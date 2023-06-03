@@ -4,6 +4,7 @@ import ContentTabContent from "./ContentTabContent";
 import LocationTabContent from "./LocationTabContent";
 import PricingTabContent from "./PricingTabContent";
 import AttributesTabContent from "./AttributesTabContent";
+import RoomsTabcontent from "./RoomsTabContent";
 
 const Index = () => {
   const tabs = [
@@ -18,13 +19,18 @@ const Index = () => {
       content: <LocationTabContent />,
     },
     {
-      label: "Pricing",
+      label: "Rooms",
       labelNo: 3,
+      content: <RoomsTabcontent/>,
+    },
+    {
+      label: "Rules",
+      labelNo: 4,
       content: <PricingTabContent />,
     },
     {
       label: "Attributes",
-      labelNo: 4,
+      labelNo: 5,
       content: <AttributesTabContent />,
     },
   ];
