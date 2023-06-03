@@ -101,7 +101,7 @@ const Sidebar = () => {
         ))}
         <div className="sidebar__item ">
           <Link
-            href="/dashboard/settings/"
+            href="/dashboard/settings"
             className="sidebar__button d-flex items-center text-15 lh-1 fw-500"
           >
             <Image

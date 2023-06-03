@@ -102,10 +102,6 @@ export const dashboardItems = [
     routePath: "/dashboard/booking",
   },
   {
-    name: "Booking History",
-    routePath: "/dashboard/booking",
-  },
-  {
     name: "All Hotels",
     routePath: "/dashboard/hotels",
   },
@@ -115,7 +111,7 @@ export const dashboardItems = [
   },
   {
     name: "Settings",
-    routePath: "dashboard/settings",
+    routePath: "/dashboard/settings",
   },
   {
     name: "Logout",
