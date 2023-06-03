@@ -95,7 +95,7 @@ export const pageItems = [
 export const dashboardItems = [
   {
     name: "Dashboard",
-    routePath: "/dashboard",
+    routePath: "/vendor-dashboard",
   },
   {
     name: "Booking History",  
