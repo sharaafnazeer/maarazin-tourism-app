@@ -1,7 +1,7 @@
 const {addHotel} = require('../services/hotel.service')
 const sendJson = require("../helpers/json");
 
-const addHotelController = async (req, res, next) => {
+const addHotelController = async (req, res) => {
     const bannerImages = req.files['bannerImages']; // Access uploaded banner images
     const featuredImages = req.files['featuredImages']; // Access uploaded featured images
     const hotel = req.body;
@@ -20,7 +20,12 @@ const addHotelController = async (req, res, next) => {
         const response = await addHotel(hotel);
         return sendJson(res, 200, {title: 'Hotel saved', message: 'Hotel saved successfully', record: response});
     } catch (e) {
-
+        return sendJson(res, 500, {
+            error: {
+                title: 'Hotel not saved',
+                message: 'Something went wrong while saving hotel'
+            }
+        })
     }
 
     // // Process the uploaded files and other form fields as needed
