@@ -1,5 +1,5 @@
-const {join, resolve} = require("path");
-const {readFile, promises} = require("fs");
+const {resolve} = require("path");
+const {promises} = require("fs");
 const {FacilityGroup} = require("../models/facility-group.model");
 const {Facility} = require("../models/facility.model");
 
