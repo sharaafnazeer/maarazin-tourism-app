@@ -63,16 +63,16 @@ const updateHotel = async (hotelId, hotelInfo) => {
             city: hotelInfo.city || hotel.location.city,
             state: hotelInfo.state || hotel.location.state,
             country: hotelInfo.country || hotel.location.country,
-            mapLatitude: hotelInfo.mapLatitude || hotel.location.mapLatitude,
-            mapLongitude: hotelInfo.mapLongitude || hotel.location.mapLongitude,
+            mapLatitude: parseFloat(hotelInfo.mapLatitude) || parseFloat(hotel.location.mapLatitude),
+            mapLongitude: parseFloat(hotelInfo.mapLongitude) || parseFloat(hotel.location.mapLongitude),
         }
 
         hotel.rule = {
             ...hotel.rule,
             checkIn: hotelInfo.checkIn || hotel.rule?.checkIn || '',
             checkOut: hotelInfo.checkOut || hotel.rule?.checkOut || '',
-            minAdvance: hotelInfo.minAdvance || hotel.rule?.minAdvance || 0.00,
-            minStay: hotelInfo.minStay || hotel.rule?.minStay || 1,
+            minAdvance: parseFloat(hotelInfo.minAdvance) || parseFloat(hotel.rule?.minAdvance) || 0.00,
+            minStay: parseInt(hotelInfo.minStay) || parseInt(hotel.rule?.minStay) || 1,
 
         }
 
@@ -85,7 +85,7 @@ const updateHotel = async (hotelId, hotelInfo) => {
 
 const getHotels = async () => {
     try {
-        return await Hotel.find()
+        return await Hotel.find();
     } catch (e) {
         throw e;
     }
@@ -93,7 +93,11 @@ const getHotels = async () => {
 
 const getHotelById = async (hotelId) => {
     try {
-        return await Hotel.findById(hotelId)
+        const hotel = await Hotel.findById(hotelId).populate();
+        if (!hotel) {
+            return new RecordNotFound("Hotel not found", "Hotel with given ID not found");
+        }
+        return hotel;
     } catch (e) {
         throw e;
     }

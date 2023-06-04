@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const hotelController = require('../controllers/hotel.controller');
+const roomController = require('../controllers/room.controller');
 const {mkdirSync} = require("fs");
 
 // Set storage destination and file names
@@ -24,7 +24,7 @@ const storage = multer.diskStorage({
 const upload = multer({
     storage: storage,
     fileFilter: (req, file, cb) => {
-        if (file.fieldname === 'bannerImages' || file.fieldname === 'featuredImages') {
+        if (file.fieldname === 'roomImages') {
             cb(null, true);
         } else {
             cb(null, false);
@@ -36,17 +36,14 @@ const upload = multer({
 });
 
 router.post('', upload.fields([
-    {name: 'bannerImages', maxCount: 10},
-    {name: 'featuredImages', maxCount: 10}
-]), hotelController.addHotelController);
+    {name: 'roomImages', maxCount: 10}
+]), roomController.addRoomController);
 
-router.put('/:hotelId', upload.fields([
-    {name: 'bannerImages', maxCount: 10},
-    {name: 'featuredImages', maxCount: 10}
-]), hotelController.updateHotelController);
+router.put('/:roomId', upload.fields([
+    {name: 'roomImages', maxCount: 10}
+]), roomController.updateRoomController);
 
-router.get('/:hotelId', hotelController.getHotelByIdController);
-router.get('/:hotelId/rooms', hotelController.getRoomsByHotelController);
-router.get('', hotelController.getHotelsController);
+router.get('/:roomId', roomController.getRoomByIdController);
+router.get('', roomController.getRoomsController);
 
 module.exports = router;

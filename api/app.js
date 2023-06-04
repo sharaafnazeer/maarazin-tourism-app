@@ -13,6 +13,7 @@ const indexRouter = require('./routes/index.route');
 const usersRouter = require('./routes/user.route');
 const attributesRouter = require('./routes/facility.route');
 const hotelsRouter = require('./routes/hotel.route');
+const roomsRouter = require('./routes/room.route');
 const {COMMON} = require("./constants/common");
 const {RecordNotFound} = require("./exceptions/errors");
 
@@ -51,6 +52,7 @@ app.use('/', indexRouter);
 
 app.use(COMMON.API_PREFIX, attributesRouter);
 app.use(COMMON.API_PREFIX + '/hotels', hotelsRouter);
+app.use(COMMON.API_PREFIX + '/rooms', roomsRouter);
 app.use(COMMON.API_PREFIX + '/users', usersRouter);
 
 app.use('/uploads', express.static('uploads'));
