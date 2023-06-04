@@ -4,7 +4,10 @@ const {FacilitySchema} = require('./facility.model')
 
 const facilityGroupSchema = new Schema({
     name: String,
-    facilities: [FacilitySchema]
+    facilities: [{
+        type: Schema.Types.ObjectId,
+        ref: "Facility"
+    }],
 }, {collection: 'facility_groups', timestamps: true});
 
 module.exports = {

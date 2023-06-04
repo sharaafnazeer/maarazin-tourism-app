@@ -1,12 +1,14 @@
 const {FacilityGroup} = require('../models/facility-group.model');
-const getFacilitiesWithGroup = async (req, res, next) => {
+const {getFacilitiesWithGroup} = require("../services/facility.service");
+const sendJson = require("../helpers/json");
+const getFacilitiesWithGroupController = async (req, res, next) => {
     try {
-        const attributeGroups = await FacilityGroup.find();
-        return res.status(200).send(attributeGroups);
+        const attributeGroups = await getFacilitiesWithGroup();
+        return sendJson(res, 200, attributeGroups);
     } catch (e) {
 
     }
 }
 module.exports = {
-    getFacilitiesWithGroup
+    getFacilitiesWithGroupController
 }

@@ -1,6 +1,7 @@
 const {RecordNotFound} = require("../exceptions/errors");
 const {Room} = require("../models/room.model");
 const {Hotel} = require("../models/hotel.model");
+const {Facility} = require("../models/facility.model");
 const addRoom = async (roomInfo) => {
     try {
 
@@ -8,6 +9,25 @@ const addRoom = async (roomInfo) => {
         if (!hotel) {
             return new RecordNotFound("Hotel not found", "Hotel with given ID not found");
         }
+
+        let roomFacilities = []
+        if (roomInfo.facilities)
+            roomFacilities = JSON.parse(roomInfo.facilities);
+
+        const newFacilities = [];
+        for (const roomFacility of roomFacilities) {
+            const facility = await Facility.findById(roomFacility.facilityId);
+            if (!facility) {
+                return new RecordNotFound("Facility not found", "Facility ID not found");
+            }
+            newFacilities.push({
+                facility: roomFacility.facilityId,
+                isPopular: roomFacility.isPopular,
+                haveExtraFee: roomFacility.haveExtraFee,
+                amount: roomFacility.amount
+            });
+        }
+
 
         const room = new Room({
             name: roomInfo.name,
@@ -20,7 +40,8 @@ const addRoom = async (roomInfo) => {
             },
             roomPrice: parseFloat(roomInfo.roomPrice),
             hotel: hotel.id,
-        })
+            facilities: newFacilities,
+        });
         const savedRoom = await room.save()
         hotel.rooms.push(savedRoom.id);
         hotel.save();

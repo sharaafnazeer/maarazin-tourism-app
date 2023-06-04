@@ -1,0 +1,561 @@
+[
+  {
+    "facilityGroup": "Bathroom",
+    "facilities": [
+      {
+        "name": "Toilet paper",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Towels",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Bidet",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Towels/Sheets (extra fee)",
+        "haveExtraFee": true,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Bathtub or shower",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Slippers",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Private Bathroom",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Toilet",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Free toiletries",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Bathrobe",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Hairdryer",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Shower",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      }
+    ]
+  },
+  {
+    "facilityGroup": "Bedroom",
+    "facilities": [
+      {
+        "name": "Linens",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Wardrobe or closet",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      }
+    ]
+  },
+  {
+    "facilityGroup": "View",
+    "facilities": [
+      {
+        "name": "Pool view",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Garden view",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      }
+    ]
+  },
+  {
+    "facilityGroup": "Outdoors",
+    "facilities": [
+      {
+        "name": "Outdoor furniture",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Outdoor dining area",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Terrace",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Garden",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      }
+    ]
+  },
+  {
+    "facilityGroup": "Kitchen",
+    "facilities": [
+      {
+        "name": "Electric kettle",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      }
+    ]
+  },
+  {
+    "facilityGroup": "Room Amenities",
+    "facilities": [
+      {
+        "name": "Clothes rack",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      }
+    ]
+  },
+  {
+    "facilityGroup": "Activities",
+    "facilities": [
+      {
+        "name": "Bicycle rental",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": true,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Cooking class",
+        "haveExtraFee": true,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Happy hour",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": true,
+        "isPopular": false,
+        "isFree": false
+      }
+    ]
+  },
+  {
+    "facilityGroup": "Living Area",
+    "facilities": [
+      {
+        "name": "Sitting area",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Desk",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      }
+    ]
+  },
+  {
+    "facilityGroup": "Media & Technology",
+    "facilities": [
+      {
+        "name": "Flat-screen TV",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Satellite channels",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Telephone",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      }
+    ]
+  },
+  {
+    "facilityGroup": "Food & Drink",
+    "facilities": [
+      {
+        "name": "Fruit",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Wine/Champagne",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": true,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Kids' meals",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Special diet meals (on request)",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Snack bar",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Breakfast in the room",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Bar",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": true,
+        "isFree": false
+      },
+      {
+        "name": "Restaurant",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": true,
+        "isFree": false
+      },
+      {
+        "name": "Tea/Coffee maker",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      }
+    ]
+  },
+  {
+    "facilityGroup": "Internet",
+    "facilities": [
+      {
+        "name": "WiFi is available in all areas and is free of charge.",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": true
+      }
+    ]
+  },
+  {
+    "facilityGroup": "Front Desk Services",
+    "facilities": [
+      {
+        "name": "Invoice provided",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Private check-in/out",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Baggage storage",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Express check-in/out",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      }
+    ]
+  },
+  {
+    "facilityGroup": "Cleaning Services",
+    "facilities": [
+      {
+        "name": "Daily housekeeping",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Suit press",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": true,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Ironing service",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": true,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Dry cleaning",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": true,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Laundry",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": true,
+        "isPopular": false,
+        "isFree": false
+      }
+    ]
+  },
+  {
+    "facilityGroup": "Business Facilities",
+    "facilities": [
+      {
+        "name": "Fax/Photocopying",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": true,
+        "isPopular": false,
+        "isFree": false
+      }
+    ]
+  },
+  {
+    "facilityGroup": "Safety & security",
+    "facilities": [
+      {
+        "name": "Fire extinguishers",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Smoke alarms",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Key access",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "24-hour security",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Safe",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      }
+    ]
+  },
+  {
+    "facilityGroup": "General",
+    "facilities": [
+      {
+        "name": "Air conditioning",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Wake-up service",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Car rental",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Packed lunches",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Fan",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Family rooms",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": true,
+        "isFree": false
+      },
+      {
+        "name": "Airport shuttle",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": true,
+        "isPopular": true,
+        "isFree": false
+      },
+      {
+        "name": "Non-smoking rooms",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": true,
+        "isFree": false
+      },
+      {
+        "name": "Room service",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": true,
+        "isFree": false
+      }
+    ]
+  },
+  {
+    "facilityGroup": "Spa",
+    "facilities": [
+      {
+        "name": "Spa lounge/Relaxation area",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      },
+      {
+        "name": "Beach chairs/Loungers",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      }
+    ]
+  },
+  {
+    "facilityGroup": "Languages Spoken",
+    "facilities": [
+      {
+        "name": "English",
+        "haveExtraFee": false,
+        "haveAdditionalCharge": false,
+        "isPopular": false,
+        "isFree": false
+      }
+    ]
+  }
+]
