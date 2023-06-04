@@ -1,5 +1,3 @@
-const {readFile} = require("fs");
-const {join} = require("path");
 const {seedFacilities} = require("../services/facility.service");
 const sendJson = require("../helpers/json");
 const attributeSeeder = async (req, res) => {
