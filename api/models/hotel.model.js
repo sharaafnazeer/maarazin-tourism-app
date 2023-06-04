@@ -1,15 +1,17 @@
 const mongoose = require('mongoose');
-const {RoomSchema} = require("./room.model");
-const {LocationSchema} = require("./location.model");
 const Schema = mongoose.Schema;
 
 const hotelSchema = new Schema({
     name: String,
-    content: String,
+    description: String,
     bannerImages: [String],
     featuredImages: [String],
-    rooms: [RoomSchema],
-    location: LocationSchema
+    rooms: [{
+        type: Schema.Types.ObjectId,
+        ref: "Room"
+    }],
+    location: Schema.Types.Mixed,
+    rule: Schema.Types.Mixed,
 }, {timestamps: true});
 
 module.exports = {

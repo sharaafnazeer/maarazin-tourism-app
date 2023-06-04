@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         const uploadDir = 'uploads/';
         // Create the uploads directory if it doesn't exist
-        mkdirSync(uploadDir, { recursive: true });
+        mkdirSync(uploadDir, {recursive: true});
         cb(null, uploadDir);
     },
     filename: (req, file, cb) => {
@@ -39,5 +39,13 @@ router.post('', upload.fields([
     {name: 'bannerImages', maxCount: 10},
     {name: 'featuredImages', maxCount: 10}
 ]), hotelController.addHotelController);
+
+router.put('/:hotelId', upload.fields([
+    {name: 'bannerImages', maxCount: 10},
+    {name: 'featuredImages', maxCount: 10}
+]), hotelController.updateHotelController);
+
+router.get('/:hotelId', hotelController.getHotelByIdController);
+router.get('', hotelController.getHotelsController);
 
 module.exports = router;

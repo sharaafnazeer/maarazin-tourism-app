@@ -11,9 +11,10 @@ if (process.env.NODE_ENV !== 'production') {
 
 const indexRouter = require('./routes/index.route');
 const usersRouter = require('./routes/user.route');
-const attributesRouter = require('./routes/attribute.route');
+const attributesRouter = require('./routes/facility.route');
 const hotelsRouter = require('./routes/hotel.route');
 const {COMMON} = require("./constants/common");
+const {RecordNotFound} = require("./exceptions/errors");
 
 const app = express();
 
@@ -23,7 +24,7 @@ app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -52,6 +53,18 @@ app.use(COMMON.API_PREFIX, attributesRouter);
 app.use(COMMON.API_PREFIX + '/hotels', hotelsRouter);
 app.use(COMMON.API_PREFIX + '/users', usersRouter);
 
+app.use('/uploads', express.static('uploads'));
+app.use((err, req, res, next) => {
+    if (err instanceof RecordNotFound) {
+        return res.status(err.statusCode).json({
+            error: {
+                title: err.title,
+                message: err.message
+            }
+        });
+    }
+    next(err);
+});
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     // next(createError(404));

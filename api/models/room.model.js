@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const {AttributeSchema} = require("./attribute.model");
 const Schema = mongoose.Schema;
 
 const roomSchema = new Schema({
@@ -7,7 +6,12 @@ const roomSchema = new Schema({
     benefits: String,
     roomImages: [String],
     sleeps: Schema.Types.Mixed, // Object field
-    attributes: [AttributeSchema],
+    roomPrice: Schema.Types.Number,
+    roomArea: String,
+    attributes: [{
+        type: Schema.Types.ObjectId,
+        ref: "Facility"
+    }],
     hotel: {type: Schema.Types.ObjectId, ref: 'Hotel'}, // Reference to Hotel model
 }, {timestamps: true});
 
