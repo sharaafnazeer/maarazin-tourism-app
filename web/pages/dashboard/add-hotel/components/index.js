@@ -14,25 +14,15 @@ const Index = () => {
       content: <ContentTabContent />,
     },
     {
-      label: "Location",
-      labelNo: 2,
-      content: <LocationTabContent />,
-    },
-    {
       label: "Rooms",
-      labelNo: 3,
+      labelNo: 2,
       content: <RoomsTabcontent/>,
     },
     {
       label: "Rules",
-      labelNo: 4,
+      labelNo: 3,
       content: <PricingTabContent />,
-    },
-    {
-      label: "Attributes",
-      labelNo: 5,
-      content: <AttributesTabContent />,
-    },
+    }
   ];
 
   const [tabIndex, setTabIndex] = useState(0);

@@ -1,7 +1,7 @@
 const RoomSleepSize = () => {
   return (
     <div className="row x-gap-20 y-gap-20">
-      <div className="col-sm-5">
+      <div className="col-sm-4">
         <div className="form-input ">
           <input type="number" required />
           <label className="lh-1 text-16 text-light-1">Adults</label>
@@ -9,7 +9,7 @@ const RoomSleepSize = () => {
       </div>
       {/* End Adults */}
 
-      <div className="col-sm-5">
+      <div className="col-sm-4">
         <div className="form-input ">
           <input type="number" required />
           <label className="lh-1 text-16 text-light-1">Childs</label>
