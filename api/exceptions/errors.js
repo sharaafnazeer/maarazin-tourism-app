@@ -8,6 +8,17 @@ class RecordNotFound extends Error {
     }
 }
 
+class RecordFound extends Error {
+    constructor(title, message) {
+        super(message);
+        this.name = this.constructor.name;
+        this.title = title;
+        this.statusCode = 400;
+        Error.captureStackTrace(this, this.constructor);
+    }
+}
+
 module.exports = {
-    RecordNotFound
+    RecordNotFound,
+    RecordFound
 }

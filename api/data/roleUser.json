@@ -1,0 +1,35 @@
+[
+  {
+    "name": "Super Admin",
+    "users": [
+      {
+        "firstName": "Sharaaf",
+        "lastName": "Sharaaf",
+        "email": "ahamedsharaaf@gmail.com",
+        "password": "Qwerty@123"
+      }
+    ]
+  },
+  {
+    "name": "Admin",
+    "users": [
+      {
+        "firstName": "Tony",
+        "lastName": "Stark",
+        "email": "tonystark@gmail.com",
+        "password": "Qwerty@123"
+      }
+    ]
+  },
+  {
+    "name": "Hotel Admin",
+    "users": [
+      {
+        "firstName": "Steve",
+        "lastName": "Rogers",
+        "email": "steverogers@gmail.com",
+        "password": "Qwerty@123"
+      }
+    ]
+  }
+]
