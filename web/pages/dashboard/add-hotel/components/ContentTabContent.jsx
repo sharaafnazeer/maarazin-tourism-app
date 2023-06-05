@@ -3,6 +3,7 @@ import HotelPolicy from "./content/HotelPolicy";
 import BannerUploader from "./content/BannerUploader";
 import FeaturedUploader from "./content/FeaturedUploader";
 import GalleryUploader from "./content/GalleryUploader";
+import Location from "./location/Location";
 
 const ContentTabContent = () => {
   return (
@@ -24,10 +25,10 @@ const ContentTabContent = () => {
         </div>
         {/* End GalleryUploader */}
 
-        <div className="border-top-light mt-30 mb-30" />
+        
 
-        <div className="text-18 fw-500 mb-10">Hotel Policy</div>
-        <HotelPolicy />
+        {/* <div className="text-18 fw-500 mb-10">Hotel Policy</div>
+        <HotelPolicy /> */}
         {/* End hotelpolicy */}
 
         <div className="mt-30">
@@ -36,6 +37,11 @@ const ContentTabContent = () => {
         </div>
         {/* End FeaturedUploader */}
 
+        <div className="border-top-light mt-30 mb-30" />
+
+        <div className="text-18 fw-500 mb-10">Location</div>
+        <Location/>
+        {/* End Location */}
         <div className="d-inline-block pt-30">
           <button className="button h-50 px-24 -dark-1 bg-blue-1 text-white">
             Save Changes <div className="icon-arrow-top-right ml-15" />

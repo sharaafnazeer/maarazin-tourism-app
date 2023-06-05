@@ -92,9 +92,11 @@ const RoomImgUploader = () => {
       ))}
 
       {error && <div className="col-12 mb-10  text-red-1">{error}</div>}
-      <div className="form-input">
-        <input type="text" required />
-        <label className="lh-1 text-16 text-light-1">Room Area Size</label>
+      <div className="col-10">
+        <div className="form-input">
+          <input type="text" required />
+          <label className="lh-1 text-16 text-light-1">Room Area Size</label>
+        </div>
       </div>
     </div>
   );

@@ -16,14 +16,6 @@ const HotelContent = () => {
         </div>
       </div>
       {/* End Content */}
-
-      <div className="col-12">
-        <div className="form-input ">
-          <input type="text" required />
-          <label className="lh-1 text-16 text-light-1">Youtube Video</label>
-        </div>
-      </div>
-      {/* End youtube Video */}
     </div>
   );
 };
