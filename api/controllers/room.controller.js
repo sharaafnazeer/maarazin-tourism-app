@@ -14,7 +14,7 @@ const addRoomController = async (req, res, next) => {
         const response = await addRoom(room);
 
         if (response instanceof RecordNotFound) {
-            return next(response)
+            return next(response);
         }
 
         return sendJson(res, 200, {title: 'Room saved', message: 'Room saved successfully', record: response});
@@ -24,7 +24,7 @@ const addRoomController = async (req, res, next) => {
                 title: 'Room not saved',
                 message: 'Something went wrong while saving room'
             }
-        })
+        });
     }
 
 }

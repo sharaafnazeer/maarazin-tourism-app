@@ -1,10 +1,11 @@
 const {RecordNotFound, RecordFound} = require("../exceptions/errors");
 const {User} = require("../models/user.model");
 const {Role} = require("../models/role.model");
+const Bcrypt = require("bcrypt");
 const addUser = async (userInfo) => {
     try {
 
-        const user = await User.find({email: userInfo.email});
+        const user = await User.findOne({email: userInfo.email});
         if (user) {
             return new RecordFound("User found", "User found with the same email");
         }
@@ -19,6 +20,7 @@ const addUser = async (userInfo) => {
             lastName: userInfo.lastName,
             email: userInfo.email,
             phoneNumber: userInfo.phoneNumber,
+            password: await Bcrypt.hash(userInfo.password, 10),
             role: role.id,
         });
         return await newUser.save();

@@ -1,13 +1,16 @@
-const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const passport = require('passport');
+
 require('dotenv').config();
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
+
+require('./helpers/passport');
 
 const indexRouter = require('./routes/index.route');
 const usersRouter = require('./routes/user.route');
@@ -15,11 +18,13 @@ const attributesRouter = require('./routes/facility.route');
 const hotelsRouter = require('./routes/hotel.route');
 const roomsRouter = require('./routes/room.route');
 const rolesRouter = require('./routes/role.route');
+const authRouter = require('./routes/auth.route');
 const seedersRouter = require('./routes/seeder.route');
 const {COMMON} = require("./constants/common");
 const {RecordNotFound} = require("./exceptions/errors");
 
 const app = express();
+app.use(passport.initialize());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -52,12 +57,14 @@ mongoose.connection.once('open', () => {
 
 app.use('/', indexRouter);
 
-app.use(COMMON.API_PREFIX, attributesRouter);
+app.use(COMMON.API_PREFIX + '/features', attributesRouter);
 app.use(COMMON.API_PREFIX + '/hotels', hotelsRouter);
 app.use(COMMON.API_PREFIX + '/rooms', roomsRouter);
 app.use(COMMON.API_PREFIX + '/users', usersRouter);
 app.use(COMMON.API_PREFIX + '/roles', rolesRouter);
 app.use(COMMON.API_PREFIX + '/seeders', seedersRouter);
+
+app.use(COMMON.API_PREFIX + '/auth', authRouter);
 
 app.use('/uploads', express.static('uploads'));
 app.use((err, req, res, next) => {

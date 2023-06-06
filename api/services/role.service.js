@@ -5,7 +5,7 @@ const {User} = require("../models/user.model");
 const {hash} = require("bcrypt");
 const seedRoles = async () => {
     try {
-        const filePath = resolve(__dirname, '..', 'data', 'roleUser.json');
+        const filePath = resolve(__dirname, '..', 'data', 'roleUsers.json');
         const data = await promises.readFile(filePath, 'utf8');
         const jsonData = JSON.parse(data);
         for (const role of jsonData) {
