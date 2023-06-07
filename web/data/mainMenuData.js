@@ -104,6 +104,10 @@ export const dashboardItems = [
   {
     name: "All Hotels",
     routePath: "/dashboard/hotels",
+  }, 
+  {
+    name: "Add Hotel",
+    routePath: "/dashboard/add-hotel",
   },
   {
     name: "All Recovery",

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const GalleryUploader = () => {
+const HotelImageUploader = () => {
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
 
@@ -96,4 +96,4 @@ const GalleryUploader = () => {
   );
 };
 
-export default GalleryUploader;
+export default HotelImageUploader;

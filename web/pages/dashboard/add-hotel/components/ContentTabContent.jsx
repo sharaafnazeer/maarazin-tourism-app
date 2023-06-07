@@ -1,9 +1,7 @@
 import HotelContent from "./content/HotelContent";
-import HotelPolicy from "./content/HotelPolicy";
-import BannerUploader from "./content/BannerUploader";
 import FeaturedUploader from "./content/FeaturedUploader";
-import GalleryUploader from "./content/GalleryUploader";
 import Location from "./location/Location";
+import HotelImageUploader from "./content/HotelImageUploader";
 
 const ContentTabContent = () => {
   return (
@@ -14,22 +12,10 @@ const ContentTabContent = () => {
         {/* End HotelContent */}
 
         <div className="mt-30">
-          <div className="fw-500">Banner Image</div>
-          <BannerUploader />
+          <div className="fw-500">Hotal Image</div>
+          <HotelImageUploader/>
         </div>
-        {/* End BannerUploader */}
-
-        <div className="mt-30">
-          <div className="fw-500">Gallery</div>
-          <GalleryUploader />
-        </div>
-        {/* End GalleryUploader */}
-
-        
-
-        {/* <div className="text-18 fw-500 mb-10">Hotel Policy</div>
-        <HotelPolicy /> */}
-        {/* End hotelpolicy */}
+        {/* End HotelImageUploader */}
 
         <div className="mt-30">
           <div className="fw-500">Featured Image</div>
@@ -37,11 +23,7 @@ const ContentTabContent = () => {
         </div>
         {/* End FeaturedUploader */}
 
-        <div className="border-top-light mt-30 mb-30" />
 
-        <div className="text-18 fw-500 mb-10">Location</div>
-        <Location/>
-        {/* End Location */}
         <div className="d-inline-block pt-30">
           <button className="button h-50 px-24 -dark-1 bg-blue-1 text-white">
             Save Changes <div className="icon-arrow-top-right ml-15" />

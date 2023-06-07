@@ -44,31 +44,83 @@ const Faq = () => {
   return (
     <>
       {faqContent.map((item) => (
-        <div className="col-12" key={item.id}>
-          <div className="accordion__item px-20 py-20 border-light rounded-4">
-            <div
-              className="accordion__button d-flex items-center"
-              data-bs-toggle="collapse"
-              data-bs-target={`#${item.collapseTarget}`}
-            >
-              <div className="accordion__icon size-40 flex-center bg-light-2 rounded-full mr-20">
-                <i className="icon-plus" />
-                <i className="icon-minus" />
-              </div>
-              <div className="button text-dark-1 text-start">{item.title}</div>
-            </div>
-            {/* End accordion button */}
+        <div className="col-lg-12" key={item.id}>
+          <div className="accordion__item rounded-8 ">
+            <div className="overflow-scroll scroll-bar-1">
+              <table className="table-4 col-12">
+                <div
+                  className="accordion__button d-flex justify-content-between"
+                  data-bs-toggle="collapse"
+                  data-bs-target={`#${item.collapseTarget}`}
+                >
+                  <div className="button text-dark-1 ">
+                    <thead className="bg-light-2">
+                      <tr>
+                        <th>Bath Room</th>
+                        <th>Most Popular</th>
+                        <th>Have Extra Fee</th>
+                        <th>Amount</th>
+                      </tr>
+                    </thead>
+                  </div>
+                  <div className="accordion__icon size-40 flex-center bg-light-2 rounded-full mt-10">
+                    <i className="icon-plus" />
+                    <i className="icon-minus" />
+                  </div>
+                </div>
+                {/* End accordion button */}
 
-            <div
-              className="accordion-collapse collapse"
-              id={item.collapseTarget}
-              data-bs-parent="#Faq1"
-            >
-              <div className="pt-15 pl-60">
-                <p className="text-15">{item.content}</p>
-              </div>
+                <div
+                  className="accordion-collapse collapse"
+                  id={item.collapseTarget}
+                  data-bs-parent="#Faq1"
+                >
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div className="col-12">
+                          <div className="d-flex items-center form-checkbox">
+                            <input type="checkbox" name="name" />
+                            <div className="form-checkbox__mark">
+                              <div className="form-checkbox__icon icon-check" />
+                            </div>
+                            <div className="text-15 lh-11 ml-10">Label</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="col-12">
+                          <div className="d-flex items-center form-checkbox">
+                            <input type="checkbox" name="name" />
+                            <div className="form-checkbox__mark">
+                              <div className="form-checkbox__icon icon-check" />
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="col-12">
+                          <div className="d-flex items-center form-checkbox">
+                            <input type="checkbox" name="name" />
+                            <div className="form-checkbox__mark">
+                              <div className="form-checkbox__icon icon-check" />
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <input
+                          type="number"
+                          placeholder="Amount USD ($)"
+                          className="border-light rounded-4 lh-2 p-2 w-34px"
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </div>
+                {/* End accordion conent */}
+              </table>
             </div>
-            {/* End accordion conent */}
           </div>
         </div>
       ))}

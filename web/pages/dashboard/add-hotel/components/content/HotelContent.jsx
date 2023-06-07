@@ -1,3 +1,5 @@
+import HotelRating from "./HotelRating";
+
 const HotelContent = () => {
   return (
     <div className="row x-gap-20 y-gap-20">
@@ -16,6 +18,17 @@ const HotelContent = () => {
         </div>
       </div>
       {/* End Content */}
+
+      <div className="mt-30">
+        <div className="row">
+          <div className="col-auto">
+            <div className="fw-500">Hotal Rating</div>
+          </div>
+          <div className="col-auto">
+            <HotelRating />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
