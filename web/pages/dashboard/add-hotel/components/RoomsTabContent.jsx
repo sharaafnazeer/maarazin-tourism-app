@@ -1,3 +1,4 @@
+import Amenities from "./rooms/Amenities";
 import RoomAddons from "./rooms/RoomAddons";
 import RoomDetails from "./rooms/RoomDetails";
 import RoomFacilities from "./rooms/RoomFacilities";
@@ -25,10 +26,26 @@ const RoomsTabcontent = () => {
           {/* End RoomImageUploader */}
 
           <div className="mt-30">
-            <div className="fw-500 mb-10">Room Sleep Size</div>
+            <div className="fw-500 mb-10 text-18">Room Sleep Size</div>
             <RoomSleepSize />
           </div>
           {/* End RoomSleepSize */}
+
+          <div className="mt-30">
+            <div className="fw-500 mb-10">Pricing</div>
+            <div className="col-lg-4">
+              <div className="form-input ">
+                <input type="number" required />
+                <label className="lh-1 text-16 text-light-1">Room Price</label>
+              </div>
+            </div>
+          </div>
+          {/* End Pricing */}
+
+          <div className="mt-30">
+            <div className="fw-500 mb-10 text-18">Amenities</div>
+            <Amenities/>
+          </div>
 
           <div className="border-top-light mt-30 mb-30" />
 
