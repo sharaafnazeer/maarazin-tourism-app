@@ -67,7 +67,7 @@ const RoomsTabcontent = () => {
             {/* End .row */}
           </div>
 
-          <div className="mt-0">
+          <div>
             <RoomDetails />
           </div>
         </div>
