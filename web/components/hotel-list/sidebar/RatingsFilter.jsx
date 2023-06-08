@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const RatingsFilter = () => {
-  const ratings = [1, 2, 3, 4, 5];
+  const ratings = [1, 2, 3, 4, 5, 6, 7];
   const [activeRating, setActiveRating] = useState(null);
 
   const handleRatingClick = (rating) => {

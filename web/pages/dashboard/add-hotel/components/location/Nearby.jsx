@@ -37,7 +37,7 @@ const Nearby = () => {
             </td>
             <td className="col-auto">
               <button className="flex-center bg-light-2 rounded-4 size-35">
-                <i className="icon-trash-2 text-16 text-light-1" />
+                <i className="icon-trash-2 text-16 text-light-1 "/>
               </button>
             </td>
           </tr>

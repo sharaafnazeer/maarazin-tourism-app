@@ -77,7 +77,7 @@ const Hotels2 = () => {
             data-aos-delay={item.delayAnimation}
           >
             <Link
-              href={`/hotel/hotel-single-v1/${item.id}`}
+              href={`/hotel/hotel-single-view/${item.id}`}
               className="hotelsCard -type-1 hover-inside-slider"
             >
               <div className="hotelsCard__image">

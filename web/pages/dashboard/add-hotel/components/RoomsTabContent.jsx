@@ -44,7 +44,7 @@ const RoomsTabcontent = () => {
 
           <div className="mt-30">
             <div className="fw-500 mb-10 text-18">Amenities</div>
-            <Amenities/>
+            <Amenities />
           </div>
 
           <div className="border-top-light mt-30 mb-30" />
@@ -58,7 +58,7 @@ const RoomsTabcontent = () => {
           <div className="border-top-light mt-30 mb-30" />
 
           <div className="mt-30">
-            <div className="fw-500 mb-10">Room addons</div>
+            <div className="fw-500 mb-20 text-18">Room addons</div>
             <RoomAddons />
           </div>
           {/* End RoomFacilities */}
