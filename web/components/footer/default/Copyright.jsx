@@ -9,12 +9,12 @@ const Copyright = () => {
             <div className="d-flex items-center">
               © {new Date().getFullYear()} by
               <a
-                href="https://themeforest.net/user/ib-themes"
+                href="https://rexe.com"
                 className="mx-2"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                ib-themes
+                Rexe Holidays & Tours
               </a>
               All rights reserved.
             </div>

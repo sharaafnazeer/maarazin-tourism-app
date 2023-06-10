@@ -462,12 +462,12 @@ export const categorieMobileItems = [
         title: "Hotel Single",
         menuList: [
           {
-            name: "Hotel Single v1",
-            routePath: "/hotel/hotel-single-v1/5",
+            name: "Hotel Single View",
+            routePath: "/hotel/hotel-single-view/5",
           },
           {
-            name: "Hotel Single v2",
-            routePath: "/hotel/hotel-single-v2/5",
+            name: "Hotel Single View",
+            routePath: "/hotel/hotel-single-view/5",
           },
         ],
       },
