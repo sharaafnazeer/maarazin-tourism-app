@@ -1,3 +1,4 @@
+import Faq from "../../../../components/faq/Faq";
 import Amenities from "./rooms/Amenities";
 import RoomAddons from "./rooms/RoomAddons";
 import RoomDetails from "./rooms/RoomDetails";
@@ -27,7 +28,10 @@ const RoomsTabcontent = () => {
 
           <div className="mt-30">
             <div className="fw-500 mb-10 text-18">Room Sleep Size</div>
-            <RoomSleepSize />
+            <div className="accordion -simple row y-gap-20 js-accordion">
+              {/* <Faq /> */}
+              <RoomSleepSize />
+            </div>
           </div>
           {/* End RoomSleepSize */}
 
@@ -49,9 +53,10 @@ const RoomsTabcontent = () => {
 
           <div className="border-top-light mt-30 mb-30" />
 
-          <div className="mt-30">
-            <div className="fw-500 mb-10 text-18">Most Popular Facilities</div>
-            <RoomFacilities />
+          <div className="col-lg-12 mt-30">
+            <div className="accordion -simple row y-gap-20 js-accordion">
+              <RoomFacilities />
+            </div>
           </div>
           {/* End RoomFacilities */}
 
