@@ -11,39 +11,36 @@ const addRoom = async (roomInfo) => {
             return new RecordNotFound("Hotel not found", "Hotel with given ID not found");
         }
 
-        let roomFacilities = []
-        if (roomInfo.facilities)
-            roomFacilities = JSON.parse(roomInfo.facilities);
-
-        const newFacilities = [];
-        for (const roomFacility of roomFacilities) {
-            const facility = await Facility.findById(roomFacility.facilityId);
-            if (!facility) {
-                return new RecordNotFound("Facility not found", "Facility ID not found");
+        const newAddons = [];
+        if (roomInfo.addons) {
+            const roomAddons = JSON.parse(roomInfo.addons);
+            if (Array.isArray(roomAddons)) {
+                for (const roomAddon of roomAddons) {
+                    const addon = await Addon.findById(roomAddon.addonId);
+                    if (!addon) {
+                        return new RecordNotFound("Addon not found", "Addon ID not found");
+                    }
+                    newAddons.push({
+                        addon: roomAddon.addonId,
+                        isActive: true,
+                        amount: roomAddon.amount
+                    });
+                }
             }
-            newFacilities.push({
-                facility: roomFacility.facilityId,
-                isPopular: roomFacility.isPopular,
-                haveExtraFee: roomFacility.haveExtraFee,
-                amount: roomFacility.amount
-            });
         }
 
-        let roomAddons = []
-        if (roomInfo.addons)
-            roomAddons = JSON.parse(roomInfo.addons);
-
-        const newAddons = [];
-        for (const roomAddon of roomAddons) {
-            const addon = await Addon.findById(roomAddon.addonId);
-            if (!addon) {
-                return new RecordNotFound("Addon not found", "Addon ID not found");
+        let newFacilities = [];
+        if (roomInfo.facilities) {
+            const facilities = JSON.parse(roomInfo.facilities)
+            if (Array.isArray(facilities)) {
+                for (const facility of facilities) {
+                    const popular = await Facility.findById(facility.toString());
+                    if (!popular) {
+                        return new RecordNotFound("Facility not found", "Facility with given ID not found");
+                    }
+                }
+                newFacilities = facilities
             }
-            newAddons.push({
-                addon: roomAddon.addonId,
-                isActive: true,
-                amount: roomAddon.amount
-            });
         }
 
         const room = new Room({
@@ -97,6 +94,44 @@ const updateRoom = async (roomId, roomInfo) => {
             adults: parseInt(roomInfo.numOfAdults) || parseInt(room.sleeps.adults),
             children: parseInt(roomInfo.numOfChild) || parseInt(room.sleeps.children)
         }
+
+        const newAddons = [];
+        if (roomInfo.addons) {
+            const roomAddons = JSON.parse(roomInfo.addons);
+            if (Array.isArray(roomAddons)) {
+                for (const roomAddon of roomAddons) {
+                    const addon = await Addon.findById(roomAddon.addonId);
+                    if (!addon) {
+                        return new RecordNotFound("Addon not found", "Addon ID not found");
+                    }
+                    newAddons.push({
+                        addon: roomAddon.addonId,
+                        isActive: true,
+                        amount: roomAddon.amount
+                    });
+                }
+            }
+        }
+
+        let newFacilities = [];
+        if (roomInfo.facilities) {
+            const facilities = JSON.parse(roomInfo.facilities)
+            if (Array.isArray(facilities)) {
+                for (const facility of facilities) {
+                    const popular = await Facility.findById(facility.toString());
+                    if (!popular) {
+                        return new RecordNotFound("Facility not found", "Facility with given ID not found");
+                    }
+                }
+                newFacilities = facilities
+            }
+        }
+
+        if (newAddons.length)
+            room.addons = newAddons || room.addons;
+
+        if (newFacilities.length)
+            room.facilities = newFacilities || room.facilities;
 
         room.save();
         return room;

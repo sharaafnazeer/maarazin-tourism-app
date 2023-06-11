@@ -6,6 +6,7 @@ const roomSchema = new Schema({
     benefits: String,
     roomImages: [String],
     sleeps: Schema.Types.Mixed, // Object field
+    amenities: Schema.Types.Mixed, // Object field
     roomPrice: Number,
     roomArea: String,
     facilities: [{type: Schema.Types.ObjectId, ref: 'Facility'}],
@@ -13,7 +14,6 @@ const roomSchema = new Schema({
         {
             addon: {type: Schema.Types.ObjectId, ref: 'Addon'},
             amount: {type: Number, default: 0.0},
-            isActive: {type: Boolean, default: true},
         }
     ],
     hotel: {type: Schema.Types.ObjectId, ref: 'Hotel'}, // Reference to Hotel model

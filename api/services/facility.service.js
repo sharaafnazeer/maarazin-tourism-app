@@ -52,7 +52,7 @@ const seedPopularFacilities = async () => {
         const data = await promises.readFile(filePath, 'utf8');
         const jsonData = JSON.parse(data);
         for (const addon of jsonData) {
-            const newAddon = new PopularFacility({name: addon.name, imageUrl: addon.imageUrl});
+            const newAddon = new PopularFacility({_id: addon.id, name: addon.name, imageUrl: addon.imageUrl});
             await newAddon.save();
         }
         console.log('Read JSON data:', jsonData);

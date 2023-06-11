@@ -1,12 +1,110 @@
 [
   {
-    "name": "Toilet paper",
-    "imageUrl": "",
-    "isActive": true
+    "id": 1,
+    "name": "Free WiFi",
+    "isActive": true,
+    "imageUrl": ""
   },
   {
-    "name": "Towels",
-    "imageUrl": "",
-    "isActive": true
+    "id": 2,
+    "name": "Restaurant",
+    "isActive": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 3,
+    "name": "Room service",
+    "isActive": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 4,
+    "name": "Bar",
+    "isActive": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 5,
+    "name": "24-hour front desk",
+    "isActive": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 6,
+    "name": "Sauna",
+    "isActive": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 7,
+    "name": "Fitness center",
+    "isActive": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 8,
+    "name": "Garden",
+    "isActive": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 9,
+    "name": "Terrace",
+    "isActive": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 10,
+    "name": "Airport shuttle",
+    "isActive": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 11,
+    "name": "Family rooms",
+    "isActive": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 12,
+    "name": "Spa",
+    "isActive": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 13,
+    "name": "Hot tub/Jacuzzi",
+    "isActive": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 14,
+    "name": "Air conditioning",
+    "isActive": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 15,
+    "name": "Water park",
+    "isActive": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 16,
+    "name": "Electric vehicle charging station",
+    "isActive": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 17,
+    "name": "Swimming pool",
+    "isActive": true,
+    "imageUrl": ""
+  },
+  {
+    "id": 18,
+    "name": "Non-Smoking rooms",
+    "isActive": true,
+    "imageUrl": ""
   }
 ]

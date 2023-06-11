@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const mostPopularFacilitySchema = new Schema({
+    _id: Number,
     name: String,
     imageUrl: String,
     isActive: {type: Boolean, default: true},

@@ -30,7 +30,7 @@ const addHotel = async (hotelInfo) => {
             if (Array.isArray(facilities)) {
 
                 for (const facility of facilities) {
-                    const popular = await PopularFacility.findById(facility.toString());
+                    const popular = await PopularFacility.findById(facility);
                     if (!popular) {
                         return new RecordNotFound("Popular facility not found", "Popular facility with given ID not found");
                     }
@@ -88,7 +88,7 @@ const updateHotel = async (hotelId, hotelInfo) => {
             if (Array.isArray(facilities)) {
 
                 for (const facility of facilities) {
-                    const popular = await PopularFacility.findById(facility.toString());
+                    const popular = await PopularFacility.findById(facility);
                     if (!popular) {
                         return new RecordNotFound("Popular facility not found", "Popular facility with given ID not found");
                     }

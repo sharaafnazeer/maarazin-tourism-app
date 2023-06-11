@@ -15,7 +15,7 @@ const hotelSchema = new Schema({
 
     popularFacilities: [
         {
-            type: Schema.Types.ObjectId,
+            type: Number,
             ref: 'PopularFacility'
         }
     ],
