@@ -16,6 +16,7 @@ const indexRouter = require('./routes/index.route');
 const usersRouter = require('./routes/user.route');
 const attributesRouter = require('./routes/facility.route');
 const hotelsRouter = require('./routes/hotel.route');
+const hotelGroupsRouter = require('./routes/hotel-group.route');
 const roomsRouter = require('./routes/room.route');
 const rolesRouter = require('./routes/role.route');
 const authRouter = require('./routes/auth.route');
@@ -59,6 +60,7 @@ app.use('/', indexRouter);
 
 app.use(COMMON.API_PREFIX + '/features', attributesRouter);
 app.use(COMMON.API_PREFIX + '/hotels', hotelsRouter);
+app.use(COMMON.API_PREFIX + '/hotel-groups', hotelGroupsRouter);
 app.use(COMMON.API_PREFIX + '/rooms', roomsRouter);
 app.use(COMMON.API_PREFIX + '/users', usersRouter);
 app.use(COMMON.API_PREFIX + '/roles', rolesRouter);
@@ -79,13 +81,13 @@ app.use((err, req, res, next) => {
     next(err);
 });
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use(function (req, res) {
     // next(createError(404));
     res.status(404).send('We are busy building this endpoint');
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
