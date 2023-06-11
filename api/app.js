@@ -58,13 +58,13 @@ mongoose.connection.once('open', () => {
 
 app.use('/', indexRouter);
 
-app.use(COMMON.API_PREFIX + '/features', attributesRouter);
-app.use(COMMON.API_PREFIX + '/hotels', hotelsRouter);
-app.use(COMMON.API_PREFIX + '/hotel-groups', hotelGroupsRouter);
-app.use(COMMON.API_PREFIX + '/rooms', roomsRouter);
-app.use(COMMON.API_PREFIX + '/users', usersRouter);
-app.use(COMMON.API_PREFIX + '/roles', rolesRouter);
-app.use(COMMON.API_PREFIX + '/seeders', seedersRouter);
+app.use(COMMON.API_PREFIX + '/admin/features', attributesRouter);
+app.use(COMMON.API_PREFIX + '/admin/hotels', hotelsRouter);
+app.use(COMMON.API_PREFIX + '/admin/hotel-groups', hotelGroupsRouter);
+app.use(COMMON.API_PREFIX + '/admin/rooms', roomsRouter);
+app.use(COMMON.API_PREFIX + '/admin/users', usersRouter);
+app.use(COMMON.API_PREFIX + '/admin/roles', rolesRouter);
+app.use(COMMON.API_PREFIX + '/admin/seeders', seedersRouter);
 
 app.use(COMMON.API_PREFIX + '/auth', authRouter);
 
