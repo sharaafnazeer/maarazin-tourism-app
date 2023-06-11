@@ -30,13 +30,7 @@ const StickyHeader = ({ hotel }) => {
                   <a href="#rooms">Rooms</a>
                 </div>
                 <div className="col-auto">
-                  <a href="#reviews">Reviews</a>
-                </div>
-                <div className="col-auto">
                   <a href="#facilities">Facilities</a>
-                </div>
-                <div className="col-auto">
-                  <a href="#faq">Faq</a>
                 </div>
               </div>
             </div>

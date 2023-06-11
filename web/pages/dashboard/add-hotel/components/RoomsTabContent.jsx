@@ -1,3 +1,5 @@
+import Faq from "../../../../components/faq/Faq";
+import Amenities from "./rooms/Amenities";
 import RoomAddons from "./rooms/RoomAddons";
 import RoomDetails from "./rooms/RoomDetails";
 import RoomFacilities from "./rooms/RoomFacilities";
@@ -25,23 +27,43 @@ const RoomsTabcontent = () => {
           {/* End RoomImageUploader */}
 
           <div className="mt-30">
-            <div className="fw-500 mb-10">Room Sleep Size</div>
-            <RoomSleepSize />
+            <div className="fw-500 mb-10 text-18">Room Sleep Size</div>
+            <div className="accordion -simple row y-gap-20 js-accordion">
+              {/* <Faq /> */}
+              <RoomSleepSize />
+            </div>
           </div>
           {/* End RoomSleepSize */}
 
-          <div className="border-top-light mt-30 mb-30" />
+          <div className="mt-30">
+            <div className="fw-500 mb-10">Pricing</div>
+            <div className="col-lg-4">
+              <div className="form-input ">
+                <input type="number" required />
+                <label className="lh-1 text-16 text-light-1">Room Price</label>
+              </div>
+            </div>
+          </div>
+          {/* End Pricing */}
 
           <div className="mt-30">
-            <div className="fw-500 mb-10 text-18">Most Popular Facilities</div>
-            <RoomFacilities />
+            <div className="fw-500 mb-10 text-18">Amenities</div>
+            <Amenities />
+          </div>
+
+          <div className="border-top-light mt-30 mb-30" />
+
+          <div className="col-lg-12 mt-30">
+            <div className="accordion -simple row y-gap-20 js-accordion">
+              <RoomFacilities />
+            </div>
           </div>
           {/* End RoomFacilities */}
 
           <div className="border-top-light mt-30 mb-30" />
 
           <div className="mt-30">
-            <div className="fw-500 mb-10">Room addons</div>
+            <div className="fw-500 mb-20 text-18">Room addons</div>
             <RoomAddons />
           </div>
           {/* End RoomFacilities */}
@@ -67,7 +89,7 @@ const RoomsTabcontent = () => {
             {/* End .row */}
           </div>
 
-          <div className="mt-0">
+          <div>
             <RoomDetails />
           </div>
         </div>

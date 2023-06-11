@@ -6,7 +6,8 @@ const CallToActions = () => {
           <div className="col-auto">
             <div className="row y-gap-20  flex-wrap items-center">
               <div className="col-auto">
-                <div className="icon-newsletter text-60 sm:text-40 text-white" />
+                {/* <div className="icon-newsletter text-60 sm:text-40 text-white" /> */}
+                <img src="/img/general/callToActions.svg"/>
               </div>
               <div className="col-auto">
                 <h4 className="text-26 text-white fw-600">

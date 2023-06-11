@@ -19,20 +19,8 @@ const Index = () => {
       content: <CustomerInfo />,
     },
     {
-      title: "Payment Details",
-      stepNo: "2",
-      stepBar: (
-        <>
-          <div className="col d-none d-sm-block">
-            <div className="w-full h-1 bg-border"></div>
-          </div>
-        </>
-      ),
-      content: <PaymentInfo />,
-    },
-    {
       title: "Final Step",
-      stepNo: "3",
+      stepNo: "2",
       stepBar: "",
       content: <OrderSubmittedInfo />,
     },
@@ -115,7 +103,7 @@ const Index = () => {
             disabled={currentStep === steps.length - 1}
             onClick={nextStep}
           >
-            Next <div className="icon-arrow-top-right ml-15" />
+            Confirm <div className="icon-arrow-top-right ml-15" />
           </button>
         </div>
         {/* End next btn */}

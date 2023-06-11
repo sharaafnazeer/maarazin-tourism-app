@@ -1,6 +1,9 @@
 import Education from "./location/Education";
 import Health from "./location/Health";
 import Location from "./location/Location";
+import Nearby from "./location/Nearby";
+import NearbyDetails from "./location/NearbyDetails";
+import SearchAndNewNearby from "./location/SearchAndNewNearby";
 import Sorroundings from "./location/Sorroundings";
 import Transportation from "./location/Transportation";
 
@@ -10,12 +13,13 @@ const LocationTabContent = () => {
       <div className="text-18 fw-500 mb-10">Location</div>
       <Location />
 
-      <div className="text-18 fw-500 mb-10 mt-30">Surroundings</div>
-      <Sorroundings />
-
-      <Education />
-      <Health />
-      <Transportation />
+      <div className="mt-30">
+        <div className="fw-500 mb-20">Nearby</div>
+        <Nearby/>
+      </div>
+      <div>
+        <NearbyDetails />
+      </div>
 
       <div className="d-inline-block pt-30">
         <button

@@ -64,8 +64,72 @@ const Faq = () => {
               id={item.collapseTarget}
               data-bs-parent="#Faq1"
             >
-              <div className="pt-15 pl-60">
+              {/* <div className="pt-15 pl-60">
                 <p className="text-15">{item.content}</p>
+              </div> */}
+               <div className="col-lg-12  mt-10">
+                <div className="row x-gap-100 y-gap-15">
+                  <div className="col-lg-4 col-sm-6">
+                    <div className="row y-gap-15">
+                      <div className="col-12">
+                        <div className="d-flex items-center form-checkbox">
+                          <input type="checkbox" name="name" />
+                          <div className="form-checkbox__mark">
+                            <div className="form-checkbox__icon icon-check" />
+                          </div>
+                          <div className="text-15 lh-11 ml-10">Apartments</div>
+                        </div>
+                      </div>
+                      {/* End .col-12 */}
+                    </div>
+                    {/* End accordion conent */}
+                  </div>
+                  <div className="col-lg-4 col-sm-6">
+                    <div className="row y-gap-15">
+                      <div className="col-12">
+                        <div className="d-flex items-center form-checkbox">
+                          <input type="checkbox" name="name" />
+                          <div className="form-checkbox__mark">
+                            <div className="form-checkbox__icon icon-check" />
+                          </div>
+                          <div className="text-15 lh-11 ml-10">Apartments</div>
+                        </div>
+                      </div>
+                      {/* End .col-12 */}
+                    </div>
+                    {/* End accordion conent */}
+                  </div>
+                  <div className="col-lg-4 col-sm-6">
+                    <div className="row y-gap-15">
+                      <div className="col-12">
+                        <div className="d-flex items-center form-checkbox">
+                          <input type="checkbox" name="name" />
+                          <div className="form-checkbox__mark">
+                            <div className="form-checkbox__icon icon-check" />
+                          </div>
+                          <div className="text-15 lh-11 ml-10">Apartments</div>
+                        </div>
+                      </div>
+                      {/* End .col-12 */}
+                    </div>
+                    {/* End accordion conent */}
+                  </div>{" "}
+                  <div className="col-lg-4 col-sm-6">
+                    <div className="row y-gap-15">
+                      <div className="col-12">
+                        <div className="d-flex items-center form-checkbox">
+                          <input type="checkbox" name="name" />
+                          <div className="form-checkbox__mark">
+                            <div className="form-checkbox__icon icon-check" />
+                          </div>
+                          <div className="text-15 lh-11 ml-10">Apartments</div>
+                        </div>
+                      </div>
+                      {/* End .col-12 */}
+                    </div>
+                    {/* End accordion conent */}
+                  </div>
+                </div>
               </div>
             </div>
             {/* End accordion conent */}

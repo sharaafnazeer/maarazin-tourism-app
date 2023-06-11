@@ -19,13 +19,22 @@ const PropertyHighlights2 = () => {
       id: 4,
       icon: "icon-tv",
       text: `Premium TV channels`,
+    }, {
+      id: 5,
+      icon: "icon-bell-ring",
+      text: `Front desk [24-hour]`,
+    },
+    {
+      id: 6,
+      icon: "icon-tv",
+      text: `Premium TV channels`,
     },
   ];
 
   return (
     <div className="row y-gap-20 pt-30">
       {highlightsContent.map((item) => (
-        <div className="col-lg-3 col-6" key={item.id}>
+        <div className="col-lg-3 col-md-4 col-6" key={item.id}>
           <div className="text-center">
             <i className={`${item.icon} text-24 text-blue-1`} />
             <div className="text-15 lh-1 mt-10">{item.text}</div>

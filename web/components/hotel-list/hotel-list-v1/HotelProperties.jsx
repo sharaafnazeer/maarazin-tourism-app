@@ -74,14 +74,6 @@ const HotelProperties = () => {
                       Show on map
                     </button>
                   </div>
-
-                  <div className="col-auto">
-                    <div className="size-3 rounded-full bg-light-1"></div>
-                  </div>
-
-                  <div className="col-auto">
-                    <p className="text-14">2 km to city center</p>
-                  </div>
                 </div>
 
                 <div className="text-14 lh-15 mt-20">
@@ -125,20 +117,6 @@ const HotelProperties = () => {
               {/* End .col-md */}
 
               <div className="col-md-auto text-right md:text-left">
-                <div className="row x-gap-10 y-gap-10 justify-end items-center md:justify-start">
-                  <div className="col-auto">
-                    <div className="text-14 lh-14 fw-500">Exceptional</div>
-                    <div className="text-14 lh-14 text-light-1">
-                      3,014 reviews
-                    </div>
-                  </div>
-                  <div className="col-auto">
-                    <div className="flex-center text-white fw-600 text-14 size-40 rounded-4 bg-blue-1">
-                      {item?.ratings}
-                    </div>
-                  </div>
-                </div>
-
                 <div className="">
                   <div className="text-14 text-light-1 mt-50 md:mt-20">
                     8 nights, 2 adult
@@ -151,7 +129,7 @@ const HotelProperties = () => {
                   </div>
 
                   <Link
-                    href={`/hotel/hotel-single-v1/${item.id}`}
+                    href={`/hotel/hotel-single-view/${item.id}`}
                     className="button -md -dark-1 bg-blue-1 text-white mt-24"
                   >
                     See Availability{" "}

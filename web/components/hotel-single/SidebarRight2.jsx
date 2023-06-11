@@ -2,6 +2,8 @@ import Map from "./Map";
 
 const SidebarRight2 = () => {
   return (
+
+    <div className="ml-50 lg:ml-0">
     <div className="px-30 py-30 border-light rounded-4">
       <div className="mb-15">
         <Map />
@@ -40,6 +42,7 @@ const SidebarRight2 = () => {
       <button className="d-block text-14 fw-500 underline text-blue-1 mt-10">
         Show More
       </button>
+    </div>
     </div>
   );
 };

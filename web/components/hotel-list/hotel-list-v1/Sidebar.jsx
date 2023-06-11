@@ -17,30 +17,11 @@ const Sidebar = () => {
       </div>
       {/* End find map */}
 
-      <div className="sidebar__item -no-border">
+      {/* <div className="sidebar__item -no-border">
         <h5 className="text-18 fw-500 mb-10">Search by property name</h5>
         <SearchBox />
-      </div>
+      </div> */}
       {/* End search box */}
-
-      <div className="sidebar__item">
-        <h5 className="text-18 fw-500 mb-10">Deals</h5>
-        <div className="sidebar-checkbox">
-          <div className="row y-gap-5 items-center">
-            <DealsFilter />
-          </div>
-        </div>
-      </div>
-      {/* End deals filter */}
-
-      <div className="sidebar__item">
-        <h5 className="text-18 fw-500 mb-10">Popular Filters</h5>
-        <div className="sidebar-checkbox">
-          <PopularFilters />
-        </div>
-        {/* End Sidebar-checkbox */}
-      </div>
-      {/* End popular filter */}
 
       <div className="sidebar__item pb-30">
         <h5 className="text-18 fw-500 mb-10">Nightly Price</h5>
@@ -53,46 +34,23 @@ const Sidebar = () => {
       {/* End Nightly priceslider */}
 
       <div className="sidebar__item">
-        <h5 className="text-18 fw-500 mb-10">Aminities</h5>
+        <h5 className="text-18 fw-500 mb-10">Most Popular Filters</h5>
         <div className="sidebar-checkbox">
-          <AminitesFilter />
+          <PopularFilters />
         </div>
-        {/* End Sidebar-checkbox */}
+        {/* End Sidebar-checkbox */}   
       </div>
-      {/* End Aminities filter */}
+      {/* End popular filter */}
 
       <div className="sidebar__item">
-        <h5 className="text-18 fw-500 mb-10">Star Rating</h5>
+        <h5 className="text-18 fw-500 mb-10">Hotel Rating</h5>
         <div className="row x-gap-10 y-gap-10 pt-10">
           <RatingsFilter />
         </div>
       </div>
       {/* End rating filter */}
 
-      <div className="sidebar__item">
-        <h5 className="text-18 fw-500 mb-10">Guest Rating</h5>
-        <div className="sidebar-checkbox">
-          <GuestRatingFilters />
-        </div>
-      </div>
-      {/* End Guest Rating */}
-
-      <div className="sidebar__item">
-        <h5 className="text-18 fw-500 mb-10">Style</h5>
-        <div className="sidebar-checkbox">
-          <StyleFilter />
-        </div>
-      </div>
-      {/* End style filter */}
-
-      <div className="sidebar__item">
-        <h5 className="text-18 fw-500 mb-10">Neighborhood</h5>
-        <div className="sidebar-checkbox">
-          <NeighborhoddFilter />
-        </div>
-        {/* End Sidebar-checkbox */}
-      </div>
-      {/* End Aminities filter */}
+      
     </>
   );
 };

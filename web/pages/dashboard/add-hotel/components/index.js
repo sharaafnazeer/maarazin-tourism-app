@@ -19,8 +19,13 @@ const Index = () => {
       content: <RoomsTabcontent/>,
     },
     {
-      label: "Rules",
+      label: "Location",
       labelNo: 3,
+      content: <LocationTabContent/>,
+    },
+    {
+      label: "Rules",
+      labelNo: 4,
       content: <PricingTabContent />,
     }
   ];

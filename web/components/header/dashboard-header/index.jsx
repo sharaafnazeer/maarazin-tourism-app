@@ -50,30 +50,13 @@ const HeaderDashBoard = () => {
                 <button className="d-flex" onClick={handleToggle}>
                   <i className="icon-menu-2 text-20"></i>
                 </button>
-
-                <div className="single-field relative d-flex items-center md:d-none ml-30">
-                  <input
-                    className="pl-50 border-light text-dark-1 h-50 rounded-8"
-                    type="email"
-                    placeholder="Search"
-                  />
-                  <button className="absolute d-flex items-center h-full">
-                    <i className="icon-search text-20 px-15 text-dark-1"></i>
-                  </button>
-                </div>
               </div>
             </div>
             {/* End .col-auto */}
 
             <div className="col-auto">
               <div className="d-flex items-center">
-                <div className="header-menu">
-                  <div className="header-menu__content">
-                    <MainMenu style="text-dark-1" />
-                  </div>
-                </div>
-                {/* End header-menu */}
-
+                
                 <div className="row items-center x-gap-5 y-gap-20 pl-20 lg:d-none">
                   <div className="col-auto">
                     <button className="button -blue-1-05 size-50 rounded-22 flex-center">
