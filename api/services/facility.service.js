@@ -3,6 +3,7 @@ const {promises} = require("fs");
 const {FacilityGroup} = require("../models/facility-group.model");
 const {Facility} = require("../models/facility.model");
 const {Addon} = require("../models/addon.model");
+const {PopularFacility} = require("../models/most-popular-facility.model");
 
 const seedFacilities = async () => {
     try {
@@ -45,6 +46,23 @@ const seedAddons = async () => {
     }
 }
 
+const seedPopularFacilities = async () => {
+    try {
+        const filePath = resolve(__dirname, '..', 'data', 'most-popular-facilities.json');
+        const data = await promises.readFile(filePath, 'utf8');
+        const jsonData = JSON.parse(data);
+        for (const addon of jsonData) {
+            const newAddon = new PopularFacility({name: addon.name, imageUrl: addon.imageUrl});
+            await newAddon.save();
+        }
+        console.log('Read JSON data:', jsonData);
+        return jsonData;
+    } catch (error) {
+        console.error('Error reading or parsing JSON:', error);
+        throw error;
+    }
+}
+
 const getFacilitiesWithGroup = async () => {
     return await FacilityGroup.find({}).populate("facilities").exec();
 }
@@ -52,10 +70,15 @@ const getFacilitiesWithGroup = async () => {
 const getAddons = async () => {
     return Addon.find();
 }
+const getPopularFacilities = async () => {
+    return PopularFacility.find();
+}
 
 module.exports = {
     seedFacilities,
+    seedPopularFacilities,
     getFacilitiesWithGroup,
     getAddons,
     seedAddons,
+    getPopularFacilities,
 }

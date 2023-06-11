@@ -1,4 +1,4 @@
-const {seedFacilities, seedAddons} = require("../services/facility.service");
+const {seedFacilities, seedAddons, seedPopularFacilities} = require("../services/facility.service");
 const sendJson = require("../helpers/json");
 const {seedRoles} = require("../services/role.service");
 const {seedHotelGroups} = require("../services/hotel-group.service");
@@ -27,6 +27,20 @@ const addonSeeder = async (req, res) => {
             error: {
                 title: 'Failed',
                 message: 'Something went wrong while seeding addons'
+            }
+        });
+    }
+}
+const popularFacilitiesSeeder = async (req, res) => {
+
+    try {
+        await seedPopularFacilities();
+        return sendJson(res, 200, {title: 'Success', message: 'Popular facilities seeded successfully'});
+    } catch (e) {
+        return sendJson(res, 500, {
+            error: {
+                title: 'Failed',
+                message: 'Something went wrong while seeding popular facilities'
             }
         });
     }
@@ -67,4 +81,5 @@ module.exports = {
     roleSeeder,
     addonSeeder,
     hotelGroupSeeder,
+    popularFacilitiesSeeder,
 }

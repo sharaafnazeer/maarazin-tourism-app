@@ -1,20 +1,22 @@
 const {Hotel} = require("../models/hotel.model");
 const {RecordNotFound} = require("../exceptions/errors");
+const {HotelGroup} = require("../models/hotel-group.model");
+const {PopularFacility} = require("../models/most-popular-facility.model");
 const addHotel = async (hotelInfo) => {
     try {
+        if (hotelInfo.hotelGroupId) {
+            let hotelGroup = await HotelGroup.findById(hotelInfo.hotelGroupId);
+            if (!hotelGroup) {
+                return new RecordNotFound("Hotel group not found", "Hotel group with given ID not found");
+            }
+        }
         const hotel = new Hotel({
             name: hotelInfo.name,
             description: hotelInfo.description,
             bannerImages: hotelInfo.bannerImages,
             featuredImages: hotelInfo.featuredImages,
-            location: {
-                city: hotelInfo.city,
-                state: hotelInfo.state,
-                country: hotelInfo.country,
-                mapLatitude: hotelInfo.mapLatitude,
-                mapLongitude: hotelInfo.mapLongitude,
-                mapZoom: hotelInfo.mapZoom,
-            },
+            hotelGroup: hotelInfo.hotelGroupId ? hotelInfo.hotelGroupId : null,
+            rating: parseInt(hotelInfo.rating),
             rule: {
                 minAdvance: 0.00,
                 minStay: 1,
@@ -22,6 +24,21 @@ const addHotel = async (hotelInfo) => {
                 checkOut: ''
             }
         })
+
+        if (hotelInfo.popularFacilities) {
+            const facilities = JSON.parse(hotelInfo.popularFacilities)
+            if (Array.isArray(facilities)) {
+
+                for (const facility of facilities) {
+                    const popular = await PopularFacility.findById(facility.toString());
+                    if (!popular) {
+                        return new RecordNotFound("Popular facility not found", "Popular facility with given ID not found");
+                    }
+                }
+                hotel.popularFacilities = facilities
+            }
+        }
+
         return await hotel.save()
     } catch (e) {
         throw e;
@@ -34,8 +51,16 @@ const updateHotel = async (hotelId, hotelInfo) => {
         if (!hotel) {
             return new RecordNotFound("Hotel not found", "Hotel with given ID not found");
         }
+        if (hotelInfo.hotelGroupId) {
+            let hotelGroup = await HotelGroup.findById(hotelInfo.hotelGroupId);
+            if (!hotelGroup) {
+                return new RecordNotFound("Hotel group not found", "Hotel group with given ID not found");
+            }
+        }
         hotel.name = hotelInfo.name || hotel.name;
         hotel.description = hotelInfo.description || hotel.description;
+        hotel.hotelGroup = hotelInfo.hotelGroupId || hotel.hotelGroup;
+        hotel.rating = parseInt(hotelInfo.rating) || parseInt(hotel.rating);
 
         let existingBannerImages = []
         let bannerImages = []
@@ -58,13 +83,18 @@ const updateHotel = async (hotelId, hotelInfo) => {
         if (featuredImages.length || existingFeatureImages.length)
             hotel.featuredImages = [...featuredImages, ...existingFeatureImages];
 
-        hotel.location = {
-            ...hotel.location,
-            city: hotelInfo.city || hotel.location.city,
-            state: hotelInfo.state || hotel.location.state,
-            country: hotelInfo.country || hotel.location.country,
-            mapLatitude: parseFloat(hotelInfo.mapLatitude) || parseFloat(hotel.location.mapLatitude),
-            mapLongitude: parseFloat(hotelInfo.mapLongitude) || parseFloat(hotel.location.mapLongitude),
+        if (hotelInfo.popularFacilities) {
+            const facilities = JSON.parse(hotelInfo.popularFacilities)
+            if (Array.isArray(facilities)) {
+
+                for (const facility of facilities) {
+                    const popular = await PopularFacility.findById(facility.toString());
+                    if (!popular) {
+                        return new RecordNotFound("Popular facility not found", "Popular facility with given ID not found");
+                    }
+                }
+                hotel.popularFacilities = facilities
+            }
         }
 
         hotel.rule = {
@@ -74,6 +104,14 @@ const updateHotel = async (hotelId, hotelInfo) => {
             minAdvance: parseFloat(hotelInfo.minAdvance) || parseFloat(hotel.rule?.minAdvance) || 0.00,
             minStay: parseInt(hotelInfo.minStay) || parseInt(hotel.rule?.minStay) || 1,
 
+        }
+
+        if (hotelInfo.location) {
+            hotel.location = JSON.parse(hotelInfo.location);
+        }
+
+        if (hotelInfo.nearBy) {
+            hotel.nearBy = JSON.parse(hotelInfo.nearBy);
         }
 
         hotel.save();

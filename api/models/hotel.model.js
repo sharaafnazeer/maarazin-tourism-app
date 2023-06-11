@@ -12,7 +12,15 @@ const hotelSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Room"
     }],
+
+    popularFacilities: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'PopularFacility'
+        }
+    ],
     location: Schema.Types.Mixed,
+    nearBy: Schema.Types.Mixed,
     rule: Schema.Types.Mixed,
 }, {timestamps: true});
 

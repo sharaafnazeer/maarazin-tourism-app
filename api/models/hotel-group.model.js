@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const hotelGroupSchema = new Schema({
     name: String,
-}, {timestamps: true});
+}, {collection: 'hotel_groups', timestamps: true});
 
 module.exports = {
     HotelGroupSchema: hotelGroupSchema,

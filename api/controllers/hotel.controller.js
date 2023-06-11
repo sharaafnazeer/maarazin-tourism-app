@@ -3,7 +3,7 @@ const sendJson = require("../helpers/json");
 const {RecordNotFound} = require("../exceptions/errors");
 const {getRoomsByHotelId} = require("../services/room.service");
 
-const addHotelController = async (req, res) => {
+const addHotelController = async (req, res, next) => {
     const bannerImages = req.files['bannerImages']; // Access uploaded banner images
     const featuredImages = req.files['featuredImages']; // Access uploaded featured images
     const hotel = req.body;
@@ -19,6 +19,11 @@ const addHotelController = async (req, res) => {
         });
     try {
         const response = await addHotel(hotel);
+
+        if (response instanceof RecordNotFound) {
+            return next(response)
+        }
+
         return sendJson(res, 200, {title: 'Hotel saved', message: 'Hotel saved successfully', record: response});
     } catch (e) {
         return sendJson(res, 500, {
@@ -66,7 +71,7 @@ const updateHotelController = async (req, res, next) => {
 
 }
 
-const getHotelsController = async (req, res, next) => {
+const getHotelsController = async (req, res) => {
     try {
         const response = await getHotels();
         return sendJson(res, 200, response);

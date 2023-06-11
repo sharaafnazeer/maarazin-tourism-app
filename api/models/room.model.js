@@ -8,15 +8,7 @@ const roomSchema = new Schema({
     sleeps: Schema.Types.Mixed, // Object field
     roomPrice: Number,
     roomArea: String,
-    facilities: [
-        {
-            facility: {type: Schema.Types.ObjectId, ref: 'Facility'},
-            isPopular: {type: Boolean, default: false},
-            haveExtraFee: {type: Boolean, default: false},
-            isActive: {type: Boolean, default: true},
-            amount: {type: Number, default: 0.0},
-        }
-    ],
+    facilities: [{type: Schema.Types.ObjectId, ref: 'Facility'}],
     addons: [
         {
             addon: {type: Schema.Types.ObjectId, ref: 'Addon'},

@@ -1,4 +1,4 @@
-const {getFacilitiesWithGroup, getAddons} = require("../services/facility.service");
+const {getFacilitiesWithGroup, getAddons, getPopularFacilities} = require("../services/facility.service");
 const sendJson = require("../helpers/json");
 const getFacilitiesWithGroupController = async (req, res) => {
     try {
@@ -26,7 +26,23 @@ const getAddonsController = async (req, res) => {
         });
     }
 }
+
+const getPopularFacilitiesController = async (req, res) => {
+    try {
+        const attributeGroups = await getPopularFacilities();
+        return sendJson(res, 200, attributeGroups);
+    } catch (e) {
+        return sendJson(res, 500, {
+            error: {
+                title: 'Failed',
+                message: 'Something went wrong while retrieving popular facilities'
+            }
+        });
+    }
+}
+
 module.exports = {
     getFacilitiesWithGroupController,
-    getAddonsController
+    getAddonsController,
+    getPopularFacilitiesController
 }

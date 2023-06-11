@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Toilet paper",
+    "imageUrl": "",
+    "isActive": true
+  },
+  {
+    "name": "Towels",
+    "imageUrl": "",
+    "isActive": true
+  }
+]
