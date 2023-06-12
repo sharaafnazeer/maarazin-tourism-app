@@ -1,7 +1,14 @@
-const {addHotel, getHotelById, updateHotel, getHotels} = require('../services/hotel.service')
+const {
+    addHotel,
+    getHotelById,
+    updateHotel,
+    getHotels,
+    getHotelByIdWithDetails,
+    getSimilarHotelsById
+} = require('../services/hotel.service')
 const sendJson = require("../helpers/json");
 const {RecordNotFound} = require("../exceptions/errors");
-const {getRoomsByHotelId} = require("../services/room.service");
+const {getRoomsByHotelId, getRoomsByHotelIdWithDetails} = require("../services/room.service");
 
 const addHotelController = async (req, res, next) => {
     const bannerImages = req.files['bannerImages']; // Access uploaded banner images
@@ -88,7 +95,8 @@ const getHotelsController = async (req, res) => {
 const getHotelByIdController = async (req, res, next) => {
     try {
         const {hotelId} = req.params;
-        const response = await getHotelById(hotelId);
+        const response =
+            req.baseUrl.includes('admin') ? await getHotelById(hotelId) : await getHotelByIdWithDetails(hotelId);
 
         if (response instanceof RecordNotFound) {
             return next(response)
@@ -108,7 +116,23 @@ const getHotelByIdController = async (req, res, next) => {
 const getRoomsByHotelController = async (req, res) => {
     try {
         const {hotelId} = req.params;
-        const response = await getRoomsByHotelId(hotelId);
+        const response =
+            req.baseUrl.includes('admin') ? await getRoomsByHotelId(hotelId) : await getRoomsByHotelIdWithDetails(hotelId);
+        return sendJson(res, 200, response);
+    } catch (e) {
+        return sendJson(res, 500, {
+            error: {
+                title: 'Failed',
+                message: 'Something went wrong while retrieving hotel rooms'
+            }
+        });
+    }
+
+}
+const getSimilarHotelsByHotelController = async (req, res) => {
+    try {
+        const {hotelId} = req.params;
+        const response = await getSimilarHotelsById(hotelId);
         return sendJson(res, 200, response);
     } catch (e) {
         return sendJson(res, 500, {
@@ -126,5 +150,6 @@ module.exports = {
     updateHotelController,
     getHotelsController,
     getHotelByIdController,
-    getRoomsByHotelController
+    getRoomsByHotelController,
+    getSimilarHotelsByHotelController
 }

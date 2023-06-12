@@ -60,6 +60,7 @@ app.use('/', indexRouter);
 
 app.use(COMMON.API_PREFIX + '/admin/features', attributesRouter);
 app.use(COMMON.API_PREFIX + '/admin/hotels', hotelsRouter);
+app.use(COMMON.API_PREFIX + '/hotels', hotelsRouter);
 app.use(COMMON.API_PREFIX + '/admin/hotel-groups', hotelGroupsRouter);
 app.use(COMMON.API_PREFIX + '/admin/rooms', roomsRouter);
 app.use(COMMON.API_PREFIX + '/admin/users', usersRouter);

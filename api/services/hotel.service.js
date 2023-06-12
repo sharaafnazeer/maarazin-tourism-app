@@ -2,6 +2,7 @@ const {Hotel} = require("../models/hotel.model");
 const {RecordNotFound} = require("../exceptions/errors");
 const {HotelGroup} = require("../models/hotel-group.model");
 const {PopularFacility} = require("../models/most-popular-facility.model");
+const {getRoomsByHotelIdWithDetails} = require("./room.service");
 const addHotel = async (hotelInfo) => {
     try {
         if (hotelInfo.hotelGroupId) {
@@ -141,9 +142,49 @@ const getHotelById = async (hotelId) => {
     }
 }
 
+const getHotelByIdWithDetails = async (hotelId) => {
+    try {
+        let hotel = await Hotel.findById(hotelId).populate('popularFacilities').populate('hotelGroup');
+        if (!hotel) {
+            return new RecordNotFound("Hotel not found", "Hotel with given ID not found");
+        }
+
+        hotel = hotel.toObject();
+        const rooms = await getRoomsByHotelIdWithDetails(hotelId);
+        hotel.minimumRoomPrice = rooms.reduce((minPrice, currentRoom) => {
+            return Math.min(minPrice, currentRoom.roomPrice);
+        }, Infinity);
+        hotel.rooms = rooms;
+        return hotel;
+    } catch (e) {
+        throw e;
+    }
+}
+
+const getSimilarHotelsById = async (hotelId) => {
+    try {
+        let hotel = await Hotel.findById(hotelId);
+        if (!hotel) {
+            return new RecordNotFound("Hotel not found", "Hotel with given ID not found");
+        }
+
+        return await Hotel.find({
+            $and: [
+                {$or: [{hotelGroup: hotel.hotelGroup}, {rating: {$gte: hotel.rating}}]},
+                {_id: {$nin: [hotelId]}}
+            ]
+        }).limit(4);
+
+    } catch (e) {
+        throw e;
+    }
+}
+
 module.exports = {
     addHotel,
     getHotels,
     getHotelById,
     updateHotel,
+    getHotelByIdWithDetails,
+    getSimilarHotelsById
 }

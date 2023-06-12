@@ -47,6 +47,7 @@ router.put('/:hotelId', upload.fields([
 
 router.get('/:hotelId', hotelController.getHotelByIdController);
 router.get('/:hotelId/rooms', hotelController.getRoomsByHotelController);
+router.get('/:hotelId/similar', hotelController.getSimilarHotelsByHotelController);
 router.get('', hotelController.getHotelsController);
 
 module.exports = router;

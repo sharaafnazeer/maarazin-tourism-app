@@ -12,7 +12,6 @@ const hotelSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Room"
     }],
-
     popularFacilities: [
         {
             type: Number,
@@ -22,6 +21,10 @@ const hotelSchema = new Schema({
     location: Schema.Types.Mixed,
     nearBy: Schema.Types.Mixed,
     rule: Schema.Types.Mixed,
+    users: [{
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }],
 }, {timestamps: true});
 
 module.exports = {

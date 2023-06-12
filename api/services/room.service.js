@@ -3,6 +3,7 @@ const {Room} = require("../models/room.model");
 const {Hotel} = require("../models/hotel.model");
 const {Facility} = require("../models/facility.model");
 const {Addon} = require("../models/addon.model");
+const {getAllCombinations} = require("../helpers/helpers");
 const addRoom = async (roomInfo) => {
     try {
 
@@ -21,9 +22,7 @@ const addRoom = async (roomInfo) => {
                         return new RecordNotFound("Addon not found", "Addon ID not found");
                     }
                     newAddons.push({
-                        addon: roomAddon.addonId,
-                        isActive: true,
-                        amount: roomAddon.amount
+                        addon: roomAddon.addonId, isActive: true, amount: roomAddon.amount
                     });
                 }
             }
@@ -49,14 +48,17 @@ const addRoom = async (roomInfo) => {
             roomImages: roomInfo.roomImages,
             benefits: roomInfo.benefits,
             sleeps: {
-                adults: parseInt(roomInfo.numOfAdults),
-                children: parseInt(roomInfo.numOfChild),
+                adults: parseInt(roomInfo.numOfAdults), children: parseInt(roomInfo.numOfChild),
             },
             roomPrice: parseFloat(roomInfo.roomPrice),
             hotel: hotel.id,
             facilities: newFacilities,
             addons: newAddons,
         });
+
+        if (roomInfo.amenities) {
+            room.amenities = JSON.parse(roomInfo.amenities);
+        }
         const savedRoom = await room.save()
         hotel.rooms.push(savedRoom.id);
         hotel.save();
@@ -80,14 +82,11 @@ const updateRoom = async (roomId, roomInfo) => {
 
         let existingRoomImages = []
         let roomImages = []
-        if (roomInfo.existingRoomImages)
-            existingRoomImages = JSON.parse(roomInfo.existingRoomImages);
+        if (roomInfo.existingRoomImages) existingRoomImages = JSON.parse(roomInfo.existingRoomImages);
 
-        if (roomInfo.roomImages)
-            roomImages = roomInfo.roomImages;
+        if (roomInfo.roomImages) roomImages = roomInfo.roomImages;
 
-        if (roomImages.length || existingRoomImages.length)
-            room.roomImages = [...roomImages, ...existingRoomImages];
+        if (roomImages.length || existingRoomImages.length) room.roomImages = [...roomImages, ...existingRoomImages];
 
         room.sleeps = {
             ...room.sleeps,
@@ -105,9 +104,7 @@ const updateRoom = async (roomId, roomInfo) => {
                         return new RecordNotFound("Addon not found", "Addon ID not found");
                     }
                     newAddons.push({
-                        addon: roomAddon.addonId,
-                        isActive: true,
-                        amount: roomAddon.amount
+                        addon: roomAddon.addonId, isActive: true, amount: roomAddon.amount
                     });
                 }
             }
@@ -127,11 +124,13 @@ const updateRoom = async (roomId, roomInfo) => {
             }
         }
 
-        if (newAddons.length)
-            room.addons = newAddons || room.addons;
+        if (newAddons.length) room.addons = newAddons || room.addons;
 
-        if (newFacilities.length)
-            room.facilities = newFacilities || room.facilities;
+        if (newFacilities.length) room.facilities = newFacilities || room.facilities;
+
+        if (roomInfo.amenities) {
+            room.amenities = JSON.parse(roomInfo.amenities);
+        }
 
         room.save();
         return room;
@@ -162,16 +161,51 @@ const getRoomById = async (roomId) => {
 
 const getRoomsByHotelId = async (hotelId) => {
     try {
-        return await Room.find({hotel: hotelId}).populate('hotel');
+        return await Room.find({hotel: hotelId});
+    } catch (e) {
+        throw e;
+    }
+}
+const getRoomsByHotelIdWithDetails = async (hotelId) => {
+    try {
+        const rooms = await Room.find({hotel: hotelId}).populate('facilities').populate('addons.addon').exec();
+        return rooms.map(room => {
+            const roomObj = room.toObject();
+            const possibleCombinations = getAllCombinations(roomObj.addons).filter(item => item.length);
+            const combinations = [];
+            possibleCombinations.forEach(combination => {
+                let comb = {
+                    totalAmount: room.roomPrice,
+                    extraAmount: 0,
+                    roomAmount: room.roomPrice,
+                    combinationId: '',
+                    roomId: room._id,
+                    addons: [],
+                }
+                combinations.push(comb); // Adding room without any addons
+                combination.forEach(addon => {
+                    comb.combinationId = comb.combinationId + '__' + addon.addon._id;
+                    comb.totalAmount = comb.totalAmount + addon.amount;
+                    comb.extraAmount += addon.amount;
+                    comb.addons.push({
+                        id: addon.addon._id,
+                        name: addon.addon.name,
+                        amount: addon.amount,
+                    });
+
+                    comb.combinationId = comb.combinationId.slice(2)
+                });
+                combinations.push(comb);  // Adding room with addons
+            });
+
+            roomObj.roomCombinations = combinations;
+            return roomObj;
+        });
     } catch (e) {
         throw e;
     }
 }
 
 module.exports = {
-    addRoom,
-    getRooms,
-    getRoomById,
-    updateRoom,
-    getRoomsByHotelId,
+    addRoom, getRooms, getRoomById, updateRoom, getRoomsByHotelId, getRoomsByHotelIdWithDetails,
 }
