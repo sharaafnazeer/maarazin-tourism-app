@@ -7,8 +7,28 @@ import TopHeaderFilter from "../../../components/hotel-list/hotel-list-v1/TopHea
 import HotelProperties from "../../../components/hotel-list/hotel-list-v1/HotelProperties";
 import Pagination from "../../../components/hotel-list/common/Pagination";
 import Sidebar from "../../../components/hotel-list/hotel-list-v1/Sidebar";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllHotels } from "../../../slices/hotelSlice";
 
 const index = () => {
+  const dispatch = useDispatch();
+  const hotelss = useSelector((state) => {
+    state.hotel.hotels;
+  });
+  console.log(hotelss);
+
+  useEffect(() => {
+    dispatch(getAllHotels())
+      .unwrap()
+      .then(() => {
+        console.log("Get All Hotels");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [dispatch]);
+
   return (
     <>
       <Seo pageTitle="Hotel List View" />

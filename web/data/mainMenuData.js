@@ -1,6 +1,6 @@
 export const homeItems = [
   {
-    name: "Home 01",
+    name: "Home",
     routePath: "/",
   },
   {
@@ -103,11 +103,11 @@ export const dashboardItems = [
   },
   {
     name: "All Hotels",
-    routePath: "/dashboard/hotels",
+    routePath: "/dashboard/hotel/hotels",
   }, 
   {
     name: "Add Hotel",
-    routePath: "/dashboard/add-hotel",
+    routePath: "/dashboard/hotel/add-hotel",
   },
   {
     name: "All Recovery",

@@ -1,16 +1,17 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+
+const HotelRating = ({ activeRating, setActiveRating,hotelId,selectedHotel }) => {
 
 
-const HotelRating = () => {
-// for start rating code
-const [activeRating, setActiveRating] = useState(0);
-
-const handleRatingClick = (rating) => {
-  setActiveRating(rating);
-};
+  // for start rating code
+  const handleRatingClick = (rating) => {
+    setActiveRating(rating);
+  };
   return (
     <>
-         <div className="col-auto">
+      <div className="col-auto">
         <div className="relative js-form-dd">
           <button
             className="d-flex items-center px-15 py-5 lh-16 text-14 rounded-100 border-light -dd-button"
@@ -18,7 +19,9 @@ const handleRatingClick = (rating) => {
             data-bs-auto-close="true"
             aria-expanded="false"
             data-bs-offset="0,10"
+            value={(selectedHotel && hotelId) ? selectedHotel.rating :''}
           >
+            
             {activeRating === 0 ? "Star Rating" : activeRating + " Star Rating"}
             <i className="icon icon-chevron-sm-down text-7 ml-15" />
           </button>
@@ -46,8 +49,7 @@ const handleRatingClick = (rating) => {
       </div>
       {/* End .col-auto start ratings */}
     </>
-  )
-}
+  );
+};
 
 export default HotelRating;
-
