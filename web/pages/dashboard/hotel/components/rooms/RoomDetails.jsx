@@ -1,6 +1,7 @@
 import SearchAndNewRoom from "./SearchAndNewRoom";
 import Image from "next/image";
 
+
 const RoomDetails = ({rooms = [], onEdit}) => {
 
     return (

@@ -12,6 +12,7 @@ import {getAllRooms, getSelectedRoom, saveRoom} from "../../../../slices/roomSli
 import {getOneHotelRooms} from "../../../../slices/hotelSlice";
 
 const RoomsTabcontent = () => {
+
     const dispatch = useDispatch();
     const router = useRouter();
     const hotelId = router.query.id;
