@@ -48,8 +48,8 @@ const updateHotelController = async (req, res, next) => {
         const {hotelId} = req.params;
         const hotel = req.body;
 
-        let bannerImages = [];
-        let featuredImages = []; // Access uploaded featured images
+        let bannerImages;
+        let featuredImages; // Access uploaded featured images
 
         if (!req.files || Object.keys(req.files).length === 0) {
             bannerImages = [];
@@ -97,7 +97,7 @@ const getHotelsController = async (req, res) => {
             rating,
         }
         const response =
-            req.baseUrl.includes('admin') ? await getHotels : await getHotelsWithDetails(filters);
+            req.baseUrl.includes('admin') ? await getHotels() : await getHotelsWithDetails(filters);
         return sendJson(res, 200, response);
     } catch (e) {
         return sendJson(res, 500, {
