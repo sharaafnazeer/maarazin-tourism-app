@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { getOneHotelRooms } from "../../../../../slices/hotelSlice";
 
-const RoomDetails = () => {
+const RoomDetails = ({selectedHotelRooms}) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const hotelId = router.query.id;

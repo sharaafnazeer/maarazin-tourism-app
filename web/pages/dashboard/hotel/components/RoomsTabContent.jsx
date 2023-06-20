@@ -26,10 +26,6 @@ const RoomsTabcontent = () => {
     dispatch(getOneHotelRooms(hotelId));
   },[])
 
-  // useEffect(() => {
-  //   dispatch(getAllRooms());
-  //   dispatch(getOneHotelRooms(hotelId));
-  // }, []);
 
   const [images, setImages] = useState([]);
   const [newAmentities, setNewAmentities] = useState({
