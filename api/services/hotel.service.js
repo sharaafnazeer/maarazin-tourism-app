@@ -130,6 +130,45 @@ const getHotels = async () => {
     }
 }
 
+const getHotelsWithDetails = async (filters) => {
+    try {
+        let query = Hotel.find();
+
+        if (filters.rating) {
+            query.where('rating').equals(filters.rating);
+        }
+
+        query
+            .populate('rooms')
+            .populate('popularFacilities')
+            .skip((filters.page - 1) * filters.size)
+            .limit(filters.size);
+
+        const hotels = await query.exec();
+
+        const totalCount = await Hotel.countDocuments();
+
+        const hotelResponse = [];
+        for (const hotel of hotels) {
+            let hotelObj = (await hotel).toObject();
+            hotelObj.minimumPrice = hotelObj.rooms.length ? hotelObj.rooms.reduce((minPrice, currentRoom) => {
+                return Math.min(minPrice, currentRoom.roomPrice);
+            }, Infinity) : 0;
+            hotelResponse.push(hotelObj);
+        }
+
+        return {
+            size: filters.size,
+            page: filters.page,
+            records: hotelResponse,
+            totalCount,
+        };
+
+    } catch (e) {
+        throw e;
+    }
+}
+
 const getHotelById = async (hotelId) => {
     try {
         const hotel = await Hotel.findById(hotelId).populate();
@@ -186,5 +225,6 @@ module.exports = {
     getHotelById,
     updateHotel,
     getHotelByIdWithDetails,
-    getSimilarHotelsById
+    getSimilarHotelsById,
+    getHotelsWithDetails
 }

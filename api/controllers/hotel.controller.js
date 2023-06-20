@@ -4,7 +4,7 @@ const {
     updateHotel,
     getHotels,
     getHotelByIdWithDetails,
-    getSimilarHotelsById
+    getSimilarHotelsById, getHotelsWithDetails
 } = require('../services/hotel.service')
 const sendJson = require("../helpers/json");
 const {RecordNotFound} = require("../exceptions/errors");
@@ -80,7 +80,14 @@ const updateHotelController = async (req, res, next) => {
 
 const getHotelsController = async (req, res) => {
     try {
-        const response = await getHotels();
+        const {page, size, rating} = req.query;
+        const filters = {
+            page: parseInt(page || 1),
+            size: parseInt(size || 12),
+            rating,
+        }
+        const response =
+            req.baseUrl.includes('admin') ? await getHotels : await getHotelsWithDetails(filters);
         return sendJson(res, 200, response);
     } catch (e) {
         return sendJson(res, 500, {
@@ -92,6 +99,7 @@ const getHotelsController = async (req, res) => {
     }
 
 }
+
 const getHotelByIdController = async (req, res, next) => {
     try {
         const {hotelId} = req.params;
