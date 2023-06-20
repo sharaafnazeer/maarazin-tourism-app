@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-const RoomImgUploader = () => {
-  const [images, setImages] = useState([]);
+const RoomImgUploader = ({ images, setImages,hotelRoom, setHotelRoom }) => {
   const [error, setError] = useState("");
 
   const handleFileUpload = (event) => {
@@ -27,7 +26,7 @@ const RoomImgUploader = () => {
               `Image ${file.name} is not a valid file type. Only PNG and JPEG are allowed.`
             );
           } else {
-            newImages.push(reader.result);
+            newImages.push(file);
             if (newImages.length === fileList.length) {
               setImages([...images, ...newImages]);
               setError("");
@@ -49,6 +48,12 @@ const RoomImgUploader = () => {
     newImages.splice(index, 1);
     setImages(newImages);
   };
+
+  const onChange = (id, value) => {
+    const newHotelRoom = { ...hotelRoom, [id]: value };
+    setHotelRoom(newHotelRoom);
+  };
+
 
   return (
     <div className="row x-gap-20 y-gap-20 pt-15">
@@ -94,7 +99,13 @@ const RoomImgUploader = () => {
       {error && <div className="col-12 mb-10  text-red-1">{error}</div>}
       <div className="col-10">
         <div className="form-input">
-          <input type="text" required />
+          <input
+            type="text"
+            required
+            id="roomArea"
+            // defaultValue={item && hotelId && item.hotel ? item.roomArea : ""}
+            onChange={(evt) => onChange(evt.target.id, evt.target.value)}
+          />
           <label className="lh-1 text-16 text-light-1">Room Area Size</label>
         </div>
       </div>

@@ -5,12 +5,12 @@ const LoginForm = () => {
     <form className="row y-gap-20">
       <div className="col-12">
         <h1 className="text-22 fw-500">Welcome back</h1>
-        <p className="mt-10">
+        {/* <p className="mt-10">
           Don&apos;t have an account yet?{" "}
           <Link href="/others-pages/signup" className="text-blue-1">
             Sign up for free
           </Link>
-        </p>
+        </p> */}
       </div>
       {/* End .col */}
 
@@ -30,11 +30,11 @@ const LoginForm = () => {
       </div>
       {/* End .col */}
 
-      <div className="col-12">
+      {/* <div className="col-12">
         <a href="#" className="text-14 fw-500 text-blue-1 underline">
           Forgot your password?
         </a>
-      </div>
+      </div> */}
       {/* End .col */}
 
       <div className="col-12">

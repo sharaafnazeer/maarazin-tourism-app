@@ -1,21 +1,58 @@
-import Image from "next/Image";
-
+import { useEffect } from "react";
 import Facilities from "../../../../../data/roomFacilities";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllFacilities } from "../../../../../slices/hotelSlice";
+import { useState } from "react";
 
-const RoomFacilities = () => {
- 
+const RoomFacilities = ({
+  selectedHotel,
+  hotelId,
+  hotelRoom,
+  setHotelRoom,
+  selectedHotelRooms,
+}) => {
+  const dispatch = useDispatch();
+  const Facilities = useSelector((state) => state.hotel.allFacilities);
+
+  
+
+  useEffect(() => {
+    dispatch(getAllFacilities());
+  }, []);
+
+  const updateCheckStatus = (id, checked) => {
+    const newFacility = { ...hotelRoom };
+
+    console.log(newFacility.Facilities);
+
+    if (checked) {
+      if (!newFacility.Facilities.includes(id)) {
+        let all = newFacility.Facilities;
+        all = [...all, id];
+
+        newFacility.Facilities = all;
+      }
+    } else {
+      if (newFacility.Facilities.includes(id)) {
+        newFacility.Facilities = newFacility.Facilities.filter(
+          (item) => item !== id
+        );
+      }
+    }
+    setHotelRoom(newFacility);
+  };
 
   return (
     <>
-      {Facilities.map((item) => (
-        <div className="col-12" key={item.id}>
+      {Facilities.map((item, index) => (
+        <div className="col-12" key={item._id}>
           <div className="accordion__item px-20 py-20 border-light rounded-4 bg-light-2">
             <div
               className="accordion__button d-flex items-center mb-20 justify-content-between"
               data-bs-toggle="collapse"
-              data-bs-target={`#${item.collapseTarget}`}
+              data-bs-target={`#item-${index}`}
             >
-              <div className="button text-dark-1 text-start">{item.title}</div>
+              <div className="button text-dark-1 text-start">{item.name}</div>
               <div className="accordion__icon size-40 flex-center bg-light-2 rounded-full mr-20">
                 <i className="icon-plus" />
                 <i className="icon-minus" />
@@ -25,27 +62,36 @@ const RoomFacilities = () => {
 
             <div
               className="accordion-collapse collapse"
-              id={item.collapseTarget}
-              // data-bs-parent="#Faq1"
+              id={`item-${index}`}
             >
-               <div className="col-lg-12 bg-light">
+              <div className="col-lg-12 bg-light">
                 <div className="row x-gap-100 y-gap-15">
-                  {item?.contents?.map((content)=>(
-                  <div className="col-lg-4 col-sm-6" key={content.id}>
-                    <div className="row y-gap-15">
-                      <div className="col-12">
-                        <div className="d-flex items-center form-checkbox">
-                          <input type="checkbox" name="name" />
-                          <div className="form-checkbox__mark">
-                            <div className="form-checkbox__icon icon-check" />
+                  {item?.facilities?.map((content, index) => (
+                    <div className="col-lg-4 col-sm-6" key={content._id}>
+                      <div className="row y-gap-15">
+                        <div className="col-12">
+                          <div className="d-flex items-center form-checkbox">
+                            <input
+                              type="checkbox"
+                              name="facilities"
+                              onChange={(event) =>
+                                updateCheckStatus(index, event.target.checked)
+                              }
+                              // defaultChecked={selectedHotelRooms && selectedHotelRooms.facilities.includes(content._id)}
+                              // defaultValue={selectedHotelRooms && selectedHotelRooms}
+                            />
+                            <div className="form-checkbox__mark">
+                              <div className="form-checkbox__icon icon-check" />
+                            </div>
+                            <div className="text-15 lh-11 ml-10">
+                              {content.name}
+                            </div>
                           </div>
-                          <div className="text-15 lh-11 ml-10">{content.label}</div>
                         </div>
+                        {/* End .col-12 */}
                       </div>
-                      {/* End .col-12 */}
+                      {/* End accordion conent */}
                     </div>
-                    {/* End accordion conent */}
-                  </div>
                   ))}
                 </div>
               </div>

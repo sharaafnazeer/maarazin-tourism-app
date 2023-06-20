@@ -1,12 +1,11 @@
 import { useState } from "react";
 
 
-const AmentitiesBedOption = () => {
-// for start bed code
-const [activeBed, setActiveBed] = useState(0);
+const AmentitiesBedOption = ({newAmentities, setNewAmentities}) => {
 
 const handlebedClick = (bed) => {
-  setActiveBed(bed);
+  setNewAmentities(bed);
+  console.log(setNewAmentities(bed));
 };
   return (
     <>
@@ -19,7 +18,7 @@ const handlebedClick = (bed) => {
             aria-expanded="false"
             data-bs-offset="0,10"
           >
-            {activeBed === 0 ? "Extra Beds" : activeBed + " Extra Beds"}
+            {newAmentities === 0 ? "Extra Beds" : newAmentities + " Extra Beds"}
             {/* <i className="icon icon-chevron-sm-down text-7 ml-15" /> */}
           </button>
 
@@ -31,7 +30,7 @@ const handlebedClick = (bed) => {
                   <div className="col-auto" key={bed}>
                     <button
                       className={`button -blue-1 bg-blue-1-05 text-blue-1 py-10 px-20 rounded-100 ${
-                        activeBed === bed ? "active" : ""
+                        newAmentities === bed ? "active" : ""
                       }`}
                       onClick={() => handlebedClick(bed)}
                     >

@@ -1,37 +1,66 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateHotelRules } from "../../../../slices/hotelSlice";
 import { useRouter } from "next/router";
+import { updateHotelRule } from "../../../../slices/hotelSlice";
 
 const RulesTabContent = () => {
   const dispatch = useDispatch();
-
-  const [rules, setRules] = useState({
-    minAdvance: "",
-    minStay: "",
-    checkIn: "",
-    checkOut: "",
-  });
-
   const router = useRouter();
   const hotelId = router.query.id;
 
   const selectedHotel = useSelector((state) => state.hotel.selectedHotel);
 
-  useEffect(() => {
-  //  setRules()
-  }, []);
+  const [rules, setRules] = useState({
+    minAdvance: '',
+    minStay: '',
+    checkIn: '',
+    checkOut: '',
+  });
+
 
   const onChange = (id, value) => {
     const newRules = { ...rules, [id]: value };
     setRules(newRules);
   };
 
-  const onSave =()=>{
-    dispatch(updateHotelRules(rules));
-  
-  }
+  const onSave = () => {
+
+    let formData = new FormData();
+
+    formData.append("minAdvance", rules.minAdvance);
+    formData.append("minStay", rules.minStay);
+    formData.append("checkIn", rules.checkIn);
+    formData.append("checkOut", rules.checkOut);
+
+    const data = {
+      formData,
+      hotelId
+    }
+    
+
+    dispatch(updateHotelRule(data))
+      .unwrap()
+      .then((res) => {
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    if (selectedHotel) {
+      setRules(
+        {
+          minAdvance: selectedHotel?.rule?.minAdvance,
+          minStay: selectedHotel?.rule?.minStay,
+          checkIn: selectedHotel?.rule?.checkIn,
+          checkOut: selectedHotel?.rule?.checkOut
+        }
+      )
+
+    }
+  }, [selectedHotel]);
 
   return (
     <div className="col-xl-9 col-lg-11">
@@ -45,12 +74,12 @@ const RulesTabContent = () => {
             <input
               type="text"
               required
-              id="minAdvance"
+              id="checkIn"
               defaultValue={
-                selectedHotel && hotelId ? selectedHotel.rule.minAdvance : ""
+                (selectedHotel && hotelId) ? selectedHotel?.rule?.checkIn : ""
               }
               onChange={(event) =>
-                onChange(event.target.id, event.target.value)
+                onChange(event.target.id,event.target.value)
               }
             />
             <label className="lh-1 text-16 text-light-1">
@@ -64,8 +93,10 @@ const RulesTabContent = () => {
             <input
               type="text"
               required
-              id="minStay"
-              defaultValue={selectedHotel && hotelId ? selectedHotel.rule.minStay : ""}
+              id="checkOut"
+              defaultValue={
+               ( selectedHotel && hotelId) ? selectedHotel?.rule?.checkOut : ""
+              }
               onChange={(event) =>
                 onChange(event.target.id, event.target.value)
               }
@@ -81,8 +112,10 @@ const RulesTabContent = () => {
             <input
               type="text"
               required
-              id="checkIn"
-              defaultValue={selectedHotel && hotelId ? selectedHotel.rule.checkIn : ""}
+              id="minAdvance"
+              defaultValue={
+                (selectedHotel && hotelId) ? selectedHotel?.rule?.minAdvance : ""
+              }
               onChange={(event) =>
                 onChange(event.target.id, event.target.value)
               }
@@ -98,9 +131,9 @@ const RulesTabContent = () => {
             <input
               type="text"
               required
-              id="checkOut"
+              id="minStay"
               defaultValue={
-                selectedHotel && hotelId ? selectedHotel.rule.checkOut : ""
+                (selectedHotel && hotelId )? selectedHotel?.rule?.minStay : ""
               }
               onChange={(event) =>
                 onChange(event.target.id, event.target.value)

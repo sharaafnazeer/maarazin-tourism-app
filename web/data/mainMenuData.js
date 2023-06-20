@@ -103,15 +103,11 @@ export const dashboardItems = [
   },
   {
     name: "All Hotels",
-    routePath: "/dashboard/hotel/hotels",
+    routePath: "/dashboard/hotels",
   }, 
   {
     name: "Add Hotel",
     routePath: "/dashboard/hotel/add-hotel",
-  },
-  {
-    name: "All Recovery",
-    routePath: "/dashboard/recovery",
   },
   {
     name: "Settings",

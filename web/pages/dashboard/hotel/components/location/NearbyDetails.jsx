@@ -1,7 +1,8 @@
 import React from "react";
 import SearchAndNewNearby from "./SearchAndNewNearby";
 
-const NearbyDetails = () => {
+const NearbyDetails = ({hotelId, nearBy = [], onEdit, onDelete}) => {
+
   return (
     <>
       <SearchAndNewNearby />
@@ -21,12 +22,13 @@ const NearbyDetails = () => {
               </thead>
               {/* End theade */}
               <tbody>
-                <tr>
-                  <td>Name </td>
-                  <td>Content </td>
+                {nearBy?.map((place,index)=>(
+                <tr key={index}>
+                  <td>{place.name}</td>
+                  <td>{place.content} </td>
                   <td>
                     <div className="rounded-4 p-2 bg-blue-1-05 text-blue-1 flex-center text-14 fw-600">
-                     60 {`${"KM"}`}
+                     {place.distance}
                     </div>
                   </td>
 
@@ -38,18 +40,19 @@ const NearbyDetails = () => {
                         </button>
                       </div>
                       <div className="col-auto">
-                        <button className="flex-center bg-light-2 rounded-4 size-35">
+                        <button className="flex-center bg-light-2 rounded-4 size-35" onClick={()=>onEdit(index)}>
                           <i className="icon-edit text-16 text-light-1" />
                         </button>
                       </div>
                       <div className="col-auto">
-                        <button className="flex-center bg-light-2 rounded-4 size-35">
+                        <button className="flex-center bg-light-2 rounded-4 size-35" onClick={()=>onDelete(index)}>
                           <i className="icon-trash-2 text-16 text-light-1" />
                         </button>
                       </div>
                     </div>
                   </td>
                 </tr>
+                ))}
                 {/* End tr */}
               </tbody>
             </table>

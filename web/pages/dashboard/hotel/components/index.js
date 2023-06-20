@@ -4,8 +4,24 @@ import ContentTabContent from "./ContentTabContent";
 import LocationTabContent from "./LocationTabContent";
 import RoomsTabcontent from "./RoomsTabContent";
 import RulesTabContent from "./RulesTabContent";
+import { useDispatch } from "react-redux";
+import { useReducer } from "react";
+import { useRouter } from "next/router";
+import { getOneHotel } from "../../../../slices/hotelSlice";
+import { useEffect } from "react";
 
 const Index = ({isUpdate = false}) => {
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+
+  useEffect(() => {
+    if (router.query.id)
+      dispatch(getOneHotel(router.query.id));
+  }, [router.query?.id]);
+
+
   const tabs = [
     {
       label: "Content",

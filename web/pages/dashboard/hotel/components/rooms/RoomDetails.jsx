@@ -1,7 +1,40 @@
+import { useDispatch, useSelector } from "react-redux";
 import SearchAndNewRoom from "./SearchAndNewRoom";
-import Image from "next/Image";
+import { useEffect } from "react";
+import { getSelectedRoom } from "../../../../../slices/roomSlice";
+import { useRouter } from "next/router";
+import Image from "next/image";
+import { getOneHotelRooms } from "../../../../../slices/hotelSlice";
 
 const RoomDetails = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const hotelId = router.query.id;
+
+  const allRooms = useSelector((state) => state.room.rooms);
+
+  const selectedRoom = useSelector(state => state.room.selectedRoom);
+  const selectedHotel = useSelector(state => state.hotel.selectedHotel);
+
+
+ 
+  // useEffect(()=>{
+  //      dispatch(getOneHotelRooms(hotelId))
+  //     .unwrap()
+  //     .then((res) => {
+  //     //  console.log(dispatch(getOneHotelRooms(hotelId)));
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // },[])
+
+  // console.log(selectedHotel);
+
+  const onEditRoom =()=>{
+    console.log("Clicked");
+  }
+
   return (
     <>
       <SearchAndNewRoom />
@@ -21,74 +54,76 @@ const RoomDetails = () => {
               </thead>
               {/* End theade */}
               <tbody>
-                <tr>
-                  <td>
-                    <div className="col">
-                      <div className="row-auto">
-                        <div className="text-blue-1 fw-500">DELUXE</div>
+                {allRooms?.map((item) => (
+                  <tr key={item._id}> 
+                    <td>
+                      <div className="col">
+                        <div className="row-auto">
+                          <div className="text-blue-1 fw-500">{item.name}</div>
+                        </div>
+                        <div className="d-flex ratio ratio-1:1 w-200">
+                          <Image
+                            width={200}
+                            height={200}
+                            src="/img/hotels/1.png"
+                            // src={`${item.roomImages[0]}`}
+                            alt="Hotel Image"
+                            className="img-ratio rounded-4"
+                          />
+                        </div>
                       </div>
-                      <div className="d-flex ratio ratio-1:1 w-200">
-                        <Image
-                          width={200}
-                          height={200}
-                          src="/img/hotels/1.png"
-                          alt="avatar"
-                          className="img-ratio rounded-4"
-                        />
+                    </td>
+
+                    <td>
+                      <div className="col">
+                        <div className="row-auto mb-2">{`${item.sleeps.adults} Adults`}</div>
+                        <div className="row-auto">{`${item.sleeps.children} Child`}</div>
                       </div>
-                    </div>
-                  </td>
+                    </td>
 
-                  <td>
-                    <div className="col ">
-                      <div className="row-auto mb-2">02 Adult</div>
-                      <div className="row-auto">10 child</div>
-                    </div>
-                  </td>
+                    <td>{item.benefits}</td>
 
-                  <td>harum ipsam, cum enim quibusdam, quas quam quidem magnam maiores officia quo necessitatibus animi ipsa atque pariatur? Quaerat, neque?</td>
+                    <td>
+                      {item?.facilities?.map((facility) => (
+                        <div className="col" key={facility._id}>
+                          <div className="row mb-2">{facility}</div>
+                        </div>
+                      ))}
+                    </td>
 
-                  <td>
-                    <div className="col">
-                      <div className="row mb-2">Parking area</div>
-                      <div className="row">Free Wifi</div>
-                    </div>
-                  </td>
-
-                  <td>
-                    <div className="rounded-4 p-2 bg-blue-1-05 text-blue-1 flex-center text-14 fw-600">
-                      US$.3000
-                    </div>
-                  </td>
-
-                  <td>
-                    <div className="row x-gap-10 y-gap-10 items-center">
-                      <div className="col-auto">
-                        <button className="flex-center bg-light-2 rounded-4 size-35">
-                          <i className="icon-eye text-16 text-light-1" />
-                        </button>
+                    <td>
+                      <div className="rounded-4 p-2 bg-blue-1-05 text-blue-1 flex-center text-14 fw-600">
+                        {`US$.${item.roomPrice}`}
                       </div>
-                      <div className="col-auto">
-                        <button className="flex-center bg-light-2 rounded-4 size-35">
-                          <i className="icon-edit text-16 text-light-1" />
-                        </button>
+                    </td>
+
+                    <td>
+                      <div className="row x-gap-10 y-gap-10 items-center">
+                        <div className="col-auto">
+                          <button className="flex-center bg-light-2 rounded-4 size-35">
+                            <i className="icon-eye text-16 text-light-1" />
+                          </button>
+                        </div>
+                        <div className="col-auto">
+                          <button className="flex-center bg-light-2 rounded-4 size-35" onClick={()=>onEditRoom()}>
+                            <i className="icon-edit text-16 text-light-1" />
+                          </button> 
+                        </div>
+                        <div className="col-auto">
+                          <button className="flex-center bg-light-2 rounded-4 size-35">
+                            <i className="icon-trash-2 text-16 text-light-1" />
+                          </button>
+                        </div>
                       </div>
-                      <div className="col-auto">
-                        <button className="flex-center bg-light-2 rounded-4 size-35">
-                          <i className="icon-trash-2 text-16 text-light-1" />
-                        </button>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                {/* End tr */}
-                
+                    </td>
+                  </tr>
+                  //  End tbody
+                ))}
               </tbody>
             </table>
           </div>
         </div>
       </div>
-      
     </>
   );
 };

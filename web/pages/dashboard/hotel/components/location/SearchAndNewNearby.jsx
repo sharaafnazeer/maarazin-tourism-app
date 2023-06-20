@@ -28,11 +28,11 @@ const SearchAndNewNearby = () => {
      </div>
      {/* End Search Button */}
 
-     <div className="col-auto">
+     {/* <div className="col-auto">
        <button className="button -md h-50 -dark-1 bg-blue-1 text-white">
          Add a new Nearby
        </button>
-     </div>
+     </div> */}
      {/* End Add New Room */}
    </div>    
       

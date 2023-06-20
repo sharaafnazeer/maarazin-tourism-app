@@ -5,9 +5,12 @@ import {
   getMostPopularCategoriesApi,
   postHotelApi,
   getOneHotelApi,
-  getUpdateHotelistByIdApi,
   updateOneHotelApi,
   updateHotelRulesApi,
+  updateHotelLocationApi,
+  getAllFacilitiesApi,
+  getAllAddonsApi,
+  getAllHotelRoomsApi,
 } from "../pages/api/hotelsApi";
 
 const initialState = {
@@ -16,8 +19,20 @@ const initialState = {
   categories: [],
   selectedHotel: null,
   mostPopularFacilities: [],
-  rules:[],
+  allFacilities:[],
+  allAddons:[],
+  selectedHotelRooms:[],
+
 };
+
+export const saveHotel = createAsyncThunk(
+  "hotel/saveHotel",
+  async (hotel, thunkAPI) => {
+    thunkAPI.dispatch(setLoading(true));
+    const response = await postHotelApi(hotel);
+    return response.data;
+  }
+);
 
 export const getAllHotels = createAsyncThunk(
   "hotel/getAllHotels",
@@ -30,6 +45,7 @@ export const getAllHotels = createAsyncThunk(
   }
 );
 
+
 export const getOneHotel = createAsyncThunk(
   "hotel/getOneHotel",
   async (hotelId, thunkAPI) => {
@@ -41,16 +57,15 @@ export const getOneHotel = createAsyncThunk(
   }
 );
 
-export const updateOneHotel = createAsyncThunk(
-  "hotel/updateOneHotel",
-  async (hotelId, thunkAPI) => {
+export const getOneHotelRooms = createAsyncThunk(
+  "hotel/getOneHotelRooms",
+  async(hotelId,thunkAPI)=>{
     thunkAPI.dispatch(setLoading(true));
-    const response = await updateOneHotelApi(hotelId);
-    thunkAPI.dispatch(updateSelectedHotel(response.data));
-    return response.data;
+    const response = await getAllHotelRoomsApi(hotelId);
+    thunkAPI.dispatch(updateSelectedHotelRoom(response.data));
+    return  response.data;
   }
-);
-
+)
 export const getRoomMostP_Facilities = createAsyncThunk(
   "hotel/getRoomMostP_Facilities",
   async (_, thunkAPI) => {
@@ -71,23 +86,58 @@ export const getAllCategories = createAsyncThunk(
   }
 );
 
-export const saveHotel = createAsyncThunk(
-  "hotel/saveHotel",
-  async (hotel, thunkAPI) => {
+export const getAllFacilities = createAsyncThunk(
+  'hotel/getAllFacilities',
+  async(_, thunkAPI)=>{
     thunkAPI.dispatch(setLoading(true));
-    const response = await postHotelApi(hotel);
+    const response = await getAllFacilitiesApi();
+    thunkAPI.dispatch(getFacilities(response.data));
     return response.data;
   }
 );
 
-export const updateHotelRules = createAsyncThunk(
-    "hotel/updateHotelRules",
-    async(hotelId,thunkAPI)=>{
+export const getAllAddons = createAsyncThunk(
+  'hotel/getAllAddons',
+  async(_,thunkAPI)=>{
+    thunkAPI.dispatch(setLoading(true));
+    const response = await getAllAddonsApi();
+    thunkAPI.dispatch(getAddons(response.data));
+    return response.data;
+  }
+)
+
+
+export const updateOneHotel = createAsyncThunk(
+  "hotel/updateOneHotel",
+  async (data, thunkAPI) => {
+    thunkAPI.dispatch(setLoading(true));
+    const response = await updateOneHotelApi(data);
+    // thunkAPI.dispatch(updateSelectedHotel(response.data));
+    return response.data;
+  }
+);
+
+
+export const updateHotelRule = createAsyncThunk(
+    "hotel/updateHotelRule",
+    async(data,thunkAPI)=>{
         thunkAPI.dispatch(setLoading(true))
-        const response = await updateHotelRulesApi(hotelId,rules);
-        // thunkAPI.dispatch(updateSelectedHotel(response.data));
+        const response = await updateHotelRulesApi(data);
+        thunkAPI.dispatch(updateSelectedHotel(response.data));
         return response.data;
     }
+)
+
+
+export const updateHotelLocation = createAsyncThunk(
+  "hotel/updateHotelLocation",
+  async(data, thunkAPI)=>{
+    thunkAPI.dispatch(setLoading(true))
+    const response = await updateHotelLocationApi(data);
+    thunkAPI.dispatch(updateSelectedHotel(response.data));
+    return response.data;
+
+  }
 )
 
 export const hotelSlice = createSlice({
@@ -111,6 +161,18 @@ export const hotelSlice = createSlice({
       state.selectedHotel = action.payload;
       state.isLoading = false;
     },
+    updateSelectedHotelRoom:(state,action)=>{
+      state.selectedHotelRooms = action.payload;
+      state.isLoading = false;
+    },
+    getFacilities:(state, action)=>{
+      state.allFacilities = action.payload;
+      state.isLoading = false;
+    },
+    getAddons:(state,action)=>{
+      state.allAddons = action.payload;
+      state.isLoading= false;
+    },
     setLoading: (state) => {
       state.isLoading = !state.isLoading;
     },
@@ -124,6 +186,10 @@ export const {
   updateMostPopularFacilities,
   updateSelectedHotel,
   setLoading,
+  updateSelectedHotelRules,
+  getFacilities,
+  getAddons,
+  updateSelectedHotelRoom,
 } = hotelSlice.actions;
 
 export default hotelSlice.reducer;

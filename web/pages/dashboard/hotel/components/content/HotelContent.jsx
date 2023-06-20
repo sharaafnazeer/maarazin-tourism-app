@@ -12,15 +12,9 @@ const HotelContent = ({
   hotelId,
   selectedHotel,
 }) => {
-  const [groupId, setGroupId] = useState([]);
-  // const router = useRouter();
-  // const hotelId = router.query.id;
-
-  // const dispatch = useDispatch();
-
+  
   const categories = useSelector(state => state.hotel.categories);
-  // const selectedHotel = useSelector(state => state.hotel.selectedHotel);
-
+  
   const onChange = (id, value) => {
     const newHotelData = { ...hotelData, [id]: value };
     setHotelData(newHotelData);
@@ -89,8 +83,8 @@ const HotelContent = ({
             <HotelRating
               activeRating={activeRating}
               setActiveRating={setActiveRating}
-              // hotelId={hotelId}            
-              // selectedHotel={selectedHotel}
+              hotelId={hotelId}            
+              selectedHotel={selectedHotel}
             />
           </div>
         </div>

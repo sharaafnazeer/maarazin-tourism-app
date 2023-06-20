@@ -26,7 +26,7 @@ const LogIn = () => {
                 <LoginForm />
                 {/* End .Login */}
 
-                <div className="row y-gap-20 pt-30">
+                {/* <div className="row y-gap-20 pt-30">
                   <div className="col-12">
                     <div className="text-center">or sign in with</div>
                   </div>
@@ -37,7 +37,7 @@ const LogIn = () => {
                       and Privacy Statement.
                     </div>
                   </div>
-                </div>
+                </div> */}
                 {/* End .row */}
               </div>
             </div>

@@ -7,6 +7,8 @@ import {
   getAllCategories,
   getRoomMostP_Facilities,
   saveHotel,
+  updateHotels,
+  updateOneHotel,
 } from "../../../../slices/hotelSlice";
 import { useRouter } from "next/router";
 import RoomMostP_Facilities from "./rooms/RoomMostP_Facilities";
@@ -18,7 +20,6 @@ const ContentTabContent = () => {
   const hotelId = router.query.id;
   
   const selectedHotel = useSelector(state => state.hotel.selectedHotel);
-
   
 
   useEffect(() => {
@@ -51,7 +52,15 @@ const ContentTabContent = () => {
       JSON.stringify(hotelData.popularFacilities)
     );
 
-    dispatch(saveHotel(formData))
+    if (hotelId) {
+      // Update
+
+      const data = {
+        formData,
+        hotelId
+      }
+
+      dispatch(updateOneHotel(data))
       .unwrap()
       .then((res) => {
         router.push(`/dashboard/hotel/update-hotel/${res.record._id}`);
@@ -59,7 +68,35 @@ const ContentTabContent = () => {
       .catch((err) => {
         console.log(err);
       });
+
+    } else {
+      dispatch(saveHotel(formData))
+      .unwrap()
+      .then((res) => {
+        router.push(`/dashboard/hotel/update-hotel/${res.record._id}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }    
   };
+
+  useEffect(() => {
+    if (selectedHotel) {
+      setActiveRating(selectedHotel.rating);
+
+      setHotelData(
+        {
+          name: selectedHotel.name,
+          content: selectedHotel.description,
+          rating: selectedHotel.rating,
+          hotelGroupId: selectedHotel.hotelGroup,
+          popularFacilities: selectedHotel.popularFacilities,
+        }
+      )
+
+    }
+  }, [selectedHotel]);
 
   return (
     <>

@@ -1,6 +1,13 @@
+import { useState } from "react";
 import AmentitiesBedOption from "./AmentitiesBedOption";
 
-const Amenities = () => {
+const Amenities = ({hotelId,newAmentities, setNewAmentities}) => {
+
+  const onChange =(id,value)=>{
+    const Amentities ={...newAmentities,[id]: value};
+    setNewAmentities(Amentities);
+  }
+
   return (
     <>
       <div className="col-lg-8 border-light rounded-4">
@@ -36,7 +43,7 @@ const Amenities = () => {
                 </p>
               </div>
               <div className="col-auto">
-                <AmentitiesBedOption />
+                <AmentitiesBedOption newAmentities={newAmentities} setNewAmentities={setNewAmentities}/>
               </div>
             </div>
           </div>
@@ -52,7 +59,10 @@ const Amenities = () => {
               <div className="col">
                 <div className="col-lg-6">
                   <div className="form-input ">
-                    <input type="number" required />
+                    <input type="number" required 
+                      id="amountPerNight"
+                      onChange={(event)=> onChange(event.target.id, event.target.value)}
+                    />
                     <label className="lh-1 text-16 text-light-1">{`US$`} 0.00</label>
                   </div>
                 </div>
