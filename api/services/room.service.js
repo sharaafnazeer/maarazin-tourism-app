@@ -161,7 +161,7 @@ const getRoomById = async (roomId) => {
 
 const getRoomsByHotelId = async (hotelId) => {
     try {
-        return await Room.find({hotel: hotelId});
+        return await Room.find({hotel: hotelId}).populate('facilities');
     } catch (e) {
         throw e;
     }

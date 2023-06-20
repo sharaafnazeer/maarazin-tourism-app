@@ -23,18 +23,18 @@ const RoomFacilities = ({
   const updateCheckStatus = (id, checked) => {
     const newFacility = { ...hotelRoom };
 
-    console.log(newFacility.Facilities);
-
+    // console.log(newFacility.Facilities);
+    //
     if (checked) {
-      if (!newFacility.Facilities.includes(id)) {
-        let all = newFacility.Facilities;
+      if (!newFacility.facilities.includes(id)) {
+        let all = newFacility.facilities;
         all = [...all, id];
 
-        newFacility.Facilities = all;
+        newFacility.facilities = all;
       }
     } else {
-      if (newFacility.Facilities.includes(id)) {
-        newFacility.Facilities = newFacility.Facilities.filter(
+      if (newFacility.facilities.includes(id)) {
+        newFacility.facilities = newFacility.facilities.filter(
           (item) => item !== id
         );
       }
@@ -75,7 +75,7 @@ const RoomFacilities = ({
                               type="checkbox"
                               name="facilities"
                               onChange={(event) =>
-                                updateCheckStatus(index, event.target.checked)
+                                updateCheckStatus(content._id, event.target.checked)
                               }
                               // defaultChecked={selectedHotelRooms && selectedHotelRooms.facilities.includes(content._id)}
                               // defaultValue={selectedHotelRooms && selectedHotelRooms}

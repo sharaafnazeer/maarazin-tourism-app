@@ -1,6 +1,4 @@
-import { useSelector } from "react-redux";
-
-const RoomSleepSize = ({ hotelRoom, setHotelRoom, hotelId }) => {
+const RoomSleepSize = ({ hotelRoom, setHotelRoom }) => {
  
   const onChange = (id, value) => {
     const newHotelRoom = { ...hotelRoom, [id]: value };
@@ -16,9 +14,7 @@ const RoomSleepSize = ({ hotelRoom, setHotelRoom, hotelId }) => {
             type="number"
             required
             id="adults"
-            // defaultValue={
-            //   item && hotelId && item.hotel ? item.sleeps.adults : ""
-            // }
+            defaultValue={(hotelRoom) ? hotelRoom.adults : ''}
             onChange={(evt) => onChange(evt.target.id, evt.target.value)}
           />
           <label className="lh-1 text-16 text-light-1">Adults</label>
@@ -32,9 +28,7 @@ const RoomSleepSize = ({ hotelRoom, setHotelRoom, hotelId }) => {
             type="number"
             required
             id="children"
-            // defaultValue={
-            //   item && hotelId && item.hotel ? item.sleeps.children : ""
-            // }
+            defaultValue={(hotelRoom) ? hotelRoom.children : ''}
             onChange={(evt) => onChange(evt.target.id, evt.target.value)}
           />
           <label className="lh-1 text-16 text-light-1">Childs</label>
@@ -48,7 +42,7 @@ const RoomSleepSize = ({ hotelRoom, setHotelRoom, hotelId }) => {
             required
             rows={5}
             id="benefits"
-            // defaultValue={item && hotelId && item.hotel ? item.benefits : ""}
+            defaultValue={(hotelRoom) ? hotelRoom.benefits : ''}
             onChange={(evt) => onChange(evt.target.id, evt.target.value)}
           />
           <label className="lh-1 text-16 text-light-1">Benefits</label>
