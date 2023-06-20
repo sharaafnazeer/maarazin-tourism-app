@@ -47,8 +47,17 @@ const updateHotelController = async (req, res, next) => {
     try {
         const {hotelId} = req.params;
         const hotel = req.body;
-        const bannerImages = req.files['bannerImages']; // Access uploaded banner images
-        const featuredImages = req.files['featuredImages']; // Access uploaded featured images
+
+        let bannerImages = [];
+        let featuredImages = []; // Access uploaded featured images
+
+        if (!req.files || Object.keys(req.files).length === 0) {
+            bannerImages = [];
+            featuredImages = [];
+        } else {
+            bannerImages =  req.files['bannerImages']; // Access uploaded banner images
+            featuredImages = req.files['featuredImages']
+        }       
 
         if (bannerImages && Array.isArray(bannerImages))
             hotel.bannerImages = bannerImages.map((file) => {
@@ -68,6 +77,7 @@ const updateHotelController = async (req, res, next) => {
 
         return sendJson(res, 200, {title: 'Hotel updated', message: 'Hotel updated successfully', record: response});
     } catch (e) {
+        console.log(e)
         return sendJson(res, 500, {
             error: {
                 title: 'Hotel not updated',
