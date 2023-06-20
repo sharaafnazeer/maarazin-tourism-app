@@ -27,6 +27,7 @@ export const destinations2 = [
     hoverText: "14 Hotel - 22 Cars - 18 Tours - 95 Activity",
     city: "New York",
     img: "/img/destinations/1/1.png",
+    routerpath:"/hotel/hotel-list-view"
   },
   {
     id: 2,

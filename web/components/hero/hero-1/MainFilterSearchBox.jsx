@@ -28,7 +28,7 @@ const MainFilterSearchBox = () => {
             <div className="button-item">
               <button
                 className="mainSearch__submit button -dark-1 h-60 px-35 col-12 rounded-100 bg-blue-1 text-white"
-                onClick={() => Router.push("/hotel/hotel-list-v1")}
+                onClick={() => Router.push("/hotel/hotel-list-view")}
               >
                 <i className="icon-search text-20 mr-10" />
                 Search

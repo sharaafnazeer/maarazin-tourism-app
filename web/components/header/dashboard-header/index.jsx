@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import MainMenu from "../MainMenu";
 import MobileMenu from "../MobileMenu";
+import dynamic from "next/dynamic";
 
 const HeaderDashBoard = () => {
   const [navbar, setNavbar] = useState(false);
@@ -119,4 +120,4 @@ const HeaderDashBoard = () => {
   );
 };
 
-export default HeaderDashBoard;
+export default dynamic(() => Promise.resolve(HeaderDashBoard), {ssr:false});
