@@ -4,7 +4,7 @@ import { Navigation, Pagination } from "swiper";
 import Image from "next/image";
 import Link from "next/link";
 
-const HotelProperties = () => {
+const HotelProperties = ({listHotel}) => {
   return (
     <>
       {hotelsData.slice(0, 7).map((item) => (

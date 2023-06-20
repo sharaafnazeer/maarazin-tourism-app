@@ -9,8 +9,8 @@ const Sidebar = () => {
       title: "Manage Hotel",
       links: [
         { title: "All Hotel", href: "/dashboard/hotels" },
-        { title: "Add Hotel", href: "/dashboard/add-hotel" },
-        { title: "Recovery", href: "/dashboard/recovery" },
+        { title: "Add Hotel", href: "/dashboard/hotel/add-hotel" },
+        // { title: "Recovery", href: "/dashboard/recovery" },
       ],
     },
   ];
@@ -37,7 +37,7 @@ const Sidebar = () => {
         </div>
         {/* End accordion__item */}
         
-        <div className="sidebar__item ">
+        {/* <div className="sidebar__item ">
           <Link
             href="/dashboard/booking"
             className="sidebar__button d-flex items-center text-15 lh-1 fw-500"
@@ -51,7 +51,7 @@ const Sidebar = () => {
             />
             Booking History
           </Link>
-        </div>
+        </div> */}
         {/* End accordion__item */}
 
         
@@ -99,7 +99,7 @@ const Sidebar = () => {
             </div>
           </div>
         ))}
-        <div className="sidebar__item ">
+        {/* <div className="sidebar__item ">
           <Link
             href="/dashboard/settings"
             className="sidebar__button d-flex items-center text-15 lh-1 fw-500"
@@ -113,7 +113,7 @@ const Sidebar = () => {
             />
             Settings
           </Link>
-        </div>
+        </div> */}
         {/* End accordion__item */}
 
         <div className="sidebar__item ">

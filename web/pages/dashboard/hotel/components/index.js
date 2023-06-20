@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import ContentTabContent from "./ContentTabContent";
 import LocationTabContent from "./LocationTabContent";
-import PricingTabContent from "./PricingTabContent";
-import AttributesTabContent from "./AttributesTabContent";
 import RoomsTabcontent from "./RoomsTabContent";
+import RulesTabContent from "./RulesTabContent";
 
-const Index = () => {
+const Index = ({isUpdate = false}) => {
   const tabs = [
     {
       label: "Content",
@@ -26,7 +25,7 @@ const Index = () => {
     {
       label: "Rules",
       labelNo: 4,
-      content: <PricingTabContent />,
+      content: <RulesTabContent/>
     }
   ];
 
@@ -40,7 +39,7 @@ const Index = () => {
     >
       <TabList className="tabs__controls row x-gap-40 y-gap-10 lg:x-gap-20">
         {tabs.map((tab, index) => (
-          <Tab key={index} className="col-auto">
+          <Tab key={index} className="col-auto" disabled={!isUpdate && index != 0}>
             <button className="tabs__button text-18 lg:text-16 text-light-1 fw-500 pb-5 lg:pb-0 js-tabs-button">
               {tab.labelNo}. {tab.label}
             </button>

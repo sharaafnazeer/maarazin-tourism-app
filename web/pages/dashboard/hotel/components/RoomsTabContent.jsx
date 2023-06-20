@@ -1,4 +1,3 @@
-import Faq from "../../../../components/faq/Faq";
 import Amenities from "./rooms/Amenities";
 import RoomAddons from "./rooms/RoomAddons";
 import RoomDetails from "./rooms/RoomDetails";

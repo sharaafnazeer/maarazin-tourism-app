@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-const HotelImageUploader = () => {
-  const [images, setImages] = useState([]);
+const FeaturedUploader = ({featuredImages, setFeaturedImages}) => {
+  
   const [error, setError] = useState("");
 
   const handleFileUpload = (event) => {
@@ -27,9 +27,9 @@ const HotelImageUploader = () => {
               `Image ${file.name} is not a valid file type. Only PNG and JPEG are allowed.`
             );
           } else {
-            newImages.push(reader.result);
+            newImages.push(file);
             if (newImages.length === fileList.length) {
-              setImages([...images, ...newImages]);
+              setFeaturedImages([...featuredImages, ...newImages]);
               setError("");
             }
           }
@@ -45,16 +45,16 @@ const HotelImageUploader = () => {
   };
 
   const handleRemoveImage = (index) => {
-    const newImages = [...images];
+    const newImages = [...featuredImages];
     newImages.splice(index, 1);
-    setImages(newImages);
+    setFeaturedImages(newImages);
   };
 
   return (
     <div className="row x-gap-20 y-gap-20 pt-15">
       <div className="col-auto">
         <div className="w-200">
-          <label htmlFor="uploadGallery" className="d-flex ratio ratio-1:1">
+          <label htmlFor="featuredImages" className="d-flex ratio ratio-1:1">
             <div className="flex-center flex-column text-center bg-blue-2 h-full w-1/1 absolute rounded-4 border-type-1">
               <div className="icon-upload-file text-40 text-blue-1 mb-10" />
               <div className="text-blue-1 fw-500">Upload Images</div>
@@ -62,7 +62,7 @@ const HotelImageUploader = () => {
           </label>
           <input
             type="file"
-            id="uploadGallery"
+            id="featuredImages"
             multiple
             accept="image/png, image/jpeg"
             className="d-none"
@@ -75,10 +75,10 @@ const HotelImageUploader = () => {
       </div>
       {/* End uploader field */}
 
-      {images.map((image, index) => (
+      {featuredImages.map((image, index) => (
         <div className="col-auto" key={index}>
           <div className="d-flex ratio ratio-1:1 w-200">
-            <img src={image} alt="image" className="img-ratio rounded-4" />
+            <img src={URL.createObjectURL(image)} alt="image" className="img-ratio rounded-4" />
             <div
               className="d-flex justify-end px-10 py-10 h-100 w-1/1 absolute"
               onClick={() => handleRemoveImage(index)}
@@ -96,4 +96,4 @@ const HotelImageUploader = () => {
   );
 };
 
-export default HotelImageUploader;
+export default FeaturedUploader;
