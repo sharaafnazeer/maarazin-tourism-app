@@ -1,14 +1,8 @@
 import SearchAndNewRoom from "./SearchAndNewRoom";
 import Image from "next/image";
 
-<<<<<<< HEAD
-const RoomDetails = ({selectedHotelRooms}) => {
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const hotelId = router.query.id;
-=======
+
 const RoomDetails = ({rooms = [], onEdit}) => {
->>>>>>> 5261033f33b4b369cbd77a70e05da2e3c144c46b
 
     return (
         <>
