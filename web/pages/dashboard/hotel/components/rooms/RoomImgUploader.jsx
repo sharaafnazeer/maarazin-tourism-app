@@ -103,7 +103,7 @@ const RoomImgUploader = ({ images, setImages,hotelRoom, setHotelRoom }) => {
             type="text"
             required
             id="roomArea"
-            // defaultValue={item && hotelId && item.hotel ? item.roomArea : ""}
+            defaultValue={(hotelRoom) ? hotelRoom.roomArea : ''}
             onChange={(evt) => onChange(evt.target.id, evt.target.value)}
           />
           <label className="lh-1 text-16 text-light-1">Room Area Size</label>

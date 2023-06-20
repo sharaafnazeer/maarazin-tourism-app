@@ -14,5 +14,5 @@ export const getAllRoomsApi = async()=>{
 }
 
 export const getOneRoomApi = async(roomId)=>{
-    return await API.put(`/admin/rooms/${roomId}`);
+    return await API.get(`/admin/rooms/${roomId}`);
 }
