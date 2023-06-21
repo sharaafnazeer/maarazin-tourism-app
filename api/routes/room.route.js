@@ -44,6 +44,7 @@ router.put('/:roomId', upload.fields([
 ]), roomController.updateRoomController);
 
 router.get('/:roomId', roomController.getRoomByIdController);
+router.delete('/:roomId', roomController.deleteRoomByIdController);
 router.get('', roomController.getRoomsController);
 
 module.exports = router;
