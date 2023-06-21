@@ -23,8 +23,6 @@ const popularFilters = () => {
         }
     }, [router.query?.facilities])
 
-    console.log(facilities);
-
     const updateCheckStatus = (id, checked) => {
         if (checked) {
             if (!facilities.includes(id)) {

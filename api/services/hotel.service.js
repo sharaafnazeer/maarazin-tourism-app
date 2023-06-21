@@ -138,6 +138,11 @@ const getHotelsWithDetails = async (filters) => {
             query.where('rating').equals(filters.rating);
         }
 
+        if (filters.location) {
+            const regex = new RegExp(filters.location, 'i');
+            query.where('location.city').regex(regex);
+        }
+
         if (filters.adults || filters.children) {
             if (!filters.children) {
                 filters.children = 0;
@@ -159,7 +164,6 @@ const getHotelsWithDetails = async (filters) => {
         }
 
         query
-            .populate('rooms')
             .populate('popularFacilities')
             .skip((filters.page - 1) * filters.size)
             .limit(filters.size);
@@ -169,11 +173,19 @@ const getHotelsWithDetails = async (filters) => {
         const totalCount = await Hotel.countDocuments();
 
         const hotelResponse = [];
+        const minPrices = [];
+        const maxPrices = [];
         for (const hotel of hotels) {
             let hotelObj = (await hotel).toObject();
             hotelObj.minimumPrice = hotelObj.rooms.length ? hotelObj.rooms.reduce((minPrice, currentRoom) => {
                 return Math.min(minPrice, currentRoom.roomPrice);
             }, Infinity) : 0;
+            minPrices.push(hotelObj.minimumPrice);
+
+            hotelObj.maximumPrice = hotelObj.rooms.length ? hotelObj.rooms.reduce((maxPrice, currentRoom) => {
+                return Math.max(maxPrice, currentRoom.roomPrice);
+            }, -Infinity) : 0;
+            maxPrices.push(hotelObj.maximumPrice);
 
             hotelObj.minimumPriceRoom = hotelObj.rooms.length ? hotelObj.rooms.reduce((minPrice, currentRoom) => {
                 if (currentRoom.roomPrice < minPrice.roomPrice) {
@@ -191,6 +203,8 @@ const getHotelsWithDetails = async (filters) => {
             size: filters.size,
             page: filters.page,
             records: hotelResponse,
+            maxPrice: Math.max(...maxPrices),
+            minPrice: Math.min(...minPrices),
             totalCount,
         };
 

@@ -20,6 +20,8 @@ const index = (props) => {
         size: 12,
         totalCount: 0,
         records: [],
+        maxPrice: 10000,
+        minPrice: 0,
     });
     const [queryData, setQueryData] = useState(props.query);
     const router = useRouter();
@@ -27,6 +29,10 @@ const index = (props) => {
     useEffect(() => {
         setHotelsData(props.hotelDetails);
     }, [props.hotelDetails, router.query])
+
+    useEffect(() => {
+        setQueryData(router.query);
+    }, [router.query]);
 
     return (
         <>
@@ -60,7 +66,7 @@ const index = (props) => {
                     <div className="row y-gap-30">
                         <div className="col-xl-3">
                             <aside className="sidebar y-gap-40 xl:d-none">
-                                <Sidebar/>
+                                <Sidebar hotelsData={hotelsData}/>
                             </aside>
                             {/* End sidebar for desktop */}
 
@@ -84,7 +90,7 @@ const index = (props) => {
 
                                 <div className="offcanvas-body">
                                     <aside className="sidebar y-gap-40  xl:d-block">
-                                        <Sidebar/>
+                                        <Sidebar hotelsData={hotelsData}/>
                                     </aside>
                                 </div>
                                 {/* End offcanvas body */}
@@ -94,7 +100,7 @@ const index = (props) => {
                         {/* End col */}
 
                         <div className="col-xl-9 ">
-                            <TopHeaderFilter hotelsData={hotelsData}/>
+                            <TopHeaderFilter hotelsData={hotelsData} queryData={queryData}/>
                             <div className="mt-30"></div>
                             {/* End mt--30 */}
                             <div className="row y-gap-30">

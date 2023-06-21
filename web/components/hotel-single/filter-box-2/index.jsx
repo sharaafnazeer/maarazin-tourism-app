@@ -6,7 +6,9 @@ import DateSearch from "../../hero/DateSearch";
 import GuestSearch from "../../hero/hero-1/GuestSearch";
 
 const MainFilterSearchBox = ({queryData}) => {
-    console.log(queryData);
+
+    const [location, setLocation] = useState("");
+
     const [dates, setDates] = useState([
         moment().add('5', 'days').toDate(),
         moment().add('5', 'days').add('1', 'month').toDate(),
@@ -37,6 +39,10 @@ const MainFilterSearchBox = ({queryData}) => {
             newGuestCount.rooms = queryData.rooms
         }
 
+        if (queryData?.location) {
+            setLocation(queryData.location);
+        }
+
         if (queryData?.from && queryData?.to) {
             const from = moment(queryData.from).toDate();
             const to = moment(queryData.to).toDate();
@@ -56,6 +62,9 @@ const MainFilterSearchBox = ({queryData}) => {
         if (dates[1]) {
             params += "&to=" + moment(dates[1]).format('YYYY-MM-DD')
         }
+        if (location) {
+            params += "&location=" + location
+        }
         if (guestCounts.adults) {
             params += "&adults=" + guestCounts.adults
         }
@@ -71,10 +80,10 @@ const MainFilterSearchBox = ({queryData}) => {
         <>
             <div className="mainSearch bg-white px-10 py-10 lg:px-20 lg:pt-5 lg:pb-20 rounded-4">
                 <div className="button-grid items-center">
-                    <LocationSearch/>
+                    <LocationSearch location={location} setLocation={setLocation}/>
                     {/* End Location */}
 
-                    <div className="searchMenu-date px-30 lg:py-20  sm:px-20 js-form-dd js-calendar">
+                    <div className="searchMenu-date lg:py-20  sm:px-20 js-form-dd js-calendar">
                         <div>
                             <h4 className="text-15 fw-500 ls-2 lh-16">
                                 Check in - Check out

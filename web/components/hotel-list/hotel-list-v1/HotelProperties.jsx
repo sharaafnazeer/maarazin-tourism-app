@@ -1,6 +1,7 @@
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Navigation, Pagination} from "swiper";
 import Link from "next/link";
+import {Fragment} from "react";
 
 const HotelProperties = ({hotels = []}) => {
 
@@ -97,10 +98,10 @@ const HotelProperties = ({hotels = []}) => {
                                 <div className="row x-gap-10 y-gap-10 pt-20">
                                     {
                                         item?.popularFacilities?.map((facility, index) => (
-                                            <>
+                                            <Fragment key={`facility-${index}`}>
                                                 {
                                                     facility.isActive ? (
-                                                        <div className="col-auto" key={`facility-${index}`}>
+                                                        <div className="col-auto">
                                                             <div
                                                                 className="border-light rounded-100 py-5 px-20 text-14 lh-14">
                                                                 {facility.name}
@@ -110,7 +111,7 @@ const HotelProperties = ({hotels = []}) => {
                                                         <></>
                                                     )
                                                 }
-                                            </>
+                                            </Fragment>
                                         ))
                                     }
                                 </div>

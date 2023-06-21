@@ -39,6 +39,9 @@ export const getAllSiteHotelsApi = async (payload) => {
     if (payload?.rooms) {
         params.append('rooms', payload.rooms);
     }
+    if (payload?.location) {
+        params.append('location', payload.location);
+    }
     if (payload?.facilities) {
         params.append('facilities', payload.facilities);
     }

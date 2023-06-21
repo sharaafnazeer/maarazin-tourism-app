@@ -1,5 +1,4 @@
 import Image from "next/image";
-import AppButton from "./AppButton";
 import ContactInfo from "./ContactInfo";
 import Copyright from "./Copyright";
 import FooterContent from "./FooterContent";
@@ -14,6 +13,7 @@ const index = () => {
             <div className="col-xl-2 col-lg-4 col-sm-6">
               <Link href="/" className="header-logo mr-20">
                 <Image
+                  alt={"image"}
                   width={300}
                   height={300}
                   src={"/img/general/rexe-dark.svg"}
