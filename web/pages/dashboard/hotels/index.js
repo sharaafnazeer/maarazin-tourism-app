@@ -36,7 +36,7 @@ const index = () => {
 
               <div className="col-auto">
                 <Link
-                  href="#"
+                  href="/dashboard/hotel/add-hotel"
                   className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
                 >
                   Add Hotels <div className="icon-arrow-top-right ml-15"></div>

@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import CallToActions from "../../../components/common/CallToActions";
 import Seo from "../../../components/common/Seo";
 import Header11 from "../../../components/header/header-11";
@@ -7,27 +8,12 @@ import TopHeaderFilter from "../../../components/hotel-list/hotel-list-v1/TopHea
 import HotelProperties from "../../../components/hotel-list/hotel-list-v1/HotelProperties";
 import Pagination from "../../../components/hotel-list/common/Pagination";
 import Sidebar from "../../../components/hotel-list/hotel-list-v1/Sidebar";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllHotels } from "../../../slices/hotelSlice";
+import { getAllRooms } from "../../../slices/roomSlice";
 
 const index = () => {
-  const dispatch = useDispatch();
-  const hotelss = useSelector((state) => {
-    state.hotel.hotels;
-  });
-  console.log(hotelss);
-
-  useEffect(() => {
-    dispatch(getAllHotels())
-      .unwrap()
-      .then(() => {
-        console.log("Get All Hotels");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [dispatch]);
 
   return (
     <>
@@ -99,7 +85,7 @@ const index = () => {
               <div className="mt-30"></div>
               {/* End mt--30 */}
               <div className="row y-gap-30">
-                <HotelProperties />
+                <HotelProperties/>
               </div>
               {/* End .row */}
               <Pagination />
@@ -120,6 +106,4 @@ const index = () => {
   );
 };
 
-
-export default index;
-
+export default dynamic(() => Promise.resolve(index), {ssr: false});

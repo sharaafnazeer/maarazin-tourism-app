@@ -1,14 +1,18 @@
 import { hotelsData } from "../../../data/hotels";
+import StarRatingComponent from "react-star-rating-component";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
 import Image from "next/image";
 import Link from "next/link";
 
-const HotelProperties = ({listHotel}) => {
+
+const HotelProperties = () => {
+  
+
   return (
     <>
-      {hotelsData.slice(0, 7).map((item) => (
-        <div className="col-12" key={item?.id}>
+      {hotelsData.slice(0, 12).map((item) => (
+        <div className="col-12" key={item?._id}>
           <div className="border-top-light pt-30">
             <div className="row x-gap-20 y-gap-20">
               <div className="col-md-auto">
@@ -53,6 +57,9 @@ const HotelProperties = ({listHotel}) => {
                   {item?.title}
                   <br className="lg:d-none" /> {item?.location}
                   <div className="d-inline-block ml-10">
+                    {/* <div className="text-16">
+                      <StarRatingComponent starCount={7} value={item?.rating} editing={false}/>
+                    </div> */}
                     <i className="icon-star text-10 text-yellow-2"></i>
                     <i className="icon-star text-10 text-yellow-2"></i>
                     <i className="icon-star text-10 text-yellow-2"></i>

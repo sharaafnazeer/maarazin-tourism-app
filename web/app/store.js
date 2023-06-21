@@ -7,6 +7,6 @@ export const store = configureStore({
     reducer: {
         hero: findPlaceSlice,
         hotel:hotelSlice,
-        room: roomSlice
+        room: roomSlice,
     },
 });

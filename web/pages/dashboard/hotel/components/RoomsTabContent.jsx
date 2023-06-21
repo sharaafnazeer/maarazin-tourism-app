@@ -20,6 +20,7 @@ const RoomsTabcontent = () => {
     const selectedHotel = useSelector((state) => state.hotel.selectedHotel);
     const selectedRoom = useSelector((state) => state.room.selectedRoom);
     const selectedHotelRooms = useSelector(state => state.hotel.selectedHotelRooms);
+ 
 
     useEffect(() => {
         dispatch(getOneHotelRooms(hotelId));
@@ -36,7 +37,7 @@ const RoomsTabcontent = () => {
             }
         })
     ;
-    // const [extraBed, setExtraBed] = useState(0);
+
     const [hotelRoom, setHotelRoom] = useState({
         hotelId: "",
         name: "",
@@ -76,6 +77,7 @@ const RoomsTabcontent = () => {
             setAddons(newAddons);
         }
     }, [selectedRoom, selectedRoom?._id]);
+    
     const onChange = (id, value) => {
         const newHotelRoom = {...hotelRoom, [id]: value};
         setHotelRoom(newHotelRoom);
