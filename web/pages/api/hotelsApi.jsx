@@ -88,3 +88,7 @@ export const postRoomApi = async (data) => {
 export const getRoomsApi = async (data) => {
     return await API.get(`/admin/rooms`);
 }
+
+export const deleteOneHotelApi = async (hotelId) => {
+    return await API.delete(`/admin/hotels/${hotelId}`);
+}

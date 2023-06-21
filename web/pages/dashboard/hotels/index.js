@@ -4,8 +4,34 @@ import Header from "../../../components/header/dashboard-header";
 import Footer from "../common/Footer";
 import BookingTable from "./components/BookingTable";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllHotels, deleteSelectedHotel } from "../../../slices/hotelSlice";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const index = () => {
+
+  const dispath = useDispatch();
+  const router = useRouter();
+
+  const listingAllHotels = useSelector((state) => state.hotel.hotels);
+  
+  useEffect(() => {
+    dispath(getAllHotels());
+  }, []);
+
+  const onDelete = (hotelId) => {
+    dispath(deleteSelectedHotel(hotelId))
+    .unwrap()
+    .then((res) => {
+      dispath(getAllHotels());
+    }).catch((err) => {});
+  }
+
+  const onEdit = (hotelId) => {
+    router.push(`/dashboard/hotel/update-hotel/${hotelId}`)
+  }
+
   return (
     <>
       <Seo pageTitle="Vendor Hotels" />
@@ -46,7 +72,7 @@ const index = () => {
             {/* End .row */}
 
             <div className="py-30 px-30 rounded-4 bg-white shadow-3">
-              <BookingTable />
+              <BookingTable hotels={listingAllHotels} onDelete={onDelete} onEdit={onEdit}/>
               {/* End tabs */}
             </div>
 

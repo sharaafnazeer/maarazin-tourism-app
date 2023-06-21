@@ -91,6 +91,7 @@ const getRoomByIdController = async (req, res, next) => {
     }
 
 }
+
 const deleteRoomByIdController = async (req, res, next) => {
     try {
         const {roomId} = req.params

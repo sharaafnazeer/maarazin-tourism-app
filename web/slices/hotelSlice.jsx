@@ -10,7 +10,9 @@ import {
     updateHotelLocationApi,
     getAllFacilitiesApi,
     getAllAddonsApi,
-    getAllHotelRoomsApi, getAllSiteHotelsApi,
+    getAllHotelRoomsApi, 
+    getAllSiteHotelsApi,
+    deleteOneHotelApi,
 } from "../pages/api/hotelsApi";
 
 const initialState = {
@@ -154,6 +156,15 @@ export const updateHotelLocation = createAsyncThunk(
 
     }
 )
+
+export const deleteSelectedHotel = createAsyncThunk(
+    "room/deleteSelectedHotel",
+    async (hotelId, thunkAPI) => {
+        thunkAPI.dispatch(setLoading(true));
+        const response = await deleteOneHotelApi(hotelId);
+        return response.data;
+    }
+);
 
 export const hotelSlice = createSlice({
     name: "hotel",

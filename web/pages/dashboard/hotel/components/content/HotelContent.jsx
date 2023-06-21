@@ -1,8 +1,6 @@
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import HotelRating from "./HotelRating";
-import {useEffect} from "react";
-import {useState} from "react";
-import {useRouter} from 'next/router'
+
 
 const HotelContent = ({
                           hotelData,
@@ -25,6 +23,7 @@ const HotelContent = ({
                     <input
                         type="text"
                         required
+                        class="form-control is-valid"
                         defaultValue={hotelData.name || ''}
                         id="name"
                         onChange={(evt) => onChange([evt.target.id], evt.target.value)}
@@ -40,8 +39,7 @@ const HotelContent = ({
               required
               defaultValue={hotelData.description || ''}
               rows={5}
-              // defaultValue={""}
-              id="content"
+              id="description"
               onChange={(event) => onChange(event.target.id, event.target.value)}
           />
                     <label className="lh-1 text-16 text-light-1">Content</label>

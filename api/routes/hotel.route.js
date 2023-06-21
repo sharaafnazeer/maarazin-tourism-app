@@ -46,6 +46,7 @@ router.put('/:hotelId', upload.fields([
 ]), hotelController.updateHotelController);
 
 router.get('/:hotelId', hotelController.getHotelByIdController);
+router.delete('/:hotelId', hotelController.deleteHotelByIdController);
 router.get('/:hotelId/rooms', hotelController.getRoomsByHotelController);
 router.get('/:hotelId/similar', hotelController.getSimilarHotelsByHotelController);
 router.get('', hotelController.getHotelsController);

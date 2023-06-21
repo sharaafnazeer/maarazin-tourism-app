@@ -211,6 +211,19 @@ const getHotelById = async (hotelId) => {
     }
 }
 
+
+const deleteHotelById = async (hotelId) => {
+    try {
+        const hotel = await Hotel.findByIdAndDelete(hotelId)
+        if (!hotel) {
+            return new RecordNotFound("Hotel not found", "Hotel with given ID not found");
+        }
+        return hotel;
+    } catch (e) {
+        throw e;
+    }
+}
+
 const getHotelByIdWithDetails = async (hotelId) => {
     try {
         let hotel = await Hotel.findById(hotelId).populate('popularFacilities').populate('hotelGroup');
@@ -256,5 +269,6 @@ module.exports = {
     updateHotel,
     getHotelByIdWithDetails,
     getSimilarHotelsById,
-    getHotelsWithDetails
+    getHotelsWithDetails,
+    deleteHotelById
 }

@@ -4,7 +4,7 @@ const {
     updateHotel,
     getHotels,
     getHotelByIdWithDetails,
-    getSimilarHotelsById, getHotelsWithDetails
+    getSimilarHotelsById, getHotelsWithDetails, deleteHotelById
 } = require('../services/hotel.service')
 const sendJson = require("../helpers/json");
 const {RecordNotFound} = require("../exceptions/errors");
@@ -132,6 +132,27 @@ const getHotelByIdController = async (req, res, next) => {
 
 }
 
+
+const deleteHotelByIdController = async (req, res, next) => {
+    try {
+        const {hotelId} = req.params
+        const response = await deleteHotelById(hotelId);
+
+        if (response instanceof RecordNotFound) {
+            return next(response)
+        }
+        return sendJson(res, 200, response);
+    } catch (e) {
+        return sendJson(res, 500, {
+            error: {
+                title: 'Failed',
+                message: 'Something went wrong while retrieving room'
+            }
+        });
+    }
+
+}
+
 const getRoomsByHotelController = async (req, res) => {
     try {
         const {hotelId} = req.params;
@@ -170,5 +191,6 @@ module.exports = {
     getHotelsController,
     getHotelByIdController,
     getRoomsByHotelController,
-    getSimilarHotelsByHotelController
+    getSimilarHotelsByHotelController,
+    deleteHotelByIdController
 }

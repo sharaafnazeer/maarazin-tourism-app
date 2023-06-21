@@ -31,7 +31,7 @@ const ContentTabContent = () => {
     const [featuredImages, setFeaturedImages] = useState([]);
     const [hotelData, setHotelData] = useState({
         name: "",
-        content: "",
+        description: "",
         rating: "",
         hotelGroupId: "",
         popularFacilities: [],
