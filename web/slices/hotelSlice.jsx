@@ -112,7 +112,7 @@ export const updateOneHotel = createAsyncThunk(
   async (data, thunkAPI) => {
     thunkAPI.dispatch(setLoading(true));
     const response = await updateOneHotelApi(data);
-    // thunkAPI.dispatch(updateSelectedHotel(response.data));
+    thunkAPI.dispatch(updateSelectedHotel(response.data.record));
     return response.data;
   }
 );
@@ -123,7 +123,7 @@ export const updateHotelRule = createAsyncThunk(
     async(data,thunkAPI)=>{
         thunkAPI.dispatch(setLoading(true))
         const response = await updateHotelRulesApi(data);
-        thunkAPI.dispatch(updateSelectedHotel(response.data));
+        thunkAPI.dispatch(updateSelectedHotel(response.data.record));
         return response.data;
     }
 )
@@ -134,7 +134,7 @@ export const updateHotelLocation = createAsyncThunk(
   async(data, thunkAPI)=>{
     thunkAPI.dispatch(setLoading(true))
     const response = await updateHotelLocationApi(data);
-    thunkAPI.dispatch(updateSelectedHotel(response.data));
+      thunkAPI.dispatch(updateSelectedHotel(response.data.record));
     return response.data;
 
   }

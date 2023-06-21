@@ -1,4 +1,4 @@
-const HotelRating = ({ activeRating, setActiveRating,hotelId,selectedHotel }) => {
+const HotelRating = ({ activeRating, setActiveRating }) => {
   // for start rating code
   const handleRatingClick = (rating) => {
     setActiveRating(rating);

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const FeaturedUploader = ({featuredImages, setFeaturedImages}) => {
+const FeaturedUploader = ({featuredImages, setFeaturedImages, hotelData, setHotelData}) => {
   
   const [error, setError] = useState("");
 
@@ -50,6 +50,17 @@ const FeaturedUploader = ({featuredImages, setFeaturedImages}) => {
     setFeaturedImages(newImages);
   };
 
+  const handleRemoveUploadedImage = (index) => {
+    const newImages = [...hotelData.existingFeatureImages];
+    newImages.splice(index, 1);
+    const newHotelData = {
+      ...hotelData,
+      existingFeatureImages: newImages,
+    };
+
+    setHotelData(newHotelData);
+  };
+
   return (
     <div className="row x-gap-20 y-gap-20 pt-15">
       <div className="col-auto">
@@ -92,6 +103,31 @@ const FeaturedUploader = ({featuredImages, setFeaturedImages}) => {
       ))}
 
       {error && <div className="col-12 mb-10  text-red-1">{error}</div>}
+
+      {
+          hotelData?.hotelId && (
+              <>
+                <div className="mt-30">Already Uploaded Featured Images</div>
+                <div className="row x-gap-20 y-gap-20 pt-15">
+                  {hotelData?.existingFeatureImages?.map((image, index) => (
+                      <div className="col-auto" key={index}>
+                        <div className="d-flex ratio ratio-1:1 w-200">
+                          <img src={image} alt="image" className="img-ratio rounded-4"/>
+                          <div
+                              className="d-flex justify-end px-10 py-10 h-100 w-1/1 absolute"
+                              onClick={() => handleRemoveUploadedImage(index)}
+                          >
+                            <div className="size-40 bg-white rounded-4 flex-center cursor-pointer">
+                              <i className="icon-trash text-16"/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  ))}
+                </div>
+              </>
+          )
+      }
     </div>
   );
 };
