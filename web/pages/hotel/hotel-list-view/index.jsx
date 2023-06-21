@@ -10,11 +10,16 @@ import {wrapper} from "../../../app/store";
 import {getAllSiteHotels} from "../../../slices/hotelSlice";
 import {useState} from "react";
 import MainFilterSearchBox from "../../../components/hero/hero-1/MainFilterSearchBox";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllHotels } from "../../../slices/hotelSlice";
+import { getAllRooms } from "../../../slices/roomSlice";
 
 const index = (props) => {
 
     const [hotelsData, setHotelsData] = useState(props.hotelDetails);
     const [queryData, setQueryData] = useState(props.query);
+const index = () => {
 
     return (
         <>

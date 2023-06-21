@@ -17,11 +17,6 @@ const Sidebar = () => {
       </div>
       {/* End find map */}
 
-      {/* <div className="sidebar__item -no-border">
-        <h5 className="text-18 fw-500 mb-10">Search by property name</h5>
-        <SearchBox />
-      </div> */}
-      {/* End search box */}
 
       <div className="sidebar__item pb-30">
         <h5 className="text-18 fw-500 mb-10">Nightly Price</h5>

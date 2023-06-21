@@ -25,27 +25,24 @@ const LocationTabContent = () => {
   const [nearBy, setNearBy] = useState([]);
   const [selectedNearBy, setSelectedNearBy] = useState(null);
 
-  const onLocationSave =()=>{
-
+  const onLocationSave = () => {
     let formData = new FormData();
 
     formData.append("location", JSON.stringify(hotelLocation));
     formData.append("nearBy", JSON.stringify(nearBy));
-   
+
     const data = {
       formData,
-      hotelId
-    }
+      hotelId,
+    };
 
     dispatch(updateHotelLocation(data))
-    .unwrap()
-    .then((result) => {
-     
-    }).catch((err) => {
-      console.log(err);
-    });
-
-  }
+      .unwrap()
+      .then((result) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     if (selectedHotel && selectedHotel.nearBy) {
@@ -56,24 +53,38 @@ const LocationTabContent = () => {
   // console.log(nearBy);
   const onNearByEdit = (i) => {
     setSelectedNearBy(nearBy.find((item, index) => index === i));
-  }
+  };
 
   const onDeleteNearBy = (i) => {
     setNearBy(nearBy.filter((item, index) => index !== i));
-  }
- 
+  };
 
   return (
     <div className="col-xl-10">
       <div className="text-18 fw-500 mb-10">Location</div>
-      <Location hotelId={hotelId} selectedHotel={selectedHotel} hotelLocation={hotelLocation} setHotelLocation={setHotelLocation}/>
+      <Location
+        hotelId={hotelId}
+        selectedHotel={selectedHotel}
+        hotelLocation={hotelLocation}
+        setHotelLocation={setHotelLocation}
+      />
 
       <div className="mt-30">
         <div className="fw-500 mb-20">Nearby</div>
-        <Nearby hotelId={hotelId} selectedNearBy={selectedNearBy} nearBy={nearBy} setNearBy={setNearBy} />
+        <Nearby
+          hotelId={hotelId}
+          selectedNearBy={selectedNearBy}
+          nearBy={nearBy}
+          setNearBy={setNearBy}
+        />
       </div>
       <div>
-        <NearbyDetails hotelId={hotelId} nearBy={nearBy} onEdit={onNearByEdit} onDelete={onDeleteNearBy}/>
+        <NearbyDetails
+          hotelId={hotelId}
+          nearBy={nearBy}
+          onEdit={onNearByEdit}
+          onDelete={onDeleteNearBy}
+        />
       </div>
       <div className="col-md-12 d-inline-block mt-30">
         <button
@@ -84,7 +95,6 @@ const LocationTabContent = () => {
           Save Changes <div className="icon-arrow-top-right ml-15" />
         </button>
       </div>
-
     </div>
   );
 };
