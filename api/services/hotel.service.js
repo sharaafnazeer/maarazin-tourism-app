@@ -154,6 +154,10 @@ const getHotelsWithDetails = async (filters) => {
             });
         }
 
+        if (filters.facilities && filters.facilities.length) {
+            query.where('popularFacilities').all(filters.facilities.split(','));
+        }
+
         query
             .populate('rooms')
             .populate('popularFacilities')

@@ -21,6 +21,27 @@ export const getAllSiteHotelsApi = async (payload) => {
     if (payload?.size) {
         params.append('size', payload.size);
     }
+    if (payload?.rating) {
+        params.append('rating', payload.rating);
+    }
+    if (payload?.from) {
+        params.append('from', payload.from);
+    }
+    if (payload?.to) {
+        params.append('to', payload.to);
+    }
+    if (payload?.adults) {
+        params.append('adults', payload.adults);
+    }
+    if (payload?.children) {
+        params.append('children', payload.children);
+    }
+    if (payload?.rooms) {
+        params.append('rooms', payload.rooms);
+    }
+    if (payload?.facilities) {
+        params.append('facilities', payload.facilities);
+    }
     return await API.get('/hotels', {params});
 }
 

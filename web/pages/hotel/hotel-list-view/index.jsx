@@ -8,18 +8,25 @@ import Pagination from "../../../components/hotel-list/common/Pagination";
 import Sidebar from "../../../components/hotel-list/hotel-list-v1/Sidebar";
 import {wrapper} from "../../../app/store";
 import {getAllSiteHotels} from "../../../slices/hotelSlice";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import MainFilterSearchBox from "../../../components/hero/hero-1/MainFilterSearchBox";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllHotels } from "../../../slices/hotelSlice";
-import { getAllRooms } from "../../../slices/roomSlice";
+import {useRouter} from "next/router";
+
 
 const index = (props) => {
 
-    const [hotelsData, setHotelsData] = useState(props.hotelDetails);
+    const [hotelsData, setHotelsData] = useState({
+        page: 1,
+        size: 12,
+        totalCount: 0,
+        records: [],
+    });
     const [queryData, setQueryData] = useState(props.query);
-const index = () => {
+    const router = useRouter();
+
+    useEffect(() => {
+        setHotelsData(props.hotelDetails);
+    }, [props.hotelDetails, router.query])
 
     return (
         <>
@@ -114,8 +121,6 @@ const index = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps((store) =>
     async ({req, res, params, query, ...etc}) => {
-        // const {show, sort} = status.shopFilterReducer;
-        console.log(query)
         await store.dispatch(getAllSiteHotels(query));
         const state = store.getState()
 
