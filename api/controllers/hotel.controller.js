@@ -55,9 +55,9 @@ const updateHotelController = async (req, res, next) => {
             bannerImages = [];
             featuredImages = [];
         } else {
-            bannerImages =  req.files['bannerImages']; // Access uploaded banner images
+            bannerImages = req.files['bannerImages']; // Access uploaded banner images
             featuredImages = req.files['featuredImages']
-        }       
+        }
 
         if (bannerImages && Array.isArray(bannerImages))
             hotel.bannerImages = bannerImages.map((file) => {
@@ -90,8 +90,9 @@ const updateHotelController = async (req, res, next) => {
 
 const getHotelsController = async (req, res) => {
     try {
-        const {page, size, rating} = req.query;
+        const {page, size, rating, ...rest} = req.query;
         const filters = {
+            ...rest,
             page: parseInt(page || 1),
             size: parseInt(size || 12),
             rating,

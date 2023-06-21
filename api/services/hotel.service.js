@@ -138,6 +138,22 @@ const getHotelsWithDetails = async (filters) => {
             query.where('rating').equals(filters.rating);
         }
 
+        if (filters.adults || filters.children) {
+            if (!filters.children) {
+                filters.children = 0;
+            }
+            if (!filters.adults) {
+                filters.adults = 0;
+            }
+            query.populate({
+                path: 'rooms',
+                match: {
+                    'sleeps.adults': {$gte: Number(filters.adults)},
+                    'sleeps.children': {$gte: Number(filters.children)}
+                }
+            });
+        }
+
         query
             .populate('rooms')
             .populate('popularFacilities')
@@ -154,7 +170,17 @@ const getHotelsWithDetails = async (filters) => {
             hotelObj.minimumPrice = hotelObj.rooms.length ? hotelObj.rooms.reduce((minPrice, currentRoom) => {
                 return Math.min(minPrice, currentRoom.roomPrice);
             }, Infinity) : 0;
-            hotelResponse.push(hotelObj);
+
+            hotelObj.minimumPriceRoom = hotelObj.rooms.length ? hotelObj.rooms.reduce((minPrice, currentRoom) => {
+                if (currentRoom.roomPrice < minPrice.roomPrice) {
+                    return currentRoom;
+                }
+                return minPrice;
+            }) : null;
+
+            if (hotelObj.rooms.length) {
+                hotelResponse.push(hotelObj);
+            }
         }
 
         return {
