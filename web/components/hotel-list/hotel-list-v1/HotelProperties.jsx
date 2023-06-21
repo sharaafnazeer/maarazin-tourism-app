@@ -60,6 +60,7 @@ const HotelProperties = ({hotels = []}) => {
                                     {item?.name}
                                     <br className="lg:d-none"/> {`${item?.location?.city}`}
                                     <div className="d-inline-block ml-10">
+
                                         {
                                             buildRating(item?.rating || 0)
                                         }

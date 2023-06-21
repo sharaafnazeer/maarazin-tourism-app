@@ -9,7 +9,7 @@ import Sidebar from "../../../components/hotel-list/hotel-list-v1/Sidebar";
 import {wrapper} from "../../../app/store";
 import {getAllSiteHotels} from "../../../slices/hotelSlice";
 import {useEffect, useState} from "react";
-import MainFilterSearchBox from "../../../components/hero/hero-1/MainFilterSearchBox";
+import MainFilterSearchBox from "../../../components/hotel-single/filter-box-2";
 import {useRouter} from "next/router";
 
 
@@ -101,7 +101,7 @@ const index = (props) => {
                                 <HotelProperties hotels={hotelsData.records}/>
                             </div>
                             {/* End .row */}
-                            <Pagination/>
+                            <Pagination hotelsData={hotelsData}/>
                         </div>
                         {/* End .col for right content */}
                     </div>
