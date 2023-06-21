@@ -59,12 +59,14 @@ const RoomsTabcontent = () => {
         if (selectedRoom && selectedRoom._id) {
             setHotelRoom({
                 hotelId: hotelId,
+                roomId: selectedRoom._id,
                 name: selectedRoom.name,
                 benefits: selectedRoom.benefits,
                 roomPrice: selectedRoom.roomPrice,
                 roomArea: selectedRoom.roomArea,
                 adults: selectedRoom.sleeps?.adults || "",
-                children: selectedRoom.sleeps?.children || ""
+                children: selectedRoom.sleeps?.children || "",
+                existingRoomImages: selectedRoom.roomImages
             });
 
             setAmenities(selectedRoom.amenities)
@@ -116,14 +118,20 @@ const RoomsTabcontent = () => {
         formData.append("benefits", hotelRoom.benefits);
         formData.append("roomPrice", hotelRoom.roomPrice);
         formData.append("roomArea", hotelRoom.roomArea);
-        formData.append("roomImages", images);
         formData.append("numOfAdults", hotelRoom.adults);
         formData.append("numOfChild", hotelRoom.children);
         formData.append("facilities", JSON.stringify(facilities));
         formData.append("addons", JSON.stringify(addons));
         formData.append("amenities", JSON.stringify(amenities));
 
+        images.forEach((image) => {
+            formData.append("roomImages", image);
+        });
+
         if (selectedRoom) {
+
+            formData.append("existingRoomImages", JSON.stringify(hotelRoom.existingRoomImages));
+
             const data = {
                 formData,
                 roomId: selectedRoom._id

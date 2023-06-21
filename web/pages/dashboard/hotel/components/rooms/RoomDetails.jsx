@@ -1,7 +1,4 @@
 import SearchAndNewRoom from "./SearchAndNewRoom";
-import Image from "next/image";
-
-
 const RoomDetails = ({rooms = [], onEdit, onDelete}) => {
 
     return (
@@ -15,7 +12,7 @@ const RoomDetails = ({rooms = [], onEdit, onDelete}) => {
                             <tr>
                                 <th>Room Type</th>
                                 <th>Members</th>
-                                <th>Benifits</th>
+                                <th>Benefits</th>
                                 <th>Facilities</th>
                                 <th>Price</th>
                                 <th>Action</th>
@@ -30,11 +27,10 @@ const RoomDetails = ({rooms = [], onEdit, onDelete}) => {
                                                 <div className="text-blue-1 fw-500">{item.name}</div>
                                             </div>
                                             <div className="d-flex ratio ratio-1:1 w-200">
-                                                <Image
+                                                <img
                                                     width={200}
                                                     height={200}
-                                                    src="/img/hotels/1.png"
-                                                    // src={`${item.roomImages[0]}`}
+                                                    src={item.roomImages.length ? item.roomImages[0] : '/img/hotels/1.png'}
                                                     alt="Hotel Image"
                                                     className="img-ratio rounded-4"
                                                 />
