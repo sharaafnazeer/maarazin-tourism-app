@@ -14,7 +14,6 @@ const Amenities = ({amenities, setAmenities, selectedRoom}) => {
     }, [amenities, amenities?.extraBed])
 
     useEffect(() => {
-        console.log(amenities?.extraBed?.possible)
         if (amenities?.extraBed?.possible) {
             setYesChecked(true);
             setNoChecked(false);
@@ -51,7 +50,7 @@ const Amenities = ({amenities, setAmenities, selectedRoom}) => {
                     <div className="form-radio x-gap-20 y-gap-20">
                         <div className="radio d-flex items-center">
                             <input type="radio" name="rating"
-                                   defaultChecked={yesChecked}
+                                   checked={yesChecked}
                                    onChange={() => {
                                        setYesChecked(true);
                                        setNoChecked(false);
@@ -71,7 +70,7 @@ const Amenities = ({amenities, setAmenities, selectedRoom}) => {
 
                         <div className="radio d-flex items-center">
                             <input type="radio" name="rating"
-                                   defaultChecked={noChecked}
+                                   checked={noChecked}
                                    onChange={() => {
                                        setYesChecked(false);
                                        setNoChecked(true);

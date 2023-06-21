@@ -13,13 +13,31 @@ const RoomAddons = ({addons = [], setAddons}) => {
     }, []);
 
     const onChange = (addonId, field, value) => {
-        const newAddon = {addonId: addonId, [field]: value};
-        if (addons.find((addon) => addon.addonId === addonId)) {
+        const newAddon = {addonId: addonId, amount: ''};
+        if (field === "addonId") {
+            if (value) {
+                if (addons.find((addon) => addon.addonId === addonId)) {
+                    const newAddons = addons.filter((addon) => addon.addonId !== addonId);
+                    newAddons.push(newAddon);
+                    setAddons(newAddons)
+                } else {
+                    setAddons([...addons, newAddon])
+                }
+            } else {
+                const newAddons = addons.filter((addon) => addon.addonId !== addonId);
+                setAddons(newAddons);
+            }
+        }
+
+        if (field === "amount") {
+            if (value > 0) {
+                newAddon.amount = Number(value);
+            }else {
+                newAddon.amount = ''
+            }
             const newAddons = addons.filter((addon) => addon.addonId !== addonId);
             newAddons.push(newAddon);
             setAddons(newAddons)
-        } else {
-            setAddons([...addons, newAddon])
         }
     }
 
@@ -31,7 +49,10 @@ const RoomAddons = ({addons = [], setAddons}) => {
                         <div className="row ">
                             <div className="col-12">
                                 <div className="d-flex items-center form-checkbox">
-                                    <input type="checkbox" name="name" defaultChecked={addons.find((add) => add.addonId === addon._id)}/>
+                                    <input type="checkbox" name="name" id="addonId"
+                                           checked={addons.find((add) => add.addonId === addon._id) || false}
+                                           onChange={(event) => onChange(addon._id, event.target.id, event.target.checked)}
+                                    />
                                     <div className="form-checkbox__mark">
                                         <div className="form-checkbox__icon icon-check"/>
                                     </div>
@@ -47,7 +68,8 @@ const RoomAddons = ({addons = [], setAddons}) => {
                             className="text-blue-1 pl-10 border-light rounded-4 text-16"
                             placeholder="Amount"
                             id="amount"
-                            defaultValue={addons.find((add) => add.addonId === addon._id)?.amount || ''}
+                            disabled={!addons.find((add) => add.addonId === addon._id)}
+                            value={addons.find((add) => add.addonId === addon._id)?.amount || 0.0}
                             onChange={(event) => onChange(addon._id, event.target.id, event.target.value)}
 
                         />

@@ -1,6 +1,6 @@
 const sendJson = require("../helpers/json");
 const {RecordNotFound} = require("../exceptions/errors");
-const {addRoom, updateRoom, getRooms, getRoomById} = require("../services/room.service");
+const {addRoom, updateRoom, getRooms, getRoomById, deleteRoomById} = require("../services/room.service");
 
 const addRoomController = async (req, res, next) => {
     const roomImages = req.files['roomImages']; // Access uploaded room images
@@ -91,10 +91,30 @@ const getRoomByIdController = async (req, res, next) => {
     }
 
 }
+const deleteRoomByIdController = async (req, res, next) => {
+    try {
+        const {roomId} = req.params
+        const response = await deleteRoomById(roomId);
+
+        if (response instanceof RecordNotFound) {
+            return next(response)
+        }
+        return sendJson(res, 200, response);
+    } catch (e) {
+        return sendJson(res, 500, {
+            error: {
+                title: 'Failed',
+                message: 'Something went wrong while retrieving room'
+            }
+        });
+    }
+
+}
 
 module.exports = {
     addRoomController,
     updateRoomController,
     getRoomsController,
-    getRoomByIdController
+    getRoomByIdController,
+    deleteRoomByIdController
 }

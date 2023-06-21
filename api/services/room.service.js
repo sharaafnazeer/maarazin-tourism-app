@@ -159,6 +159,18 @@ const getRoomById = async (roomId) => {
     }
 }
 
+const deleteRoomById = async (roomId) => {
+    try {
+        const room = await Room.findByIdAndDelete(roomId)
+        if (!room) {
+            return new RecordNotFound("Room not found", "Room with given ID not found");
+        }
+        return room;
+    } catch (e) {
+        throw e;
+    }
+}
+
 const getRoomsByHotelId = async (hotelId) => {
     try {
         return await Room.find({hotel: hotelId}).populate('facilities');
@@ -207,5 +219,5 @@ const getRoomsByHotelIdWithDetails = async (hotelId) => {
 }
 
 module.exports = {
-    addRoom, getRooms, getRoomById, updateRoom, getRoomsByHotelId, getRoomsByHotelIdWithDetails,
+    addRoom, getRooms, getRoomById, deleteRoomById, updateRoom, getRoomsByHotelId, getRoomsByHotelIdWithDetails,
 }

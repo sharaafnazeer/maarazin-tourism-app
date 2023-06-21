@@ -8,7 +8,14 @@ import RoomSleepSize from "./rooms/RoomSleepSize";
 import {useEffect} from "react";
 import {useRouter} from "next/router";
 import {useState} from "react";
-import {getAllRooms, getSelectedRoom, saveRoom} from "../../../../slices/roomSlice";
+import {
+    deleteSelectedRoom,
+    getAllRooms,
+    getSelectedRoom,
+    saveRoom,
+    updateRoom,
+    updateRooms, updateSelectedRoom
+} from "../../../../slices/roomSlice";
 import {getOneHotelRooms} from "../../../../slices/hotelSlice";
 
 const RoomsTabcontent = () => {
@@ -17,7 +24,6 @@ const RoomsTabcontent = () => {
     const router = useRouter();
     const hotelId = router.query.id;
 
-    const selectedHotel = useSelector((state) => state.hotel.selectedHotel);
     const selectedRoom = useSelector((state) => state.room.selectedRoom);
     const selectedHotelRooms = useSelector(state => state.hotel.selectedHotelRooms);
  
@@ -29,6 +35,7 @@ const RoomsTabcontent = () => {
     const [images, setImages] = useState([]);
 
     const [addons, setAddons] = useState([]);
+    const [facilities, setFacilities] = useState([]);
     const [amenities, setAmenities] = useState({
             extraBed: {
                 amountPerNight: 0,
@@ -46,9 +53,6 @@ const RoomsTabcontent = () => {
         roomArea: "",
         adults: "",
         children: "",
-        facilities: [],
-        addons: [],
-        amenities: [],
     });
 
     useEffect(() => {
@@ -60,13 +64,12 @@ const RoomsTabcontent = () => {
                 roomPrice: selectedRoom.roomPrice,
                 roomArea: selectedRoom.roomArea,
                 adults: selectedRoom.sleeps?.adults || "",
-                children: selectedRoom.sleeps?.children || "",
-                facilities: selectedRoom.facilities,
-                addons: selectedRoom.addons,
-                amenities: selectedRoom.amenities,
+                children: selectedRoom.sleeps?.children || ""
             });
 
             setAmenities(selectedRoom.amenities)
+
+            setFacilities(selectedRoom.facilities);
 
             const newAddons = selectedRoom.addons.map((addon) => {
                 return {
@@ -75,6 +78,29 @@ const RoomsTabcontent = () => {
                 }
             })
             setAddons(newAddons);
+        } else {
+            setHotelRoom({
+                hotelId: "",
+                name: "",
+                benefits: "",
+                roomPrice: "",
+                roomArea: "",
+                adults: "",
+                children: "",
+            });
+
+            setAmenities(
+                {
+                    extraBed: {
+                        amountPerNight: 0,
+                        numOfBeds: 0,
+                        possible: false
+                    }
+                }
+            )
+
+            setFacilities([]);
+            setAddons([]);
         }
     }, [selectedRoom, selectedRoom?._id]);
     
@@ -93,26 +119,49 @@ const RoomsTabcontent = () => {
         formData.append("roomImages", images);
         formData.append("numOfAdults", hotelRoom.adults);
         formData.append("numOfChild", hotelRoom.children);
-        formData.append("facilities", JSON.stringify(hotelRoom.facilities));
+        formData.append("facilities", JSON.stringify(facilities));
         formData.append("addons", JSON.stringify(addons));
         formData.append("amenities", JSON.stringify(amenities));
 
-        dispatch(saveRoom(formData))
-            .unwrap()
-            .then((res) => {
-                dispatch(getOneHotelRooms(hotelId));
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        if (selectedRoom) {
+            const data = {
+                formData,
+                roomId: selectedRoom._id
+            }
+            dispatch(updateRoom(data))
+                .unwrap()
+                .then((res) => {
+                    dispatch(getOneHotelRooms(hotelId));
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        } else {
+            dispatch(saveRoom(formData))
+                .unwrap()
+                .then((res) => {
+                    dispatch(getOneHotelRooms(hotelId));
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
     };
 
     const onDelete = (id) => {
-
+        dispatch(deleteSelectedRoom(id))
+            .unwrap()
+            .then(res => {
+                dispatch(getOneHotelRooms(hotelId));
+            });
     }
 
     const onEdit = (id) => {
         dispatch(getSelectedRoom(id));
+    }
+
+    const onRoomClear = () => {
+        dispatch(updateSelectedRoom(null));
     }
 
     return (
@@ -188,11 +237,8 @@ const RoomsTabcontent = () => {
                     <div className="col-lg-12 mt-30">
                         <div className="accordion -simple row y-gap-20 js-accordion">
                             <RoomFacilities
-                                hotelRoom={hotelRoom}
-                                setHotelRoom={setHotelRoom}
-                                selectedHotel={selectedHotel}
-                                hotelId={hotelId}
-                                selectedHotelRooms={selectedHotelRooms}
+                                facilities={facilities}
+                                setFacilities={setFacilities}
                             />
                         </div>
                     </div>
@@ -209,7 +255,9 @@ const RoomsTabcontent = () => {
                     <div className="mt-40">
                         <div className="row y-gap-20 d-flex justify-end items-end pb-60 lg:pb-40 md:pb-32">
                             <div className="col-auto">
-                                <button className="button -md -blue-1 bg-blue-1-05 text-blue-1 h-50">
+                                <button className="button -md -blue-1 bg-blue-1-05 text-blue-1 h-50"
+                                        onClick={() => onRoomClear()}
+                                >
                                     Clear
                                 </button>
                             </div>
@@ -228,7 +276,7 @@ const RoomsTabcontent = () => {
                     </div>
 
                     <div>
-                        <RoomDetails rooms={selectedHotelRooms} onEdit={onEdit}/>
+                        <RoomDetails rooms={selectedHotelRooms} onEdit={onEdit} onDelete={onDelete}/>
                     </div>
                 </div>
             </div>

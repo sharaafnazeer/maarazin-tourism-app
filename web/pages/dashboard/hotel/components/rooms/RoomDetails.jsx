@@ -2,7 +2,7 @@ import SearchAndNewRoom from "./SearchAndNewRoom";
 import Image from "next/image";
 
 
-const RoomDetails = ({rooms = [], onEdit}) => {
+const RoomDetails = ({rooms = [], onEdit, onDelete}) => {
 
     return (
         <>
@@ -80,7 +80,8 @@ const RoomDetails = ({rooms = [], onEdit}) => {
                                                 </button>
                                             </div>
                                             <div className="col-auto">
-                                                <button className="flex-center bg-light-2 rounded-4 size-35">
+                                                <button className="flex-center bg-light-2 rounded-4 size-35"
+                                                        onClick={() => onDelete(item._id)}>
                                                     <i className="icon-trash-2 text-16 text-light-1"/>
                                                 </button>
                                             </div>
