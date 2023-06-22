@@ -12,14 +12,22 @@ RUN addgroup -g 1001 myuser && \
 USER myuser
 
 WORKDIR /app
+
 COPY ./package.json ./
-RUN yarn install
+
+COPY ./yarn.lock ./
+COPY ./next.config.js ./
+COPY ./next.config.js ./
+
 COPY . .
 
-RUN yarn build
+# Set permissions for the app directory
+USER root
+RUN chown -R myuser:myuser /app
 
-# Set permissions for the .next directory
-RUN chown -R myuser:myuser .next
+USER myuser
+
+RUN yarn install
 
 EXPOSE 3000
-CMD ["yarn", "run", "start"]
+CMD ["yarn", "dev"]

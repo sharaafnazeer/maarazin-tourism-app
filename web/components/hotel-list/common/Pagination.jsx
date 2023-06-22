@@ -47,7 +47,7 @@ const Pagination = ({hotelsData}) => {
 
             <div className="col-md-auto md:order-3">
                 <div className="row x-gap-20 y-gap-20 items-center md:d-none">
-                    {renderPages()}
+                    hotelsData && (renderPages())
                     {
                         totalPages > 5 && (
                             <>
@@ -63,7 +63,9 @@ const Pagination = ({hotelsData}) => {
                 </div>
 
                 <div className="row x-gap-10 y-gap-20 justify-center items-center d-none md:d-flex">
-                    {renderPages()}
+                    {
+                        hotelsData && (renderPages())
+                    }
                 </div>
 
                 {/*<div className="text-center mt-30 md:mt-10">*/}
