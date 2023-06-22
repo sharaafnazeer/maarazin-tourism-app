@@ -11,13 +11,13 @@ const BookingTable = () => {
 
   const tabItems = [
     "All Booking",
-    "Completed",
-    "Processing",
-    "Confirmed",
-    "Cancelled",
-    "Paid",
-    "Unpaid",
-    "Partial Payment",
+    // "Completed",
+    // "Processing",
+    // "Confirmed",
+    // "Cancelled",
+    // "Paid",
+    // "Unpaid",
+    // "Partial Payment",
   ];
 
   return (

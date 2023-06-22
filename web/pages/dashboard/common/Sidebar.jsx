@@ -37,7 +37,7 @@ const Sidebar = () => {
         </div>
         {/* End accordion__item */}
         
-        {/* <div className="sidebar__item ">
+        <div className="sidebar__item ">
           <Link
             href="/dashboard/booking"
             className="sidebar__button d-flex items-center text-15 lh-1 fw-500"
@@ -51,7 +51,7 @@ const Sidebar = () => {
             />
             Booking History
           </Link>
-        </div> */}
+        </div>
         {/* End accordion__item */}
 
         

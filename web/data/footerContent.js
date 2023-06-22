@@ -13,7 +13,7 @@ module.exports = [
     id: 2,
     title: "Address",
     menuList: [
-      { name: "54, St'Lawarance Road, Colombo - 06, Sri Lanka", routerPath: "#" },
+      { name: "347, R.A. De Mel Mawatha, Kollupitiya, colombo 03, Sri Lanka", routerPath: "#" },
       { name: "View Map", routerPath: "/" },
     ],
   },

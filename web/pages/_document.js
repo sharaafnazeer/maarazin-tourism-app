@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <meta
           name="description"
-          content="GoTrip - Tour & Travel React NextJS Template"
+          content="Rexe - Holidays & Tours React NextJS Template"
         />
         {/* <!-- Google fonts --> */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

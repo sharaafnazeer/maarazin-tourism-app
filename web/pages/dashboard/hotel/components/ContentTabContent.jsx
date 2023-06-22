@@ -11,6 +11,8 @@ import {
 } from "../../../../slices/hotelSlice";
 import {useRouter} from "next/router";
 import RoomMostP_Facilities from "./rooms/RoomMostP_Facilities";
+import { ToastContainer, toast } from 'react-toastify';
+import { failureNofication, successNofication } from "../../../../data/notification";
 
 const ContentTabContent = () => {
 
@@ -38,7 +40,6 @@ const ContentTabContent = () => {
         existingBannerImages: [],
         existingFeatureImages: [],
     });
-
     const onSave = () => {
         let formData = new FormData();
 
@@ -72,10 +73,11 @@ const ContentTabContent = () => {
                 .then((res) => {
                     setFeaturedImages([]);
                     setHotelImages([]);
-                    router.push(`/dashboard/hotel/update-hotel/${res.record._id}`);
+                    successNofication(res.message);
+                    router.push(`/dashboard/hotel/update-hotel/${res.record._id}`);                    
                 })
                 .catch((err) => {
-                    console.log(err);
+                   failureNofication(err.message) ;
                 });
 
         } else {
@@ -84,10 +86,11 @@ const ContentTabContent = () => {
                 .then((res) => {
                     setFeaturedImages([]);
                     setHotelImages([]);
+                    successNofication(res.message);
                     router.push(`/dashboard/hotel/update-hotel/${res.record._id}`);
                 })
                 .catch((err) => {
-                    console.log(err);
+                    failureNofication(err.message);
                 });
         }
     };
@@ -164,8 +167,9 @@ const ContentTabContent = () => {
                         onClick={() => onSave()}
                     >
                         Save Changes <div className="icon-arrow-top-right ml-15"/>
-                    </button>
+                    </button>                   
                 </div>
+                <ToastContainer/>
             </div>
         </>
     );

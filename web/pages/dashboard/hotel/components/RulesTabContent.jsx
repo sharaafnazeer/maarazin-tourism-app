@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { updateHotelRule } from "../../../../slices/hotelSlice";
+import { failureNofication, successNofication } from "../../../../data/notification";
 
 const RulesTabContent = () => {
   const dispatch = useDispatch();
@@ -42,9 +43,10 @@ const RulesTabContent = () => {
     dispatch(updateHotelRule(data))
       .unwrap()
       .then((res) => {
+        successNofication(res.message);
       })
       .catch((err) => {
-        console.log(err);
+        failureNofication(err.message);
       });
   };
 

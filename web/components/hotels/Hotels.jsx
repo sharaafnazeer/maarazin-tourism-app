@@ -117,11 +117,11 @@ const Hotels = () => {
                     {item?.ratings}
                   </div>
                   <div className="text-14 text-dark-1 fw-500 ml-10">
-                    Exceptional
+                    Hotel
                   </div>
-                  <div className="text-14 text-light-1 ml-10">
+                  {/* <div className="text-14 text-light-1 ml-10">
                     {item?.numberOfReviews} reviews
-                  </div>
+                  </div> */}
                 </div>
                 <div className="mt-5">
                   <div className="fw-500">

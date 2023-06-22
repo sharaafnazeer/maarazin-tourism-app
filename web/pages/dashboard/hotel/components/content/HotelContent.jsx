@@ -23,7 +23,6 @@ const HotelContent = ({
                     <input
                         type="text"
                         required
-                        class="form-control is-valid"
                         defaultValue={hotelData.name || ''}
                         id="name"
                         onChange={(evt) => onChange([evt.target.id], evt.target.value)}
