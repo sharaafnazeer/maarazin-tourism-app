@@ -8,6 +8,7 @@ import "swiper/css/scrollbar";
 import "swiper/css/effect-cards";
 import "aos/dist/aos.css";
 import "../styles/index.scss";
+import 'react-toastify/dist/ReactToastify.css';
 import { Provider } from "react-redux";
 import {wrapper} from "../app/store";
 

@@ -61,7 +61,8 @@ const HeaderDashBoard = () => {
                 <div className="row items-center x-gap-5 y-gap-20 pl-20 lg:d-none">
                   <div className="col-auto">
                     <button className="button -blue-1-05 size-50 rounded-22 flex-center">
-                      <i className="icon-email-2 text-20"></i>
+                      {/* <i className="icon-email-2 text-20"></i> */}
+                      
                     </button>
                   </div>
                   {/* End col-auto */}

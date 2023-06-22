@@ -17,6 +17,7 @@ import {
     updateRooms, updateSelectedRoom
 } from "../../../../slices/roomSlice";
 import {getOneHotelRooms} from "../../../../slices/hotelSlice";
+import { failureNofication, successNofication } from "../../../../data/notification";
 
 const RoomsTabcontent = () => {
 
@@ -110,6 +111,8 @@ const RoomsTabcontent = () => {
         const newHotelRoom = {...hotelRoom, [id]: value};
         setHotelRoom(newHotelRoom);
     };
+
+
     const onRoomSave = () => {
         let formData = new FormData();
 
@@ -139,19 +142,21 @@ const RoomsTabcontent = () => {
             dispatch(updateRoom(data))
                 .unwrap()
                 .then((res) => {
+                    successNofication(res.message);
                     dispatch(getOneHotelRooms(hotelId));
                 })
                 .catch((err) => {
-                    console.log(err);
+                    failureNofication(err.message)
                 });
         } else {
             dispatch(saveRoom(formData))
                 .unwrap()
                 .then((res) => {
+                    successNofication(res.message);
                     dispatch(getOneHotelRooms(hotelId));
                 })
                 .catch((err) => {
-                    console.log(err);
+                    failureNofication(err.message);
                 });
         }
     };
@@ -160,6 +165,7 @@ const RoomsTabcontent = () => {
         dispatch(deleteSelectedRoom(id))
             .unwrap()
             .then(res => {
+                successNofication(res.message);
                 dispatch(getOneHotelRooms(hotelId));
             });
     }

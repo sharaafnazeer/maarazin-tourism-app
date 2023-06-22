@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { updateHotelLocation } from "../../../../slices/hotelSlice";
 import { useEffect } from "react";
+import { failureNofication, successNofication } from "../../../../data/notification";
 
 const LocationTabContent = () => {
   const dispatch = useDispatch();
@@ -38,9 +39,11 @@ const LocationTabContent = () => {
 
     dispatch(updateHotelLocation(data))
       .unwrap()
-      .then((result) => {})
+      .then((result) => {
+        successNofication(result.message)
+      })
       .catch((err) => {
-        console.log(err);
+        failureNofication(err.message)
       });
   };
 

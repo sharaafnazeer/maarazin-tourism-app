@@ -83,7 +83,7 @@ const BookingTable = ({hotels = [], onDelete, onEdit}) => {
           </div>
         </div>
       </div>
-      <Pagination />
+      {/* <Pagination /> */}
     </>
   );
 };

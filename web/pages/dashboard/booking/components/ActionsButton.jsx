@@ -8,9 +8,9 @@ const ActionsButton = () => {
   };
 
   const filters = [
-    { label: "All", value: "all" },
+    // { label: "All", value: "all" },
     { label: "Details", value: "details" },
-    { label: "Invoice", value: "invoice" },
+    // { label: "Invoice", value: "invoice" },
     { label: "Confirm", value: "confirm" },
     { label: "Cancel", value: "cancel" },
   ];
@@ -26,10 +26,11 @@ const ActionsButton = () => {
       >
         <span className="js-dropdown-title">
           {activeFilter === "all"
-            ? "All"
+            ? ""
             : filters.find((f) => f.value === activeFilter)?.label || "Actions"}
         </span>
-        <i className="icon icon-chevron-sm-down text-7 ml-10" />
+        {/* <i className="icon icon-chevron-sm-down text-7 ml-10" /> */}
+        <i className="icon icon-menu text-12 ml-10"/>
       </div>
       <div className="toggle-element -dropdown-2 js-click-dropdown dropdown-menu">
         <div className="text-14 fw-500 js-dropdown-list">
