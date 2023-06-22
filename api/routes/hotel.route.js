@@ -45,6 +45,7 @@ router.put('/:hotelId', upload.fields([
     {name: 'featuredImages', maxCount: 10}
 ]), hotelController.updateHotelController);
 
+router.get('/popular/all', hotelController.getPopularHotelsController);
 router.get('/:hotelId', hotelController.getHotelByIdController);
 router.delete('/:hotelId', hotelController.deleteHotelByIdController);
 router.get('/:hotelId/rooms', hotelController.getRoomsByHotelController);

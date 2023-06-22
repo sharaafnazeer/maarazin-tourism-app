@@ -10,7 +10,7 @@ const PirceSlider = ({hotelsData}) => {
         setPrice({
             value: {
                 min: 0,
-                max: hotelsData.maxPrice
+                max: hotelsData.maxPrice || 10000
             }
         })
     }, [hotelsData])

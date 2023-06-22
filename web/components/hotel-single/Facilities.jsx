@@ -1,4 +1,4 @@
-const Facilities = () => {
+const Facilities = ({hotelData}) => {
   const facilitiesContent = [
     {
       id: 1,

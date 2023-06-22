@@ -5,7 +5,7 @@ export const buildSleeps = (adults, children) => {
         sleeps.push(<i className="icon-man text-24" key={`sleep-${i}`}></i>)
 
         if (i > 0) {
-            sleeps.push(<i className="icon-plus text-12" key={`sleep-${i}`}></i>)
+            sleeps.push(<i className="icon-plus text-12" key={`sleep-${i}-plus`}></i>)
             break;
         }
     }

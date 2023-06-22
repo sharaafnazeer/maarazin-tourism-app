@@ -1,16 +1,16 @@
 export const buildPriceIncludes = (addon = [], payAtHotel = true, payNothing = true, freeCancel = true) => {
     const results = [];
-    for (const add of addon) {
+    addon.forEach((add, index) => {
         results.push(
-            <div className="d-flex items-center text-green-2">
+            <div className="d-flex items-center text-green-2" key={`addon-${index}`}>
                 <i className="icon-check text-12 mr-10"/>
                 <div className="text-15">{add.name}</div>
             </div>
         )
-    }
+    })
     if (payAtHotel) {
         results.push(
-            <div className="d-flex items-center text-green-2">
+            <div className="d-flex items-center text-green-2" key={`addon-pay`}>
                 <i className="icon-check text-12 mr-10"/>
                 <div className="text-15">Pay at the hotel</div>
             </div>
@@ -18,7 +18,7 @@ export const buildPriceIncludes = (addon = [], payAtHotel = true, payNothing = t
     }
     if (payNothing) {
         results.push(
-            <div className="d-flex items-center text-green-2">
+            <div className="d-flex items-center text-green-2" key={`addon-arrival`}>
                 <i className="icon-check text-12 mr-10"/>
                 <div className="text-15">
                     Pay nothing until arrival
@@ -28,7 +28,7 @@ export const buildPriceIncludes = (addon = [], payAtHotel = true, payNothing = t
     }
     if (freeCancel) {
         results.push(
-            <div className="d-flex items-center text-green-2">
+            <div className="d-flex items-center text-green-2" key={`addon-cancel`}>
                 <i className="icon-check text-12 mr-10"/>
                 <div className="text-15">
                     Free cancellation before arrival
