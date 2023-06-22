@@ -77,63 +77,6 @@ const Hotels = ({popularHotels = []}) => {
                                     </button>
                                 </div>
 
-<<<<<<< HEAD
-                <div className="cardImage__leftBadge">
-                  <div
-                    className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500 uppercase ${
-                      isTextMatched(item?.tag, "breakfast included")
-                        ? "bg-dark-1 text-white"
-                        : ""
-                    } ${
-                      isTextMatched(item?.tag, "best seller")
-                        ? "bg-blue-1 text-white"
-                        : ""
-                    } 
-                    ${
-                      isTextMatched(item?.tag, "-25% today")
-                        ? "bg-brown-1 text-white"
-                        : ""
-                    } 
-                     ${
-                       isTextMatched(item?.tag, "top rated")
-                         ? "bg-yellow-1 text-dark-1"
-                         : ""
-                     }`}
-                  >
-                    {item?.tag}
-                  </div>
-                </div>
-              </div>
-              <div className="hotelsCard__content mt-10">
-                <h4 className="hotelsCard__title text-dark-1 text-18 lh-16 fw-500">
-                  <span>{item?.title}</span>
-                </h4>
-                <p className="text-light-1 lh-14 text-14 mt-5">
-                  {item?.location}
-                </p>
-                <div className="d-flex items-center mt-20">
-                  <div className="flex-center bg-blue-1 rounded-4 size-30 text-12 fw-600 text-white">
-                    {item?.ratings}
-                  </div>
-                  <div className="text-14 text-dark-1 fw-500 ml-10">
-                    Hotel
-                  </div>
-                  {/* <div className="text-14 text-light-1 ml-10">
-                    {item?.numberOfReviews} reviews
-                  </div> */}
-                </div>
-                <div className="mt-5">
-                  <div className="fw-500">
-                    Starting from{" "}
-                    <span className="text-blue-1">US${item?.price}</span>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-=======
                     {/*            <div className="cardImage__leftBadge">*/}
                     {/*                <div*/}
                     {/*                    className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500 uppercase ${*/}
@@ -165,7 +108,6 @@ const Hotels = ({popularHotels = []}) => {
                                     <span>{item?.name}</span>
                                 </h4>
                                 <p className="text-light-1 lh-14 text-14 mt-5">
->>>>>>> 3f672fac4204acf53975b73241906d6b019873fb
 
                                     {
                                         item?.location && (
