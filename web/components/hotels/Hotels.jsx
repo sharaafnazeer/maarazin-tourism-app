@@ -1,6 +1,6 @@
 import Link from "next/link";
-import {Swiper, SwiperSlide} from "swiper/react";
-import {Navigation, Pagination} from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper";
 
 const Hotels = ({popularHotels = []}) => {
     return (
@@ -34,7 +34,7 @@ const Hotels = ({popularHotels = []}) => {
                 }}
             >
                 {popularHotels.slice(0, 8).map((item, index) => (
-                    <SwiperSlide key={item?._id}>
+                    <SwiperSlide key={item?.id}>
                         <Link
                             href={`/hotel/hotel-single-view/${item._id}`}
                             className="hotelsCard -type-1 hover-inside-slider"
@@ -71,11 +71,12 @@ const Hotels = ({popularHotels = []}) => {
                                 </div>
                                 {/* End .cardImage */}
 
-                                <div className="cardImage__wishlist">
-                                    <button className="button -blue-1 bg-white size-30 rounded-full shadow-2">
-                                        <i className="icon-heart text-12"/>
-                                    </button>
-                                </div>
+                <div className="cardImage__wishlist">
+                  <button className="button -blue-1 bg-white size-30 rounded-full shadow-2">
+                    <i className="icon-heart text-12" />
+                  </button>
+                </div>
+
 
                     {/*            <div className="cardImage__leftBadge">*/}
                     {/*                <div*/}
@@ -148,29 +149,29 @@ const Hotels = ({popularHotels = []}) => {
                 ))}
             </Swiper>
 
-            <div className="d-flex x-gap-15 items-center justify-center sm:justify-start pt-40 sm:pt-20">
-                <div className="col-auto">
-                    <button className="d-flex items-center text-24 arrow-left-hover js-hotels-prev">
-                        <i className="icon icon-arrow-left"/>
-                    </button>
-                </div>
-                {/* End .prev */}
+      <div className="d-flex x-gap-15 items-center justify-center sm:justify-start pt-40 sm:pt-20">
+        <div className="col-auto">
+          <button className="d-flex items-center text-24 arrow-left-hover js-hotels-prev">
+            <i className="icon icon-arrow-left" />
+          </button>
+        </div>
+        {/* End .prev */}
 
-                <div className="col-auto">
-                    <div className="pagination -dots text-border js-hotels-pag"/>
-                </div>
-                {/* End .pagination */}
+        <div className="col-auto">
+          <div className="pagination -dots text-border js-hotels-pag" />
+        </div>
+        {/* End .pagination */}
 
-                <div className="col-auto">
-                    <button className="d-flex items-center text-24 arrow-right-hover js-hotels-next">
-                        <i className="icon icon-arrow-right"/>
-                    </button>
-                </div>
-                {/* End .next */}
-            </div>
-            {/* End navigation and pagination */}
-        </>
-    );
+        <div className="col-auto">
+          <button className="d-flex items-center text-24 arrow-right-hover js-hotels-next">
+            <i className="icon icon-arrow-right" />
+          </button>
+        </div>
+        {/* End .next */}
+      </div>
+      {/* End navigation and pagination */}
+    </>
+  );
 };
 
 export default Hotels;
