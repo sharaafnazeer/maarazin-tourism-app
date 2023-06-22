@@ -5,7 +5,7 @@ import Link from "next/link";
 const Sidebar = () => {
   const sidebarData = [
     {
-      icon: "/img/dashboard/sidebar/booking.svg",
+      icon: "/img/dashboard/sidebar/hotel.svg",
       title: "Manage Hotel",
       links: [
         { title: "All Hotel", href: "/dashboard/hotels" },
@@ -50,6 +50,24 @@ const Sidebar = () => {
               className="mr-15"
             />
             Booking History
+          </Link>
+        </div>
+        {/* End accordion__item */}
+        
+        
+        <div className="sidebar__item ">
+          <Link
+            href="/dashboard/reservation-details-page"
+            className="sidebar__button d-flex items-center text-15 lh-1 fw-500"
+          >
+            <Image
+              width={20}
+              height={20}
+              src="/img/dashboard/sidebar/bookmark.svg"
+              alt="image"
+              className="mr-15"
+            />
+            Reservation Details
           </Link>
         </div>
         {/* End accordion__item */}

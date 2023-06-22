@@ -11,6 +11,8 @@ import "../styles/index.scss";
 import 'react-toastify/dist/ReactToastify.css';
 import { Provider } from "react-redux";
 import {wrapper} from "../app/store";
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");

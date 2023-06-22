@@ -349,6 +349,3 @@ export const getServerSideProps = wrapper.getServerSideProps((store) =>
 );
 
 export default HotelSingleV1Dynamic;
-// export default dynamic(() => Promise.resolve(HotelSingleV1Dynamic), {
-//   ssr: false,
-// });

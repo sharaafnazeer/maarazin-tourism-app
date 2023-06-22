@@ -29,8 +29,7 @@ const ActionsButton = () => {
             ? ""
             : filters.find((f) => f.value === activeFilter)?.label || "Actions"}
         </span>
-        {/* <i className="icon icon-chevron-sm-down text-7 ml-10" /> */}
-        <i className="icon icon-menu text-12 ml-10"/>
+        <i class="bi bi-three-dots-vertical"></i>
       </div>
       <div className="toggle-element -dropdown-2 js-click-dropdown dropdown-menu">
         <div className="text-14 fw-500 js-dropdown-list">
