@@ -13,7 +13,7 @@ import MainFilterSearchBox from "../../../components/hotel-single/filter-box-2";
 import {useRouter} from "next/router";
 
 
-const index = (props) => {
+const HotelListView = (props) => {
 
     const [hotelsData, setHotelsData] = useState({
         page: 1,
@@ -143,5 +143,5 @@ export const getServerSideProps = wrapper.getServerSideProps((store) =>
 );
 
 
-export default index;
+export default HotelListView;
 

@@ -23,7 +23,7 @@ const HotelContent = ({
                     <input
                         type="text"
                         required
-                        defaultValue={hotelData.name || ''}
+                        defaultValue={hotelData?.name || ''}
                         id="name"
                         onChange={(evt) => onChange([evt.target.id], evt.target.value)}
                     />
@@ -36,7 +36,7 @@ const HotelContent = ({
                 <div className="form-input ">
           <textarea
               required
-              defaultValue={hotelData.description || ''}
+              defaultValue={hotelData?.description || ''}
               rows={5}
               id="description"
               onChange={(event) => onChange(event.target.id, event.target.value)}
@@ -56,7 +56,7 @@ const HotelContent = ({
                             <select
                                 className="form-select rounded-10 border-light-1 justify-between text-12 fw-500 px-20 w-200 h-50  sm:w-full text-14"
                                 id="hotelGroupId"
-                                value={hotelData.hotelGroupId || ''}
+                                value={hotelData?.hotelGroupId || ''}
                                 onChange={(event) => onChange(event.target.id, event.target.value)}
                             >
                                 <option key={"None"} value="">Select</option>

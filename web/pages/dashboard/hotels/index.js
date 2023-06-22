@@ -9,7 +9,7 @@ import { getAllHotels, deleteSelectedHotel } from "../../../slices/hotelSlice";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-const index = () => {
+const Hotels = () => {
 
   const dispath = useDispatch();
   const router = useRouter();
@@ -87,4 +87,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Hotels;

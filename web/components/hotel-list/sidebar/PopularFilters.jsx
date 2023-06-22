@@ -4,7 +4,7 @@ import {getRoomMostP_Facilities} from "../../../slices/hotelSlice";
 import {useRouter} from "next/router";
 import queryParamsBuilderOnObject from "../../../utils/queryParmsBuilderOnObject";
 
-const popularFilters = () => {
+const PopularFilters = () => {
     const dispatch = useDispatch();
     const router = useRouter();
     let [facilities, setFacilities] = useState([]);
@@ -77,4 +77,4 @@ const popularFilters = () => {
     );
 };
 
-export default popularFilters;
+export default PopularFilters;

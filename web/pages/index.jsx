@@ -10,7 +10,7 @@ import {wrapper} from "../app/store";
 import {getAllPopularSiteHotels} from "../slices/hotelSlice";
 import {useState} from "react";
 
-const index = (props) => {
+const Home = (props) => {
     const [popularHotels, setPopularHotels] = useState(props.popularHotelDetails);
 
     return (
@@ -113,4 +113,4 @@ export const getServerSideProps = wrapper.getServerSideProps((store) =>
     }
 );
 
-export default index;
+export default Home;

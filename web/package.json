@@ -17,7 +17,7 @@
     "bootstrap": "^5.2.3",
     "chart.js": "^4.2.1",
     "eslint": "8.35.0",
-    "eslint-config-next": "13.2.3",
+    "eslint-config-next": "^13.4.7",
     "google-map-react": "^2.2.0",
     "moment": "^2.29.4",
     "next": "13.2.3",
@@ -40,5 +40,8 @@
     "sass": "^1.57.1",
     "slick-carousel": "^1.8.1",
     "swiper": "^8.4.7"
+  },
+  "devDependencies": {
+    "eslint-plugin-next": "^0.0.0"
   }
 }

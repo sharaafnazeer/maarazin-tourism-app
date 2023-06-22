@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-const RoomImgUploader = ({images, setImages, hotelRoom, setHotelRoom}) => {
+const RoomImgUploader = ({images = [], setImages, hotelRoom, setHotelRoom}) => {
     const [error, setError] = useState("");
 
     const handleFileUpload = (event) => {
@@ -115,7 +115,7 @@ const RoomImgUploader = ({images, setImages, hotelRoom, setHotelRoom}) => {
                     <>
                         <div className="mt-30">Already Uploaded Room Images</div>
                         <div className="row x-gap-20 y-gap-20 pt-15">
-                            {hotelRoom?.existingRoomImages?.map((image, index) => (
+                            {hotelRoom?.existingRoomImages && hotelRoom?.existingRoomImages?.map((image, index) => (
                                 <div className="col-auto" key={index}>
                                     <div className="d-flex ratio ratio-1:1 w-200">
                                         <img src={image} alt="image" className="img-ratio rounded-4"/>

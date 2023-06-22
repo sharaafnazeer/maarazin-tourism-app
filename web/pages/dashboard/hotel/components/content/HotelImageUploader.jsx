@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-const HotelImageUploader = ({hotelImages, setHotelImages, hotelData, setHotelData}) => {
+const HotelImageUploader = ({hotelImages = [], setHotelImages, hotelData, setHotelData}) => {
 
     const [error, setError] = useState("");
 
@@ -114,7 +114,7 @@ const HotelImageUploader = ({hotelImages, setHotelImages, hotelData, setHotelDat
                     <>
                         <div className="mt-30">Already Uploaded Hotel Images</div>
                         <div className="row x-gap-20 y-gap-20 pt-15">
-                            {hotelData?.existingBannerImages?.map((image, index) => (
+                            {hotelData?.existingBannerImages && hotelData?.existingBannerImages?.map((image, index) => (
                                 <div className="col-auto" key={index}>
                                     <div className="d-flex ratio ratio-1:1 w-200">
                                         <img src={image} alt="image" className="img-ratio rounded-4"/>
