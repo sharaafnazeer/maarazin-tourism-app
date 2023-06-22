@@ -52,7 +52,7 @@ const HotelProperties = ({hotels = []}) => {
                             <div className="col-md">
                                 <h3 className="text-18 lh-16 fw-500">
                                     {item?.name}
-                                    <br className="lg:d-none"/> {`${item?.location?.city}`}
+                                    <br className="lg:d-none"/> {item?.location && (`${item?.location?.city}`)}
                                     <div className="d-inline-block ml-10">
 
                                         {
@@ -63,7 +63,23 @@ const HotelProperties = ({hotels = []}) => {
 
                                 <div className="row x-gap-10 y-gap-10 items-center pt-10">
                                     <div className="col-auto">
-                                        <p className="text-14">{`${item?.location?.city}, ${item?.location?.state}, ${item?.location?.country}`}</p>
+                                        <p className="text-14">
+                                            {
+                                                item?.location && (
+                                                    <>
+                                                        {
+                                                            item?.location?.city && (`${item?.location?.city}`)
+                                                        }
+                                                        {
+                                                            item?.location?.state && (`, ${item?.location?.state}`)
+                                                        }
+                                                        {
+                                                            item?.location?.country && (`, ${item?.location?.country}`)
+                                                        }
+                                                    </>
+                                                )
+                                            }
+                                        </p>
                                     </div>
 
                                     <div className="col-auto">

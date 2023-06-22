@@ -18,7 +18,7 @@ const Surroundings = ({hotelData}) => {
         setSurroundingContent(hotelData)
         const newContents = [];
         for (const newContentElement of [...surroundingsContent]) {
-            newContentElement.list = hotelData.nearBy
+            newContentElement.list = hotelData?.nearBy || []
             newContents.push(newContentElement);
         }
         setSurroundingContent(newContents);

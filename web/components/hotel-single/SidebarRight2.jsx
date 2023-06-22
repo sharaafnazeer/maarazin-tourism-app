@@ -32,7 +32,7 @@ const SidebarRight2 = ({hotelData}) => {
                 <div className="border-top-light mt-15 mb-15"/>
                 <div className="text-15 fw-500">Popular landmarks</div>
                 {
-                    [...hotelData?.nearBy]?.splice(0, 2).map((near, index) => (
+                    hotelData?.nearBy && [...hotelData?.nearBy]?.splice(0, 2).map((near, index) => (
                         <div className="d-flex justify-between pt-10" key={`near-${index}`}>
                             <div className="text-14">{near.name}</div>
                             <div className="text-14 text-light-1">{near.distance}</div>

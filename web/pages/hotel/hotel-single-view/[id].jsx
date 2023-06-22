@@ -18,17 +18,19 @@ import CallToActions from "../../../components/common/CallToActions";
 import DefaultFooter from "../../../components/footer/default";
 import Link from "next/link";
 import {wrapper} from "../../../app/store";
-import {getOneSiteHotel} from "../../../slices/hotelSlice";
+import {getAllSimilarSiteHotels, getOneSiteHotel} from "../../../slices/hotelSlice";
 import {useEffect, useState} from "react";
 import {buildRating} from "../../../utils/buildRatings";
 
 const HotelSingleV1Dynamic = (props) => {
     const [isOpen, setOpen] = useState(false);
     const [hotel, setHotel] = useState(props.selectedHotelDetails);
+    const [similarHotels, setSimilarHotels] = useState(props.similarHotelDetails);
 
     useEffect(() => {
         setHotel(props.selectedHotelDetails)
-    }, [props.selectedHotelDetails]);
+        setSimilarHotels(props.similarHotelDetails)
+    }, [props.selectedHotelDetails, props.similarHotelDetails]);
     console.log(props);
 
     return (
@@ -50,7 +52,7 @@ const HotelSingleV1Dynamic = (props) => {
             <Header11/>
             {/* End Header 1 */}
 
-            <TopBreadCrumb/>
+            <TopBreadCrumb hotelData={hotel}/>
             {/* End top breadcrumb */}
 
             <StickyHeader hotel={hotel}/>
@@ -225,7 +227,7 @@ const HotelSingleV1Dynamic = (props) => {
                         <div className="col-12">
                             <h3 className="text-22 fw-500">Facilities of this Hotel</h3>
                             <div className="row x-gap-40 y-gap-40 pt-20">
-                                <Facilities/>
+                                <Facilities hotelData={hotel}/>
                             </div>
                             {/* End .row */}
                         </div>
@@ -288,33 +290,37 @@ const HotelSingleV1Dynamic = (props) => {
             </section>
             {/* End hotel surroundings */}
 
-            <section className="layout-pt-md layout-pb-lg">
-                <div className="container">
-                    <div className="row justify-center text-center">
-                        <div className="col-auto">
-                            <div className="sectionTitle -md">
-                                <h2 className="sectionTitle__title">
-                                    Popular properties similar to The Crown Hotel
-                                </h2>
-                                <p className=" sectionTitle__text mt-5 sm:mt-0">
-                                    Interdum et malesuada fames ac ante ipsum
-                                </p>
+            {
+                similarHotels.length && (
+                    <section className="layout-pt-md layout-pb-lg">
+                        <div className="container">
+                            <div className="row justify-center text-center">
+                                <div className="col-auto">
+                                    <div className="sectionTitle -md">
+                                        <h2 className="sectionTitle__title">
+                                            Popular properties similar to The {hotel?.name}
+                                        </h2>
+                                        {/*<p className=" sectionTitle__text mt-5 sm:mt-0">*/}
+                                        {/*    Interdum et malesuada fames ac ante ipsum*/}
+                                        {/*</p>*/}
+                                    </div>
+                                    {/* End sectionTitle */}
+                                </div>
+                                {/* End .col */}
                             </div>
-                            {/* End sectionTitle */}
-                        </div>
-                        {/* End .col */}
-                    </div>
-                    {/* End .row */}
+                            {/* End .row */}
 
-                    <div className="pt-40 sm:pt-20 item_gap-x30">
-                        <Hotels2/>
-                        {/* <Hotels/>
-            <Hotels3/> */}
-                    </div>
-                    {/* End slide hotel */}
-                </div>
-                {/* End .container */}
-            </section>
+                            <div className="pt-40 sm:pt-20 item_gap-x30">
+                                <Hotels2 similarHotels={similarHotels}/>
+                                {/*<Hotels/>*/}
+                                {/*<Hotels3/>*/}
+                            </div>
+                            {/* End slide hotel */}
+                        </div>
+                        {/* End .container */}
+                    </section>
+                )
+            }
             {/* End similar hotel */}
 
             <CallToActions/>
@@ -328,6 +334,7 @@ const HotelSingleV1Dynamic = (props) => {
 export const getServerSideProps = wrapper.getServerSideProps((store) =>
     async ({req, res, params, query, ...etc}) => {
         await store.dispatch(getOneSiteHotel(params?.id));
+        await store.dispatch(getAllSimilarSiteHotels(params?.id));
         const state = store.getState()
 
         console.log("State on server", state);
@@ -335,6 +342,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) =>
             props: {
                 query: query,
                 selectedHotelDetails: state.hotel.selectedHotel,
+                similarHotelDetails: state.hotel.siteSimilarHotels,
             },
         };
     }

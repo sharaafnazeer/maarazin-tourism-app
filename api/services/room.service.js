@@ -185,6 +185,18 @@ const getRoomsByHotelIdWithDetails = async (hotelId) => {
             const roomObj = room.toObject();
             const possibleCombinations = getAllCombinations(roomObj.addons).filter(item => item.length);
             const combinations = [];
+
+            combinations.push(
+                {
+                    totalAmount: room.roomPrice,
+                    extraAmount: 0,
+                    roomAmount: room.roomPrice,
+                    combinationId: '',
+                    roomId: room._id,
+                    addons: [],
+                }
+            )
+
             possibleCombinations.forEach(combination => {
                 let comb = {
                     totalAmount: room.roomPrice,
@@ -194,7 +206,6 @@ const getRoomsByHotelIdWithDetails = async (hotelId) => {
                     roomId: room._id,
                     addons: [],
                 }
-                combinations.push(comb); // Adding room without any addons
                 combination.forEach(addon => {
                     comb.combinationId = comb.combinationId + '__' + addon.addon._id;
                     comb.totalAmount = comb.totalAmount + addon.amount;

@@ -240,7 +240,7 @@ const deleteHotelById = async (hotelId) => {
 
 const getHotelByIdWithDetails = async (hotelId) => {
     try {
-        let hotel = await Hotel.findById(hotelId).populate('popularFacilities').populate('hotelGroup');
+        let hotel = await Hotel.findById(hotelId).populate('popularFacilities').populate('rooms').populate('hotelGroup');
         if (!hotel) {
             return new RecordNotFound("Hotel not found", "Hotel with given ID not found");
         }
@@ -250,6 +250,12 @@ const getHotelByIdWithDetails = async (hotelId) => {
         hotel.minimumRoomPrice = rooms.reduce((minPrice, currentRoom) => {
             return Math.min(minPrice, currentRoom.roomPrice);
         }, Infinity);
+        hotel.minimumPriceRoom = hotel.rooms.length ? hotel.rooms.reduce((minPrice, currentRoom) => {
+            if (currentRoom.roomPrice < minPrice.roomPrice) {
+                return currentRoom;
+            }
+            return minPrice;
+        }) : null;
         hotel.rooms = rooms;
         return hotel;
     } catch (e) {
@@ -264,12 +270,50 @@ const getSimilarHotelsById = async (hotelId) => {
             return new RecordNotFound("Hotel not found", "Hotel with given ID not found");
         }
 
-        return await Hotel.find({
+        const hotels = await Hotel.find({
             $and: [
                 {$or: [{hotelGroup: hotel.hotelGroup}, {rating: {$gte: hotel.rating}}]},
                 {_id: {$nin: [hotelId]}}
             ]
-        }).limit(4);
+        }).limit(4).populate('rooms');
+
+        const hotelResponse = [];
+
+        for (const hotel of hotels) {
+            let hotelObj = (await hotel).toObject();
+            hotelObj.minimumPrice = hotelObj.rooms.length ? hotelObj.rooms.reduce((minPrice, currentRoom) => {
+                return Math.min(minPrice, currentRoom.roomPrice);
+            }, Infinity) : 0;
+
+            if (hotelObj.rooms.length) {
+                hotelResponse.push(hotelObj);
+            }
+        }
+        return hotelResponse;
+
+    } catch (e) {
+        throw e;
+    }
+}
+
+const getPopularHotels = async () => {
+    try {
+
+        const hotels = await Hotel.find({rating: {$gte: 4}}).limit(16).populate('rooms');
+
+        const hotelResponse = [];
+
+        for (const hotel of hotels) {
+            let hotelObj = (await hotel).toObject();
+            hotelObj.minimumPrice = hotelObj.rooms.length ? hotelObj.rooms.reduce((minPrice, currentRoom) => {
+                return Math.min(minPrice, currentRoom.roomPrice);
+            }, Infinity) : 0;
+
+            if (hotelObj.rooms.length) {
+                hotelResponse.push(hotelObj);
+            }
+        }
+        return hotelResponse;
 
     } catch (e) {
         throw e;
@@ -284,5 +328,6 @@ module.exports = {
     getHotelByIdWithDetails,
     getSimilarHotelsById,
     getHotelsWithDetails,
+    getPopularHotels,
     deleteHotelById
 }

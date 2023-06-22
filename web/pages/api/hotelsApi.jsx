@@ -56,6 +56,13 @@ export const getOneSiteHotelApi = async (hotelId) => {
     return await API.get(`/hotels/${hotelId}`);
 }
 
+export const getSimilarSiteHotelApi = async (hotelId) => {
+    return await API.get(`/hotels/${hotelId}/similar`);
+}
+export const getPopularSiteHotelApi = async () => {
+    return await API.get(`/hotels/popular/all`);
+}
+
 export const getAllCategoriesApi = async () => {
     return await API.get('/admin/hotel-groups');
 }

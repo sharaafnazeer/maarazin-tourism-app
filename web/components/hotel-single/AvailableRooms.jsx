@@ -1,18 +1,61 @@
-import Image from "next/image";
 import {useEffect, useState} from "react";
 import {buildSleeps} from "../../utils/buildSleeps";
 import {buildPriceIncludes} from "../../utils/buildPriceIncludes";
 
 const AvailableRooms = ({hotelData}) => {
-    console.log(hotelData);
-
     const [rooms, setRooms] = useState([]);
+    const [reservationRoomPrices, setReservationRoomPrices] = useState([]);
 
     useEffect(() => {
         if (hotelData) {
             setRooms(hotelData.rooms);
+            const reserveRoomPrices = hotelData.rooms.map((room) => {
+                return {
+                    roomId: room._id,
+                    roomPrice: room.roomPrice,
+                    finalPrice: room.roomPrice,
+                    finalNumRooms: 1,
+                    combinations: room.roomCombinations.map((comb, index) => {
+                        return {
+                            combinationId: comb.combinationId,
+                            combinationPrice: comb.totalAmount,
+                            combinationSelected: index === 0,
+                            numberOfCombinationsSelected: index === 0 ? 1 : 0
+                        }
+                    })
+                }
+            })
+            setReservationRoomPrices(reserveRoomPrices);
         }
     }, [hotelData]);
+
+
+    const calculateFinalPrice = (roomId, value, combinationId = "", combinationAmount, isFirst) => {
+
+
+        const finalRoom = reservationRoomPrices.find((room) => room.roomId === roomId);
+
+        const selectedCombination = finalRoom.combinations.find((combination) => combination.combinationId === combinationId);
+        const newSelectedCombination = {
+            ...selectedCombination,
+            combinationPrice: value ? Number(value) * combinationAmount : combinationAmount,
+            combinationSelected: !!value,
+            numberOfCombinationsSelected: Number(value),
+        }
+        finalRoom.combinations = [...finalRoom.combinations.filter((combination) => combination.combinationId !== combinationId), newSelectedCombination];
+        let finalRoomPrice = 0;
+        let finalNumbRooms = 0;
+
+        finalRoom.combinations.forEach((comb) => {
+            const price = comb.combinationPrice * comb.numberOfCombinationsSelected;
+            finalRoomPrice += price;
+            finalNumbRooms += comb.numberOfCombinationsSelected
+        });
+        finalRoom.finalPrice = finalRoomPrice;
+        finalRoom.finalNumRooms = finalNumbRooms;
+        const finalRooms = [...reservationRoomPrices.filter((room) => room.roomId !== roomId), finalRoom];
+        setReservationRoomPrices(finalRooms);
+    }
 
 
     return (
@@ -121,18 +164,24 @@ const AvailableRooms = ({hotelData}) => {
                                                         <div>
                                                             <div className="dropdown js-dropdown js-price-1-active">
                                                                 <select
+                                                                    defaultValue={index !== 0 ? "" : "1"}
+                                                                    onChange={(event) => calculateFinalPrice(event.target.id, event.target.value, combination.combinationId, combination.totalAmount, index === 0)}
+                                                                    id={`${combination.roomId}`}
                                                                     className="form-select dropdown__button d-flex items-center rounded-4 border-light px-15 h-50 text-14">
-                                                                    <option value="1" defaultValue>
+                                                                    <option value="" key={`key-0`}>
+                                                                        Select
+                                                                    </option>
+                                                                    <option value="1" key={`key-1`}>
                                                                         {
                                                                             `1 (US $${combination.totalAmount})`
                                                                         }
                                                                     </option>
-                                                                    <option value="2">
+                                                                    <option value="2" key={`key-2`}>
                                                                         {
                                                                             `2 (US $${combination.totalAmount * 2})`
                                                                         }
                                                                     </option>
-                                                                    <option value="3">
+                                                                    <option value="3" key={`key-3`}>
                                                                         {
                                                                             `3 (US $${combination.totalAmount * 3})`
                                                                         }
@@ -148,9 +197,13 @@ const AvailableRooms = ({hotelData}) => {
                                         {/* End price features */}
 
                                         <div>
-                                            <div className="text-14 lh-1">3 rooms for</div>
+                                            <div
+                                                className="text-14 lh-1">{reservationRoomPrices.find((price) => price.roomId === room._id)?.finalNumRooms || 0} rooms
+                                                for
+                                            </div>
                                             <div className="text-22 fw-500 lh-17 mt-5">
-                                                US${room?.roomPrice}
+                                                US
+                                                ${reservationRoomPrices.find((price) => price.roomId === room._id)?.finalPrice || 0}
                                             </div>
                                             <a
                                                 href="#"

@@ -12,7 +12,7 @@ import {
     getAllAddonsApi,
     getAllHotelRoomsApi,
     getAllSiteHotelsApi,
-    deleteOneHotelApi, getOneSiteHotelApi,
+    deleteOneHotelApi, getOneSiteHotelApi, getSimilarSiteHotelApi, getPopularSiteHotelApi,
 } from "../pages/api/hotelsApi";
 
 const initialState = {
@@ -24,6 +24,8 @@ const initialState = {
     allFacilities: [],
     allAddons: [],
     selectedHotelRooms: [],
+    siteSimilarHotels: [],
+    sitePopularHotels: [],
     siteHotelData: {
         records: [],
         page: 1,
@@ -81,6 +83,27 @@ export const getOneSiteHotel = createAsyncThunk(
         const response = await getOneSiteHotelApi(hotelId); //returrn get response from the API
         thunkAPI.dispatch(updateSelectedHotel(response.data)); //passing the response to the reducer function including the response
         // console.log(response.data);
+        return response.data;
+    }
+);
+
+export const getAllSimilarSiteHotels = createAsyncThunk(
+    "hotel/getAllSimilarSiteHotels",
+    async (hotelId, thunkAPI) => {
+        thunkAPI.dispatch(setLoading(true));
+        const response = await getSimilarSiteHotelApi(hotelId); //returrn get response from the API
+        thunkAPI.dispatch(updateSiteSimilarHotels(response.data)); //passing the response to the reducer function including the response
+        // console.log(response.data);
+        return response.data;
+    }
+);
+export const getAllPopularSiteHotels = createAsyncThunk(
+    "hotel/getAllPopularSiteHotels",
+    async (_, thunkAPI) => {
+        thunkAPI.dispatch(setLoading(true));
+        const response = await getPopularSiteHotelApi(); //returrn get response from the API
+        thunkAPI.dispatch(updateSitePopularHotels(response.data)); //passing the response to the reducer function including the response
+        console.log(response.data);
         return response.data;
     }
 );
@@ -189,6 +212,14 @@ export const hotelSlice = createSlice({
             state.siteHotelData = action.payload;
             state.isLoading = false;
         },
+        updateSiteSimilarHotels: (state, action) => {
+            state.siteSimilarHotels = action.payload;
+            state.isLoading = false;
+        },
+        updateSitePopularHotels: (state, action) => {
+            state.sitePopularHotels = action.payload;
+            state.isLoading = false;
+        },
         updateCategories: (state, action) => {
             state.categories = action.payload;
             state.isLoading = false;
@@ -232,6 +263,8 @@ export const {
     getFacilities,
     getAddons,
     updateSelectedHotelRoom,
+    updateSiteSimilarHotels,
+    updateSitePopularHotels,
 } = hotelSlice.actions;
 
 export default hotelSlice.reducer;
