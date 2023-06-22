@@ -10,9 +10,9 @@ import {
     updateHotelLocationApi,
     getAllFacilitiesApi,
     getAllAddonsApi,
-    getAllHotelRoomsApi, 
+    getAllHotelRoomsApi,
     getAllSiteHotelsApi,
-    deleteOneHotelApi,
+    deleteOneHotelApi, getOneSiteHotelApi,
 } from "../pages/api/hotelsApi";
 
 const initialState = {
@@ -68,6 +68,17 @@ export const getOneHotel = createAsyncThunk(
     async (hotelId, thunkAPI) => {
         thunkAPI.dispatch(setLoading(true));
         const response = await getOneHotelApi(hotelId); //returrn get response from the API
+        thunkAPI.dispatch(updateSelectedHotel(response.data)); //passing the response to the reducer function including the response
+        // console.log(response.data);
+        return response.data;
+    }
+);
+
+export const getOneSiteHotel = createAsyncThunk(
+    "hotel/getOneSiteHotel",
+    async (hotelId, thunkAPI) => {
+        thunkAPI.dispatch(setLoading(true));
+        const response = await getOneSiteHotelApi(hotelId); //returrn get response from the API
         thunkAPI.dispatch(updateSelectedHotel(response.data)); //passing the response to the reducer function including the response
         // console.log(response.data);
         return response.data;

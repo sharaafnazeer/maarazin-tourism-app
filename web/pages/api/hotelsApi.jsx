@@ -52,6 +52,10 @@ export const getOneHotelApi = async (hotelId) => {
     return await API.get(`/admin/hotels/${hotelId}`);
 }
 
+export const getOneSiteHotelApi = async (hotelId) => {
+    return await API.get(`/hotels/${hotelId}`);
+}
+
 export const getAllCategoriesApi = async () => {
     return await API.get('/admin/hotel-groups');
 }
