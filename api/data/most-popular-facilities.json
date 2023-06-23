@@ -3,25 +3,25 @@
     "id": 1,
     "name": "Free WiFi",
     "isActive": true,
-    "imageUrl": ""
+    "imageUrl": "../../web/public/img/facilities/wifi.svg"
   },
   {
     "id": 2,
     "name": "Restaurant",
     "isActive": true,
-    "imageUrl": ""
+    "imageUrl": "../../web/public/img/facilities/restaurant.svg"
   },
   {
     "id": 3,
     "name": "Room service",
     "isActive": true,
-    "imageUrl": ""
+    "imageUrl": "../../web/public/img/facilities/roomService.svg"
   },
   {
     "id": 4,
     "name": "Bar",
     "isActive": true,
-    "imageUrl": ""
+    "imageUrl": "../../web/public/img/facilities/bar.svg"
   },
   {
     "id": 5,
@@ -39,7 +39,7 @@
     "id": 7,
     "name": "Fitness center",
     "isActive": true,
-    "imageUrl": ""
+    "imageUrl": "../../web/public/img/facilities/gym.svg"
   },
   {
     "id": 8,
@@ -69,7 +69,7 @@
     "id": 12,
     "name": "Spa",
     "isActive": true,
-    "imageUrl": ""
+    "imageUrl": "../../web/public/img/facilities/Spa.svg"
   },
   {
     "id": 13,
@@ -81,7 +81,7 @@
     "id": 14,
     "name": "Air conditioning",
     "isActive": true,
-    "imageUrl": ""
+    "imageUrl": "../../web/public/img/facilities/air-condition.svg"
   },
   {
     "id": 15,
@@ -93,13 +93,13 @@
     "id": 16,
     "name": "Electric vehicle charging station",
     "isActive": true,
-    "imageUrl": ""
+    "imageUrl": "../../web/public/img/facilities/Charging Station.svg"
   },
   {
     "id": 17,
     "name": "Swimming pool",
     "isActive": true,
-    "imageUrl": ""
+    "imageUrl": "../../web/public/img/facilities/Swimming Pool.svg"
   },
   {
     "id": 18,
