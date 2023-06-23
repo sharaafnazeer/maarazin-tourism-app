@@ -4,7 +4,7 @@ const TopHeaderFilter = ({hotelsData, queryData}) => {
             <div className="row y-gap-10 items-center justify-between">
                 <div className="col-auto">
                     <div className="text-18">
-                        <span className="fw-500">{hotelsData.totalCount} properties </span>
+                        <span className="fw-500">{hotelsData.actualCount} properties </span>
                         {
                             queryData.location && (
                                 <>

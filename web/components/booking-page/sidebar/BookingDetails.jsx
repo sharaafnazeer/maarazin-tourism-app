@@ -66,7 +66,7 @@ const BookingDetails = () => {
                     <div className="text-15">Check-in</div>
                     <div className="fw-500">
                         {
-                            reservationData?.reservationQueryDetails?.from ? moment(reservationData?.reservationQueryDetails?.from).format('dddd, MMMM Do YYYY') : ""
+                            reservationData?.reservationQueryDetails?.from ? moment(reservationData?.reservationQueryDetails?.from).format('ddd, MMM Do YYYY') : ""
                         }
                     </div>
                     {/*<div className="text-15 text-light-1">15:00 – 23:00</div>*/}
@@ -78,7 +78,7 @@ const BookingDetails = () => {
                     <div className="text-15">Check-out</div>
                     <div className="fw-500">
                         {
-                            reservationData?.reservationQueryDetails?.to ? moment(reservationData?.reservationQueryDetails?.to).format('dddd, MMMM Do YYYY') : ""
+                            reservationData?.reservationQueryDetails?.to ? moment(reservationData?.reservationQueryDetails?.to).format('ddd, MMM Do YYYY') : ""
                         }
                     </div>
                     {/*<div className="text-15 text-light-1">01:00 – 11:00</div>*/}

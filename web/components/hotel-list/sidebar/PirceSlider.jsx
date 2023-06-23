@@ -1,7 +1,11 @@
 import {useEffect, useState} from "react";
 import InputRange from "react-input-range";
+import {useRouter} from "next/router";
+import queryParamsBuilderOnObject from "../../../utils/queryParmsBuilderOnObject";
 
 const PirceSlider = ({hotelsData}) => {
+
+    const router = useRouter();
     const [price, setPrice] = useState({
         value: {min: 0, max: 10000},
     });
@@ -9,7 +13,7 @@ const PirceSlider = ({hotelsData}) => {
     useEffect(() => {
         setPrice({
             value: {
-                min: 0,
+                min: hotelsData.minPrice || 0,
                 max: hotelsData.maxPrice || 10000
             }
         })
@@ -17,6 +21,12 @@ const PirceSlider = ({hotelsData}) => {
 
     const handleOnChange = (value) => {
         setPrice({value});
+        const query = {
+            ...router.query,
+            minPrice: value.min,
+            maxPrice: value.max,
+        }
+        router.push(router.pathname + '?' + queryParamsBuilderOnObject(query));
     };
 
     return (

@@ -84,7 +84,7 @@ const MainFilterSearchBox = ({queryData}) => {
                         <LocationSearch location={location} setLocation={setLocation}/>
                         {/* End Location */}
 
-                        <div className="searchMenu-date lg:py-20 lg:px-0 js-form-dd js-calendar">
+                        <div className="searchMenu-date px-30 lg:py-20 lg:px-0 js-form-dd js-calendar">
                             <div>
                                 <h4 className="text-15 fw-500 ls-2 lh-16">
                                     Check in - Check out

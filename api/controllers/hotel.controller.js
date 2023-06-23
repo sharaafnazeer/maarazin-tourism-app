@@ -9,6 +9,7 @@ const {
 const sendJson = require("../helpers/json");
 const {RecordNotFound} = require("../exceptions/errors");
 const {getRoomsByHotelId, getRoomsByHotelIdWithDetails} = require("../services/room.service");
+const {PRICE_FILTER} = require("../constants/common");
 
 const addHotelController = async (req, res, next) => {
     const bannerImages = req.files['bannerImages']; // Access uploaded banner images
@@ -90,12 +91,20 @@ const updateHotelController = async (req, res, next) => {
 
 const getHotelsController = async (req, res) => {
     try {
-        const {page, size, rating, ...rest} = req.query;
+        const {page, size, rating, minPrice, maxPrice, ...rest} = req.query;
         const filters = {
             ...rest,
             page: parseInt(page || 1),
             size: parseInt(size || 12),
             rating,
+            minPrice: PRICE_FILTER.MIN,
+            maxPrice: PRICE_FILTER.MAX
+        }
+        if (minPrice) {
+            filters.minPrice = Number(minPrice)
+        }
+        if (maxPrice) {
+            filters.maxPrice = Number(maxPrice)
         }
         const response =
             req.baseUrl.includes('admin') ? await getHotels() : await getHotelsWithDetails(filters);

@@ -45,6 +45,12 @@ export const getAllSiteHotelsApi = async (payload) => {
     if (payload?.facilities) {
         params.append('facilities', payload.facilities);
     }
+    if (payload?.minPrice) {
+        params.append('minPrice', payload.minPrice);
+    }
+    if (payload?.minPrice) {
+        params.append('maxPrice', payload.maxPrice);
+    }
     return await API.get('/hotels', {params});
 }
 
