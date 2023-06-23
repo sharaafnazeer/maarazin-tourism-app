@@ -30,7 +30,7 @@ const AvailableRooms = ({hotelData}) => {
     }, [hotelData]);
 
 
-    const calculateFinalPrice = (roomId, value, combinationId = "", combinationAmount, isFirst) => {
+    const calculateFinalPrice = (roomId, value, combinationId = "", combinationAmount) => {
 
 
         const finalRoom = reservationRoomPrices.find((room) => room.roomId === roomId);
@@ -62,7 +62,7 @@ const AvailableRooms = ({hotelData}) => {
         <>
             {
                 rooms?.map((room, index) => (
-                    <div className="border-light rounded-4 px-30 py-30 sm:px-20 sm:py-20" key={`combination-${index}`}>
+                    <div className="border-light rounded-4 px-30 py-30 sm:px-20 sm:py-20" id={`room-id-${room._id}`} key={`room-${index}`}>
                         <div className="row y-gap-20">
                             <div className="col-12">
                                 <h3 className="text-18 fw-500 mb-15">{room.name}</h3>
@@ -165,7 +165,7 @@ const AvailableRooms = ({hotelData}) => {
                                                             <div className="dropdown js-dropdown js-price-1-active">
                                                                 <select
                                                                     defaultValue={index !== 0 ? "" : "1"}
-                                                                    onChange={(event) => calculateFinalPrice(event.target.id, event.target.value, combination.combinationId, combination.totalAmount, index === 0)}
+                                                                    onChange={(event) => calculateFinalPrice(event.target.id, event.target.value, combination.combinationId, combination.totalAmount)}
                                                                     id={`${combination.roomId}`}
                                                                     className="form-select dropdown__button d-flex items-center rounded-4 border-light px-15 h-50 text-14">
                                                                     <option value="" key={`key-0`}>

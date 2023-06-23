@@ -10,7 +10,6 @@ import TopBreadCrumb from "../../../components/hotel-single/TopBreadCrumb";
 import SidebarRight from "../../../components/hotel-single/SidebarRight";
 import SidebarRight2 from "../../../components/hotel-single/SidebarRight2";
 import AvailableRooms from "../../../components/hotel-single/AvailableRooms";
-import Facilities from "../../../components/hotel-single/Facilities";
 import Image from "next/image";
 import Surroundings from "../../../components/hotel-single/Surroundings";
 import Hotels2 from "../../../components/hotels/Hotels2";
@@ -21,17 +20,25 @@ import {wrapper} from "../../../store/store";
 import {getAllSimilarSiteHotels, getOneSiteHotel} from "../../../slices/hotelSlice";
 import {useEffect, useState} from "react";
 import {buildRating} from "../../../utils/buildRatings";
+import {useRouter} from "next/router";
 
 const HotelSingleV1Dynamic = (props) => {
+
     const [isOpen, setOpen] = useState(false);
+    const router = useRouter();
     const [hotel, setHotel] = useState(props.selectedHotelDetails);
     const [similarHotels, setSimilarHotels] = useState(props.similarHotelDetails);
+    const [queryData, setQueryData] = useState(props.query);
 
     useEffect(() => {
         setHotel(props.selectedHotelDetails)
         setSimilarHotels(props.similarHotelDetails)
     }, [props.selectedHotelDetails, props.similarHotelDetails]);
-    console.log(props);
+
+    useEffect(() => {
+        setQueryData(router.query);
+    }, [router.query]);
+
 
     return (
         <>
@@ -116,13 +123,13 @@ const HotelSingleV1Dynamic = (props) => {
                                     <div className="text-14">
                                         From{" "}
                                         <span className="text-22 text-dark-1 fw-500">
-                                          US${hotel?.minimumRoomPrice}
+                                          US ${hotel?.minimumRoomPrice}
                                         </span>
                                     </div>
                                 </div>
                                 <div className="col-auto">
                                     <Link
-                                        href={"#rooms"}
+                                        href={`#room-id-${hotel?.minimumPriceRoom._id}`}
                                         className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
                                     >
                                         Select Room <div className="icon-arrow-top-right ml-15"/>
@@ -195,7 +202,7 @@ const HotelSingleV1Dynamic = (props) => {
 
                         <div className="col-xl-4">
                             <div className="mb-10">
-                                <SidebarRight hotel={hotel}/>
+                                <SidebarRight hotel={hotel} queryData={queryData}/>
                             </div>
                             <SidebarRight2 hotelData={hotel}/>
                         </div>
@@ -221,22 +228,22 @@ const HotelSingleV1Dynamic = (props) => {
             </section>
             {/* End Available Rooms */}
 
-            <section className="mt-40" id="facilities">
-                <div className="container">
-                    <div className="row x-gap-40 y-gap-40">
-                        <div className="col-12">
-                            <h3 className="text-22 fw-500">Facilities of this Hotel</h3>
-                            <div className="row x-gap-40 y-gap-40 pt-20">
-                                <Facilities hotelData={hotel}/>
-                            </div>
-                            {/* End .row */}
-                        </div>
-                        {/* End .col-12 */}
-                    </div>
-                    {/* End .row */}
-                </div>
-                {/* End .container */}
-            </section>
+            {/*<section className="mt-40" id="facilities">*/}
+            {/*    <div className="container">*/}
+            {/*        <div className="row x-gap-40 y-gap-40">*/}
+            {/*            <div className="col-12">*/}
+            {/*                <h3 className="text-22 fw-500">Facilities of this Hotel</h3>*/}
+            {/*                <div className="row x-gap-40 y-gap-40 pt-20">*/}
+            {/*                    <Facilities hotelData={hotel}/>*/}
+            {/*                </div>*/}
+            {/*                /!* End .row *!/*/}
+            {/*            </div>*/}
+            {/*            /!* End .col-12 *!/*/}
+            {/*        </div>*/}
+            {/*        /!* End .row *!/*/}
+            {/*    </div>*/}
+            {/*    /!* End .container *!/*/}
+            {/*</section>*/}
             {/* End facilites section */}
 
             <section className="pt-40">

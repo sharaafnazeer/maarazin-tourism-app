@@ -26,6 +26,11 @@ const HotelListView = (props) => {
     const [queryData, setQueryData] = useState(props.query);
     const router = useRouter();
 
+    console.log(
+        props
+    )
+    console.log(queryData)
+
     useEffect(() => {
         setHotelsData(props.hotelDetails);
     }, [props.hotelDetails, router.query])
@@ -104,7 +109,7 @@ const HotelListView = (props) => {
                             <div className="mt-30"></div>
                             {/* End mt--30 */}
                             <div className="row y-gap-30">
-                                <HotelProperties hotels={hotelsData.records}/>
+                                <HotelProperties hotels={hotelsData.records} queryData={queryData}/>
                             </div>
                             {/* End .row */}
                             <Pagination hotelsData={hotelsData}/>

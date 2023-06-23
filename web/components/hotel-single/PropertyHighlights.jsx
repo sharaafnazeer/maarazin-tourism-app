@@ -1,6 +1,4 @@
 const PropertyHighlights = ({highlights = []}) => {
-  
-  console.log(highlights);
 
   return (
     <div className="row y-gap-20 pt-30">

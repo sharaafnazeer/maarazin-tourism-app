@@ -3,9 +3,9 @@ import {Navigation, Pagination} from "swiper";
 import Link from "next/link";
 import {Fragment} from "react";
 import {buildRating} from "../../../utils/buildRatings";
+import queryParamsBuilderOnObject from "../../../utils/queryParmsBuilderOnObject";
 
-const HotelProperties = ({hotels = []}) => {
-
+const HotelProperties = ({hotels = [], queryData}) => {
     return (
         <>
             {hotels.map((item) => (
@@ -154,7 +154,7 @@ const HotelProperties = ({hotels = []}) => {
                                     {/*</div>*/}
 
                                     <Link
-                                        href={`/hotel/hotel-single-view/${item._id}`}
+                                        href={`/hotel/hotel-single-view/${item._id}?${queryParamsBuilderOnObject(queryData)}`}
                                         className="button -md -dark-1 bg-blue-1 text-white mt-24"
                                     >
                                         See Availability{" "}

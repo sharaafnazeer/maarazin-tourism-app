@@ -1,15 +1,17 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {configureStore} from "@reduxjs/toolkit";
 import findPlaceSlice from "../features/hero/findPlaceSlice";
 import hotelSlice from "../slices/hotelSlice";
 import roomSlice from "../slices/roomSlice";
 import {createWrapper} from "next-redux-wrapper";
+import reservationSlice from "../slices/reservationSlice";
 
 export const makeStore = () =>
     configureStore({
         reducer: {
             hero: findPlaceSlice,
-            hotel:hotelSlice,
-            room: roomSlice
+            hotel: hotelSlice,
+            room: roomSlice,
+            reservation: reservationSlice,
         },
     });
 

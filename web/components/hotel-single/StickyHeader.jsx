@@ -42,13 +42,13 @@ const StickyHeader = ({ hotel }) => {
                   <div className="text-14">
                     From{" "}
                     <span className="text-22 text-dark-1 fw-500">
-                      US${hotel?.minimumRoomPrice}
+                      US ${hotel?.minimumRoomPrice}
                     </span>
                   </div>
                 </div>
                 <div className="col-auto">
                   <Link
-                    href="/hotel/booking-page"
+                    href={`#room-id-${hotel?.minimumPriceRoom._id}`}
                     className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
                   >
                     Select Room <div className="icon-arrow-top-right ml-15" />

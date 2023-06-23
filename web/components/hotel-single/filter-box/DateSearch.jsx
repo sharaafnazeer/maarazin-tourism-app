@@ -1,11 +1,18 @@
-import React, { useState } from "react";
-import DatePicker, { DateObject } from "react-multi-date-picker";
+import React from "react";
+import DatePicker from "react-multi-date-picker";
+import moment from "moment/moment";
 
-const DateSearch = () => {
-  const [dates, setDates] = useState([
-    new DateObject().setDay(15),
-    new DateObject().setDay(14).add(1, "month"),
-  ]);
+const DateSearch = ({dates, setDates}) => {
+    const triggerSetDate = (values) => {
+
+        if (values[0] && values[1]) {
+            let newDates = [
+                moment(values[0].format('YYYY-MM-DD')).toDate(),
+                moment(values[1].format('YYYY-MM-DD')).toDate()
+            ];
+            setDates(newDates);
+        }
+    }
 
   return (
     <div className="text-15 text-light-1 ls-2 lh-16 custom_dual_datepicker">
@@ -13,7 +20,7 @@ const DateSearch = () => {
         inputClass="custom_input-picker"
         containerClassName="custom_container-picker"
         value={dates}
-        onChange={setDates}
+        onChange={triggerSetDate}
         numberOfMonths={2}
         offsetY={10}
         range
