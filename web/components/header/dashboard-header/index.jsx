@@ -38,7 +38,7 @@ const HeaderDashBoard = () => {
                 <div className="header__container px-30 sm:px-20">
                     <div className="-left-side">
                         <Link href="/" className="header-logo">
-                            <Image src="/img/general/Rexe-dark.svg" alt="logo icon" width={300} height={200}/>
+                            <Image src="/img/general/rexe-dark.svg" alt="logo icon" width={300} height={200}/>
                         </Link>
                         {/* End logo */}
                     </div>
