@@ -3,108 +3,108 @@
     "id": 1,
     "name": "Free WiFi",
     "isActive": true,
-    "imageUrl": "../../web/public/img/facilities/wifi.svg"
+    "imageUrl": "wifi.svg"
   },
   {
     "id": 2,
     "name": "Restaurant",
     "isActive": true,
-    "imageUrl": "../../web/public/img/facilities/restaurant.svg"
+    "imageUrl": "restaurant.svg"
   },
   {
     "id": 3,
     "name": "Room service",
     "isActive": true,
-    "imageUrl": "../../web/public/img/facilities/roomService.svg"
+    "imageUrl": "room-service.svg"
   },
   {
     "id": 4,
     "name": "Bar",
     "isActive": true,
-    "imageUrl": "../../web/public/img/facilities/bar.svg"
+    "imageUrl": "bar.svg"
   },
   {
     "id": 5,
     "name": "24-hour front desk",
     "isActive": true,
-    "imageUrl": "../../web/public/img/facilities/service24.svg"
+    "imageUrl": "service-hour.svg"
   },
   {
     "id": 6,
     "name": "Sauna",
     "isActive": true,
-    "imageUrl": "../../web/public/img/facilities/sauna.svg"
+    "imageUrl": "sauna.svg"
   },
   {
     "id": 7,
     "name": "Fitness center",
     "isActive": true,
-    "imageUrl": "../../web/public/img/facilities/gym.svg"
+    "imageUrl": "gym.svg"
   },
   {
     "id": 8,
     "name": "Garden",
     "isActive": true,
-    "imageUrl": "../../web/public/img/facilities/garden.svg"
+    "imageUrl": "garden.svg"
   },
   {
     "id": 9,
     "name": "Terrace",
     "isActive": true,
-    "imageUrl": "../../web/public/img/facilities/Terrace.svg"
+    "imageUrl": "terrace.svg"
   },
   {
     "id": 10,
     "name": "Airport shuttle",
     "isActive": true,
-    "imageUrl": "../../web/public/img/facilities/shuttle.svg"
+    "imageUrl": "shuttle.svg"
   },
   {
     "id": 11,
     "name": "Family rooms",
     "isActive": true,
-    "imageUrl": "../../web/public/img/facilities/familyRooms.svg"
+    "imageUrl": "family-rooms.svg"
   },
   {
     "id": 12,
     "name": "Spa",
     "isActive": true,
-    "imageUrl": "../../web/public/img/facilities/Spa.svg"
+    "imageUrl": "spa.svg"
   },
   {
     "id": 13,
     "name": "Hot tub/Jacuzzi",
     "isActive": true,
-    "imageUrl": "../../web/public/img/facilities/Hot Tub.svg"
+    "imageUrl": "hot-tub.svg"
   },
   {
     "id": 14,
     "name": "Air conditioning",
     "isActive": true,
-    "imageUrl": "../../web/public/img/facilities/air-condition.svg"
+    "imageUrl": "air-condition.svg"
   },
   {
     "id": 15,
     "name": "Water park",
     "isActive": true,
-    "imageUrl": "../../web/public/img/facilities/Water.svg"
+    "imageUrl": "water.svg"
   },
   {
     "id": 16,
     "name": "Electric vehicle charging station",
     "isActive": true,
-    "imageUrl": "../../web/public/img/facilities/Charging Station.svg"
+    "imageUrl": "charging-station.svg"
   },
   {
     "id": 17,
     "name": "Swimming pool",
     "isActive": true,
-    "imageUrl": "../../web/public/img/facilities/Swimming Pool.svg"
+    "imageUrl": "swimming-pool.svg"
   },
   {
     "id": 18,
     "name": "Non-Smoking rooms",
     "isActive": true,
-    "imageUrl": "../../web/public/img/facilities/Smoking Ban.svg"
+    "imageUrl": "smoking-ban.svg"
   }
 ]
