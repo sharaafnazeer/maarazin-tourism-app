@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {buildSleeps} from "../../utils/buildSleeps";
 import {buildPriceIncludes} from "../../utils/buildPriceIncludes";
 
-const AvailableRooms = ({hotelData}) => {
+const AvailableRooms = ({hotelData, onReserve}) => {
     const [rooms, setRooms] = useState([]);
     const [reservationRoomPrices, setReservationRoomPrices] = useState([]);
 
@@ -57,12 +57,12 @@ const AvailableRooms = ({hotelData}) => {
         setReservationRoomPrices(finalRooms);
     }
 
-
     return (
         <>
             {
                 rooms?.map((room, index) => (
-                    <div className="border-light rounded-4 px-30 py-30 sm:px-20 sm:py-20" id={`room-id-${room._id}`} key={`room-${index}`}>
+                    <div className="border-light rounded-4 px-30 py-30 sm:px-20 sm:py-20" id={`room-id-${room._id}`}
+                         key={`room-${index}`}>
                         <div className="row y-gap-20">
                             <div className="col-12">
                                 <h3 className="text-18 fw-500 mb-15">{room.name}</h3>
@@ -207,6 +207,7 @@ const AvailableRooms = ({hotelData}) => {
                                             </div>
                                             <a
                                                 href="#"
+                                                onClick={() => onReserve(room._id, reservationRoomPrices)}
                                                 className="button h-50 px-24 -dark-1 bg-blue-1 text-white mt-10"
                                             >
                                                 Reserve <div className="icon-arrow-top-right ml-15"/>

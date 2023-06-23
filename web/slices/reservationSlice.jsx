@@ -3,7 +3,10 @@ import {deleteOneRoomApi, getAllRoomsApi, getOneRoomApi, postRoomApi, updateRoom
 
 const initialState = {
     isLoading: false,
-    reservationRoomDetails: [],
+    reservationRoomDetails: null,
+    reservationHotelDetails: null,
+    reservationQueryDetails: null,
+    reservationCustomerDetails: null,
 };
 
 export const saveRoom = createAsyncThunk(
@@ -28,8 +31,12 @@ export const reservationSlice = createSlice({
     name: "reservation",
     initialState,
     reducers: {
-        updateReservationRoomDetails: (state, action) => {
-            state.reservationRoomDetails = action.payload;
+        updateReservationDetails: (state, action) => {
+            console.log(action.payload);
+            state.reservationHotelDetails = action.payload.reservationHotelDetails;
+            state.reservationRoomDetails = action.payload.reservationRoomDetails;
+            state.reservationQueryDetails = action.payload.reservationQueryDetails;
+            state.reservationCustomerDetails = action.payload.reservationCustomerDetails;
             state.isLoading = false;
         },
         setLoading: (state) => {
@@ -38,7 +45,7 @@ export const reservationSlice = createSlice({
     },
 });
 
-export const {updateReservationRoomDetails, setLoading} =
+export const {updateReservationDetails, setLoading} =
     reservationSlice.actions;
 
 export default reservationSlice.reducer;

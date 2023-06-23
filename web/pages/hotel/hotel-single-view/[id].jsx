@@ -21,6 +21,8 @@ import {getAllSimilarSiteHotels, getOneSiteHotel} from "../../../slices/hotelSli
 import {useEffect, useState} from "react";
 import {buildRating} from "../../../utils/buildRatings";
 import {useRouter} from "next/router";
+import {useDispatch} from "react-redux";
+import {updateReservationDetails} from "../../../slices/reservationSlice";
 
 const HotelSingleV1Dynamic = (props) => {
 
@@ -29,6 +31,7 @@ const HotelSingleV1Dynamic = (props) => {
     const [hotel, setHotel] = useState(props.selectedHotelDetails);
     const [similarHotels, setSimilarHotels] = useState(props.similarHotelDetails);
     const [queryData, setQueryData] = useState(props.query);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setHotel(props.selectedHotelDetails)
@@ -38,6 +41,21 @@ const HotelSingleV1Dynamic = (props) => {
     useEffect(() => {
         setQueryData(router.query);
     }, [router.query]);
+
+    const onReserve = (roomId, reservationRoomPrices = []) => {
+        const reservationActual = reservationRoomPrices.find((room) => room.roomId === roomId);
+        reservationActual.combinations = reservationActual.combinations.filter(com => com.combinationSelected);
+
+        reservationActual.room = hotel.rooms.find((room) => room._id === roomId);
+        const data = {
+            reservationHotelDetails: hotel,
+            reservationRoomDetails: reservationActual,
+            reservationQueryDetails: queryData,
+        }
+
+        dispatch(updateReservationDetails(data));
+        router.push(`/hotel/booking-page?hotel=${hotel._id}&room=${reservationActual.room._id}`);
+    }
 
 
     return (
@@ -222,7 +240,7 @@ const HotelSingleV1Dynamic = (props) => {
                         </div>
                     </div>
                     {/* End .row */}
-                    <AvailableRooms hotelData={hotel}/>
+                    <AvailableRooms hotelData={hotel} onReserve={onReserve}/>
                 </div>
                 {/* End .container */}
             </section>

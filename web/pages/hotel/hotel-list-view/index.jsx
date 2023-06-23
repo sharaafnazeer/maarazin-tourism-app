@@ -112,7 +112,11 @@ const HotelListView = (props) => {
                                 <HotelProperties hotels={hotelsData.records} queryData={queryData}/>
                             </div>
                             {/* End .row */}
-                            <Pagination hotelsData={hotelsData}/>
+                            {
+                                hotelsData.totalCount > 12 && (
+                                    <Pagination hotelsData={hotelsData}/>
+                                )
+                            }
                         </div>
                         {/* End .col for right content */}
                     </div>
