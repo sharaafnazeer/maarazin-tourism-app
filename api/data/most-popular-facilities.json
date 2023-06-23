@@ -27,13 +27,13 @@
     "id": 5,
     "name": "24-hour front desk",
     "isActive": true,
-    "imageUrl": ""
+    "imageUrl": "../../web/public/img/facilities/service24.svg"
   },
   {
     "id": 6,
     "name": "Sauna",
     "isActive": true,
-    "imageUrl": ""
+    "imageUrl": "../../web/public/img/facilities/sauna.svg"
   },
   {
     "id": 7,
@@ -45,25 +45,25 @@
     "id": 8,
     "name": "Garden",
     "isActive": true,
-    "imageUrl": ""
+    "imageUrl": "../../web/public/img/facilities/garden.svg"
   },
   {
     "id": 9,
     "name": "Terrace",
     "isActive": true,
-    "imageUrl": ""
+    "imageUrl": "../../web/public/img/facilities/Terrace.svg"
   },
   {
     "id": 10,
     "name": "Airport shuttle",
     "isActive": true,
-    "imageUrl": ""
+    "imageUrl": "../../web/public/img/facilities/shuttle.svg"
   },
   {
     "id": 11,
     "name": "Family rooms",
     "isActive": true,
-    "imageUrl": ""
+    "imageUrl": "../../web/public/img/facilities/familyRooms.svg"
   },
   {
     "id": 12,
@@ -75,7 +75,7 @@
     "id": 13,
     "name": "Hot tub/Jacuzzi",
     "isActive": true,
-    "imageUrl": ""
+    "imageUrl": "../../web/public/img/facilities/Hot Tub.svg"
   },
   {
     "id": 14,
@@ -87,7 +87,7 @@
     "id": 15,
     "name": "Water park",
     "isActive": true,
-    "imageUrl": ""
+    "imageUrl": "../../web/public/img/facilities/Water.svg"
   },
   {
     "id": 16,
@@ -105,6 +105,6 @@
     "id": 18,
     "name": "Non-Smoking rooms",
     "isActive": true,
-    "imageUrl": ""
+    "imageUrl": "../../web/public/img/facilities/Smoking Ban.svg"
   }
 ]
