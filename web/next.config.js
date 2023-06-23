@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: false,
-    output: "standalone",
+    publicRuntimeConfig: {
+        staticFolder: '/public',
+    }
 };
 
 module.exports = nextConfig;

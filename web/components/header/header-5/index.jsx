@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import MainMenu from "../MainMenu";
 import MobileMenu from "../MobileMenu";
+import Image from "next/image";
 
 const Header1 = () => {
   const [navbar, setNavbar] = useState(false);
@@ -55,8 +56,8 @@ const Header1 = () => {
                 {/* humberger menu */}
 
                 <Link href="/" className="header-logo mr-20">
-                  <img src="/img/general/logo-dark.svg" alt="logo icon" />
-                  <img src="/img/general/logo-dark.svg" alt="logo icon" />
+                  <Image src="/img/general/logo-dark.svg" alt="logo icon" width={300} height={200}/>
+                  <Image src="/img/general/logo-dark.svg" alt="logo icon" width={300} height={200}/>
                 </Link>
                 {/* End logo */}
 

@@ -8,6 +8,7 @@ import {
 } from "react-pro-sidebar";
 import Social from "../common/social/Social";
 import ContactInfo from "./ContactInfo";
+import Image from "next/image";
 
 const MobileMenu = () => {
 
@@ -15,7 +16,7 @@ const MobileMenu = () => {
         <>
             <div className="pro-header d-flex align-items-center justify-between border-bottom-light">
                 <Link href="/">
-                    <img src="/img/general/rexe-dark.svg" alt="brand"/>
+                    <Image src="/img/general/rexe-dark.svg" alt="brand" width={300} height={200}/>
                 </Link>
                 {/* End logo */}
 

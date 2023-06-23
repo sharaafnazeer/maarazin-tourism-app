@@ -4,6 +4,7 @@ import CurrenctyMegaMenu from "../CurrenctyMegaMenu";
 import LanguageMegaMenu from "../LanguageMegaMenu";
 import LocationSearch from "./LocationSearch";
 import MobileMenu from "../MobileMenu";
+import Image from "next/image";
 
 const Header1 = () => {
   const [navbar, setNavbar] = useState(false);
@@ -58,8 +59,8 @@ const Header1 = () => {
                 {/* End mobile humberger menu */}
 
                 <Link href="/" className="header-logo mr-20">
-                  <img src="/img/general/logo-light-2.svg" alt="logo icon" />
-                  <img src="/img/general/logo-dark.svg" alt="logo icon" />
+                  <Image src="/img/general/logo-light-2.svg" alt="logo icon" width={300} height={200}/>
+                  <Image src="/img/general/logo-dark.svg" alt="logo icon" width={300} height={200}/>
                 </Link>
                 {/* End logo */}
 
