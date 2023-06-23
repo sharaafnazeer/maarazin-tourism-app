@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import moment from "moment";
 import {useRouter} from "next/router";
 
-const index = ({queryData}) => {
+const Index = ({queryData}) => {
 
     const [location, setLocation] = useState("");
     const router = useRouter();
@@ -111,4 +111,4 @@ const index = ({queryData}) => {
     );
 };
 
-export default index;
+export default Index;
