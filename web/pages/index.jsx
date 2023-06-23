@@ -6,7 +6,7 @@ import Header1 from "../components/header/header-1";
 import Hero1 from "../components/hero/hero-1";
 import CallToActions from "../components/common/CallToActions";
 import Hotels from "../components/hotels/Hotels";
-import {wrapper} from "../app/store";
+import {wrapper} from "../store/store";
 import {getAllPopularSiteHotels} from "../slices/hotelSlice";
 import {useState} from "react";
 

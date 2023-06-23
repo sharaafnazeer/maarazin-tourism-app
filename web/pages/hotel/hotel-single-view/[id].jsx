@@ -17,7 +17,7 @@ import Hotels2 from "../../../components/hotels/Hotels2";
 import CallToActions from "../../../components/common/CallToActions";
 import DefaultFooter from "../../../components/footer/default";
 import Link from "next/link";
-import {wrapper} from "../../../app/store";
+import {wrapper} from "../../../store/store";
 import {getAllSimilarSiteHotels, getOneSiteHotel} from "../../../slices/hotelSlice";
 import {useEffect, useState} from "react";
 import {buildRating} from "../../../utils/buildRatings";

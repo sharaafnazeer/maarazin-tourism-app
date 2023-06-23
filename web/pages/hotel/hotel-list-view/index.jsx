@@ -6,7 +6,7 @@ import TopHeaderFilter from "../../../components/hotel-list/hotel-list-v1/TopHea
 import HotelProperties from "../../../components/hotel-list/hotel-list-v1/HotelProperties";
 import Pagination from "../../../components/hotel-list/common/Pagination";
 import Sidebar from "../../../components/hotel-list/hotel-list-v1/Sidebar";
-import {wrapper} from "../../../app/store";
+import {wrapper} from "../../../store/store";
 import {getAllSiteHotels} from "../../../slices/hotelSlice";
 import {useEffect, useState} from "react";
 import MainFilterSearchBox from "../../../components/hotel-single/filter-box-2";

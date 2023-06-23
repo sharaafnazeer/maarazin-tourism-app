@@ -10,7 +10,7 @@ import "aos/dist/aos.css";
 import "../styles/index.scss";
 import 'react-toastify/dist/ReactToastify.css';
 import { Provider } from "react-redux";
-import {wrapper} from "../app/store";
+import {wrapper} from "../store/store";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
