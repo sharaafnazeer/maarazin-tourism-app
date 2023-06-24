@@ -12,6 +12,7 @@ const reservationSchema = new Schema({
     roomSelections: Schema.Types.Mixed,
     arrivalDate: String,
     departureDate: String,
+    reservationDateTime: String,
     status: {type: Number, default: 0}, // 0 - Pending, 1 - Confirmed, 2 - Rejected, 3 - Canceled
 }, {timestamps: true});
 

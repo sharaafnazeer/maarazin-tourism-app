@@ -3,7 +3,6 @@ import Seo from "../../../components/common/Seo";
 import Header11 from "../../../components/header/header-11";
 import DefaultFooter from "../../../components/footer/default";
 import StepperBooking from "../../../components/booking-page/stepper-booking";
-import {useSelector} from "react-redux";
 
 const index = () => {
 

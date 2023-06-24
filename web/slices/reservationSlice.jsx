@@ -1,5 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {deleteOneRoomApi, getAllRoomsApi, getOneRoomApi, postRoomApi, updateRoomApi} from "../services/roomsApi";
+import {postReservationApi} from "../services/reservationApi";
+import {updateSelectedHotel} from "./hotelSlice";
 
 const initialState = {
     isLoading: false,
@@ -7,22 +8,15 @@ const initialState = {
     reservationHotelDetails: null,
     reservationQueryDetails: null,
     reservationCustomerDetails: null,
+    reservationConfirmationDetails: null,
 };
 
-export const saveRoom = createAsyncThunk(
-    "hotel/saveRoom",
+export const saveReservation = createAsyncThunk(
+    "reservation/saveReservation",
     async (room, thunkAPI) => {
         thunkAPI.dispatch(setLoading(true));
-        const response = await postRoomApi(room);
-        return response.data;
-    }
-);
-
-export const updateRoom = createAsyncThunk(
-    "hotel/updateRoom",
-    async (data, thunkAPI) => {
-        thunkAPI.dispatch(setLoading(true));
-        const response = await updateRoomApi(data);
+        const response = await postReservationApi(room);
+        thunkAPI.dispatch(updateReservationConfirmationDetails(response.data.record));
         return response.data;
     }
 );
@@ -32,11 +26,14 @@ export const reservationSlice = createSlice({
     initialState,
     reducers: {
         updateReservationDetails: (state, action) => {
-            console.log(action.payload);
             state.reservationHotelDetails = action.payload.reservationHotelDetails;
             state.reservationRoomDetails = action.payload.reservationRoomDetails;
             state.reservationQueryDetails = action.payload.reservationQueryDetails;
             state.reservationCustomerDetails = action.payload.reservationCustomerDetails;
+            state.isLoading = false;
+        },
+        updateReservationConfirmationDetails: (state, action) => {
+            state.reservationConfirmationDetails = action.payload;
             state.isLoading = false;
         },
         setLoading: (state) => {
@@ -45,7 +42,7 @@ export const reservationSlice = createSlice({
     },
 });
 
-export const {updateReservationDetails, setLoading} =
+export const {updateReservationDetails, updateReservationConfirmationDetails, setLoading} =
     reservationSlice.actions;
 
 export default reservationSlice.reducer;
