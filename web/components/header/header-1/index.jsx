@@ -3,9 +3,11 @@ import {useEffect, useState} from "react";
 import MainMenu from "../MainMenu";
 import MobileMenu from "../MobileMenu";
 import Image from "next/image";
+import {useSession} from "next-auth/react";
 
 const Header1 = () => {
     const [navbar, setNavbar] = useState(false);
+    const session = useSession();
 
     const changeBackground = () => {
         if (window.scrollY >= 10) {
@@ -46,23 +48,36 @@ const Header1 = () => {
                         <div className="col-auto">
                             <div className="d-flex items-center">
                                 {/* Start btn-group */}
-                                <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
-                                    <Link
-                                        href="/others-pages/login"
-                                        className="button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ml-20"
-                                    >
-                                        Sign In
-                                    </Link>
-                                </div>
+                                {
+                                    !(session && session.status === "authenticated") && (
+                                        <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
+                                            <Link
+                                                href="/auth/login"
+                                                className="button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ml-20"
+                                            >
+                                                Sign In
+                                            </Link>
+                                        </div>
+                                    )
+                                }
                                 {/* End btn-group */}
 
                                 {/* Start mobile menu icon */}
                                 <div className="d-none xl:d-flex x-gap-20 items-center pl-30 text-white">
                                     <div>
-                                        <Link
-                                            href="/others-pages/login"
-                                            className="d-flex items-center icon-user text-inherit text-22"
-                                        />
+                                        {
+                                            (session && session.status === "authenticated") ? (
+                                                <Link
+                                                    href="/dashboard"
+                                                    className="d-flex items-center icon-user text-inherit text-22"
+                                                />
+                                            ): (
+                                                <Link
+                                                    href="/auth/login"
+                                                    className="d-flex items-center icon-user text-inherit text-22"
+                                                />
+                                            )
+                                        }
                                     </div>
                                     <div>
                                         <button

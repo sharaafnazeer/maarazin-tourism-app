@@ -30,5 +30,6 @@ class InvalidCredential extends Error {
 
 module.exports = {
     RecordNotFound,
-    RecordFound
+    RecordFound,
+    InvalidCredential
 }

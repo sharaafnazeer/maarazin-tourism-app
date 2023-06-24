@@ -5,12 +5,16 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
 
+
 require('dotenv').config();
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
 
 require('./helpers/passport');
+
+const app = express();
+app.use(passport.initialize());
 
 const indexRouter = require('./routes/index.route');
 const usersRouter = require('./routes/user.route');
@@ -22,10 +26,7 @@ const rolesRouter = require('./routes/role.route');
 const authRouter = require('./routes/auth.route');
 const seedersRouter = require('./routes/seeder.route');
 const {COMMON} = require("./constants/common");
-const {RecordNotFound} = require("./exceptions/errors");
-
-const app = express();
-app.use(passport.initialize());
+const {RecordNotFound, InvalidCredential, RecordFound} = require("./exceptions/errors");
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -71,7 +72,7 @@ app.use(COMMON.API_PREFIX + '/auth', authRouter);
 
 app.use('/uploads', express.static('uploads'));
 app.use((err, req, res, next) => {
-    if (err instanceof RecordNotFound) {
+    if (err instanceof RecordNotFound || err instanceof InvalidCredential || err instanceof RecordFound) {
         return res.status(err.statusCode).json({
             error: {
                 title: err.title,

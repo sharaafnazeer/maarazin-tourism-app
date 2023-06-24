@@ -5,7 +5,6 @@ import Image from "next/image";
 
 const Header1 = () => {
     const [navbar, setNavbar] = useState(false);
-
     const changeBackground = () => {
         if (window.scrollY >= 10) {
             setNavbar(true);

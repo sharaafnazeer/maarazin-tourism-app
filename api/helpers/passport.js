@@ -23,7 +23,7 @@ passport.use(new LocalStrategy(
             if (!result) {
                 return done(new RecordNotFound('Invalid credential', 'You have entered a wrong email or password'), false);
             }
-            return done(null, {...availableUser});
+            return done(null, availableUser);
         } catch (error) {
             return done(error);
         }

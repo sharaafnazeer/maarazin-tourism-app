@@ -6,27 +6,26 @@ const sendJson = require("../helpers/json");
 const {addUser} = require("../services/user.service");
 const {RecordFound} = require("../exceptions/errors");
 
-const signInController = (req, res, next) => {
-
+const signInController = async (req, res, next) => {
+    // console.log(req.body)
     passport.authenticate(
         'local',
         async (err, user) => {
+
             try {
                 if (err) {
                     return next(err);
                 }
+
                 req.login(
                     user,
                     {session: false},
                     async (error) => {
                         if (error) return next(error);
 
-                        const body = {id: user.id, email: user.email};
-                        const token = jwt.sign({user: body}, process.env.JWT_SECRET);
-
-                        return sendJson(res, 200, {
-                            accessToken: token,
-                        })
+                        const body = {_id: user._id, email: user.email};
+                        const token = jwt.sign({user: body}, process.env.JWT_SECRET, {expiresIn: '6h'});
+                        return sendJson(res, 200, {accessToken: token});
                     }
                 );
             } catch (error) {
@@ -52,15 +51,13 @@ const signUpController = async (req, res, next) => {
     }
 }
 
-const checkAuthController = (req, res) => {
-    return sendJson(res, 200, {
-        title: "Success",
-        message: "Authenticated"
-    });
+const getUserController = (req, res) => {
+    const {password, ...user} = req.decodedToken.user;
+    return sendJson(res, 200, user);
 }
 
 module.exports = {
     signInController,
     signUpController,
-    checkAuthController,
+    getUserController,
 }

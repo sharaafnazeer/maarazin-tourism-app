@@ -13,7 +13,7 @@ import {
     getAllHotelRoomsApi,
     getAllSiteHotelsApi,
     deleteOneHotelApi, getOneSiteHotelApi, getSimilarSiteHotelApi, getPopularSiteHotelApi,
-} from "../pages/api/hotelsApi";
+} from "../services/hotelsApi";
 
 const initialState = {
     isLoading: false,

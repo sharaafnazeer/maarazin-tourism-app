@@ -29,7 +29,7 @@ const Header1 = () => {
                 <div className="mr-20 d-flex items-center">
                   <div className="mr-15 d-none md:d-flex">
                     <Link
-                      href="/others-pages/login"
+                      href="/auth/login"
                       className="icon-user text-inherit text-22 "
                     />
                   </div>
@@ -77,13 +77,13 @@ const Header1 = () => {
                 {/* Start btn-group */}
                 <div className="header__buttons d-flex items-center is-menu-opened-hide">
                   <Link
-                    href="/others-pages/login"
+                    href="/auth/login"
                     className="button h-50 px-30 fw-400 text-14 -blue-1 bg-white text-dark-1 sm:d-none"
                   >
                     Become An Expert
                   </Link>
                   <Link
-                    href="/others-pages/signup"
+                    href="/auth/signup"
                     className="button h-50 px-30 fw-400 text-14 -outline-white text-white ml-20 sm:ml-0"
                   >
                     Sign In / Register

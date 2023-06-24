@@ -9,8 +9,11 @@ import {
 import Social from "../common/social/Social";
 import ContactInfo from "./ContactInfo";
 import Image from "next/image";
+import {signOut, useSession} from "next-auth/react";
 
 const MobileMenu = () => {
+
+    const session = useSession();
 
     return (
         <>
@@ -52,12 +55,25 @@ const MobileMenu = () => {
                     </div>
                 </div>
                 <div className="mt-20">
-                    <Link
-                        className=" button -dark-1 px-30 fw-400 text-14 bg-blue-1 h-50 text-white"
-                        href="/others-pages/login"
-                    >
-                        Log In
-                    </Link>
+
+                    {
+                        !(session && session.status === "authenticated") ? (
+                            <Link
+                                className=" button -dark-1 px-30 fw-400 text-14 bg-blue-1 h-50 text-white"
+                                href="/auth/login"
+                            >
+                                Log In
+                            </Link>
+                        ) : (
+                            <Link
+                                onClick={() => signOut()}
+                                className=" button -dark-1 px-30 fw-400 text-14 bg-blue-1 h-50 text-white"
+                                href="#"
+                            >
+                                Logout
+                            </Link>
+                        )
+                    }
                 </div>
             </div>
             {/* End pro-footer */}

@@ -1,16 +1,15 @@
-import Seo from "../../../../components/common/Seo";
-import Sidebar from "../../common/Sidebar";
-import Footer from "../../common/Footer";
-import Header from "../../../../components/header/dashboard-header";
-import SettingsTabs from "../components/index";
+import Seo from "../../../components/common/Seo";
+import Sidebar from "../common/Sidebar";
+import Header from "../../../components/header/dashboard-header";
+import Footer from "../common/Footer";
+import BookingTable from "./components/BookingTable";
+import FilterBox from "./components/filter-box";
 import {getSession} from "next-auth/react";
 
-const UpdateHotel = () => {
-
-
+const Index = () => {
     return (
         <>
-            <Seo pageTitle="Vendor Update Hotel"/>
+            <Seo pageTitle="Vendor Reservation Details"/>
             {/* End Page Title */}
 
             <div className="header-margin"></div>
@@ -28,20 +27,26 @@ const UpdateHotel = () => {
                 <div className="dashboard__main">
                     <div className="dashboard__content bg-light-2">
                         <div className="row y-gap-20 justify-between items-end pb-60 lg:pb-40 md:pb-32">
-                            <div className="col-12">
-                                <h1 className="text-30 lh-14 fw-600">Update Hotel</h1>
+                            <div className="col-auto">
+                                <h1 className="text-30 lh-14 fw-600">
+                                    Reservations
+                                </h1>
                                 <div className="text-15 text-light-1">
-                                    Lorem ipsum dolor sit amet, consectetur.
+                                    Show the client hotel reservation
                                 </div>
                             </div>
-                            {/* End .col-12 */}
+                            {/* End .col-auto */}
+
+                            <div className="col-auto">
+                                <FilterBox/>
+                            </div>
                         </div>
                         {/* End .row */}
 
                         <div className="py-30 px-30 rounded-4 bg-white shadow-3">
-                            <SettingsTabs isUpdate/>
+                            <BookingTable/>
+                            {/* End tabs */}
                         </div>
-
                         <Footer/>
                     </div>
                     {/* End .dashboard__content */}
@@ -64,4 +69,4 @@ export async function getServerSideProps(context) {
     return {props: {session}};
 }
 
-export default UpdateHotel;
+export default Index;

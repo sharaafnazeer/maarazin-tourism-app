@@ -69,7 +69,7 @@ const Header1 = () => {
                 {/* Start btn-group */}
                 <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
                   <Link
-                    href="/others-pages/signup"
+                    href="/auth/signup"
                     className="button px-30 fw-400 text-14 -blue-1 bg-blue-1 h-50 text-white"
                   >
                     Sign In / Register
@@ -81,7 +81,7 @@ const Header1 = () => {
                 <div className="d-none xl:d-flex x-gap-20 items-center pl-30 text-dark-1">
                   <div>
                     <Link
-                      href="/others-pages/login"
+                      href="/auth/login"
                       className="d-flex items-center icon-user text-inherit text-22"
                     />
                   </div>

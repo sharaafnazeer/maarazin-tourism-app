@@ -1,4 +1,4 @@
-import {API} from "."
+import {API} from "./index"
 
 const config = {
     headers: {'content-type': 'multipart/form-data'}

@@ -3,8 +3,9 @@ import Sidebar from "../../common/Sidebar";
 import Header from "../../../../components/header/dashboard-header";
 import SettingsTabs from "../components/index";
 import Footer from "../../common/Footer";
+import {getSession} from "next-auth/react";
 
-const index = () => {
+const Index = () => {
   return (
     <>
       <Seo pageTitle="Vendor Add Hotel" />
@@ -50,4 +51,15 @@ const index = () => {
   );
 };
 
-export default index;
+export async function getServerSideProps(context) {
+  const session = await getSession({req: context.req});
+  if (!session) {
+    context.res.statusCode = 302
+    context.res.setHeader('Location', '/auth/login')
+    return {props: {}}
+  }
+  // We'll pass the returned `user` to the page's React Component as a prop
+  return {props: {session}};
+}
+
+export default Index;

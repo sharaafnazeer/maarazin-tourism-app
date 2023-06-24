@@ -32,13 +32,12 @@ const AvailableRooms = ({hotelData, onReserve}) => {
 
     const calculateFinalPrice = (roomId, value, combinationId = "", combinationAmount) => {
 
-
         const finalRoom = reservationRoomPrices.find((room) => room.roomId === roomId);
 
         const selectedCombination = finalRoom.combinations.find((combination) => combination.combinationId === combinationId);
         const newSelectedCombination = {
             ...selectedCombination,
-            combinationPrice: value ? Number(value) * combinationAmount : combinationAmount,
+            combinationPrice: combinationAmount,
             combinationSelected: !!value,
             numberOfCombinationsSelected: Number(value),
         }

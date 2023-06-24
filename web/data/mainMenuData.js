@@ -73,7 +73,7 @@ export const pageItems = [
   },
   {
     name: "Login",
-    routePath: "/others-pages/login",
+    routePath: "/auth/login",
   },
   {
     name: "Register",
@@ -115,7 +115,7 @@ export const dashboardItems = [
   // },
   {
     name: "Logout",
-    routePath: "/others-pages/login",
+    routePath: "/auth/login",
   },
 ];
 
@@ -260,7 +260,6 @@ export const categorieMegaMenuItems = [
               },
               {
                 name: "Activity Single",
-                routePath: "activity-single",
                 routePath: "/activity/activity-single/3",
               },
             ],
@@ -345,7 +344,6 @@ export const categorieMegaMenuItems = [
               },
               {
                 name: "Car Single",
-                routePath: "/car/car-single/1",
                 routePath: "/car/car-single/1",
               },
             ],

@@ -61,7 +61,7 @@ const Header1 = () => {
                 <div className="d-none xl:d-flex x-gap-20 items-center pl-20 text-white">
                   <div>
                     <Link
-                      href="/others-pages/login"
+                      href="/auth/login"
                       className="d-flex items-center icon-user text-inherit text-22"
                     />
                   </div>

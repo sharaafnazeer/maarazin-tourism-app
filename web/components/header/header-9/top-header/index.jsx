@@ -38,7 +38,7 @@ const HeaderBanner = () => {
               </div>
               {/* End .col-auto */}
               <div className="col-auto md:d-none">
-                <Link href="/others-pages/login" className="text-12 text-white">
+                <Link href="/auth/login" className="text-12 text-white">
                   Become An Expert
                 </Link>
               </div>
@@ -48,7 +48,7 @@ const HeaderBanner = () => {
               </div>
               {/* End .col-auto */}
               <div className="col-auto">
-                <Link href="/others-pages/login" className="text-12 text-white">
+                <Link href="/auth/login" className="text-12 text-white">
                   Sign In / Register
                 </Link>
               </div>

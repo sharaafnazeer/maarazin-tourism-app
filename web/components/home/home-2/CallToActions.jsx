@@ -20,7 +20,7 @@ const CallToActions = () => {
             <div className="row x-gap-20 y-gap-20">
               <div className="col-auto">
                 <Link
-                  href="/others-pages/login"
+                  href="/auth/login"
                   className="button px-40 h-60 -blue-1 text-blue-1 border-blue-1"
                 >
                   Sign In
@@ -31,7 +31,7 @@ const CallToActions = () => {
 
               <div className="col-auto">
                 <Link
-                  href="/others-pages/signup"
+                  href="/auth/signup"
                   className="button px-40 h-60 -blue-1 bg-yellow-1 text-dark-1"
                 >
                   Register

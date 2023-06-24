@@ -26,11 +26,6 @@ const HotelListView = (props) => {
     const [queryData, setQueryData] = useState(props.query);
     const router = useRouter();
 
-    console.log(
-        props
-    )
-    console.log(queryData)
-
     useEffect(() => {
         setHotelsData(props.hotelDetails);
     }, [props.hotelDetails, router.query])

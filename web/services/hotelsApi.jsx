@@ -1,4 +1,4 @@
-import {API} from "."
+import {API} from "./index"
 
 const config = {
     headers: {'content-type': 'multipart/form-data'}
@@ -104,11 +104,6 @@ export const updateHotelLocationApi = async (data) => {
 export const postRoomApi = async (data) => {
     return await API.post(`/admin/rooms/${data.hotelId}`, data.formData, config);
 }
-
-export const getRoomsApi = async (data) => {
-    return await API.get(`/admin/rooms`);
-}
-
 export const deleteOneHotelApi = async (hotelId) => {
     return await API.delete(`/admin/hotels/${hotelId}`);
 }

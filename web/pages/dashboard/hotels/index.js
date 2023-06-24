@@ -6,8 +6,9 @@ import BookingTable from "./components/BookingTable";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllHotels, deleteSelectedHotel } from "../../../slices/hotelSlice";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
+import {getSession} from "next-auth/react";
 
 const Hotels = () => {
 
@@ -23,9 +24,9 @@ const Hotels = () => {
   const onDelete = (hotelId) => {
     dispath(deleteSelectedHotel(hotelId))
     .unwrap()
-    .then((res) => {
+    .then(() => {
       dispath(getAllHotels());
-    }).catch((err) => {});
+    }).catch(() => {});
   }
 
   const onEdit = (hotelId) => {
@@ -86,5 +87,16 @@ const Hotels = () => {
     </>
   );
 };
+
+export async function getServerSideProps(context) {
+  const session = await getSession({req: context.req});
+  if (!session) {
+    context.res.statusCode = 302
+    context.res.setHeader('Location', '/auth/login')
+    return {props: {}}
+  }
+  // We'll pass the returned `user` to the page's React Component as a prop
+  return {props: {session}};
+}
 
 export default Hotels;

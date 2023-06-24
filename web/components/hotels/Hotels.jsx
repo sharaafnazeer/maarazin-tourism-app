@@ -34,7 +34,7 @@ const Hotels = ({popularHotels = []}) => {
                 }}
             >
                 {popularHotels.slice(0, 8).map((item, index) => (
-                    <SwiperSlide key={item?.id}>
+                    <SwiperSlide key={item?._id}>
                         <Link
                             href={`/hotel/hotel-single-view/${item._id}`}
                             className="hotelsCard -type-1 hover-inside-slider"

@@ -47,13 +47,13 @@ const Header1 = () => {
               <div className="d-flex items-center">
                 <div className="d-flex items-center is-menu-opened-hide md:d-none">
                   <Link
-                    href="/others-pages/login"
+                    href="/auth/login"
                     className="button px-30 fw-400 text-14 -blue-1 bg-dark-4 h-50 text-white"
                   >
                     Become An Expert
                   </Link>
                   <Link
-                    href="/others-pages/signup"
+                    href="/auth/signup"
                     className="button px-30 fw-400 text-14 border-dark-4 -blue-1 h-50 text-dark-4 ml-20"
                   >
                     Sign In / Register
@@ -65,7 +65,7 @@ const Header1 = () => {
                 <div className="d-none xl:d-flex x-gap-20 items-center pl-30 text-dark-1">
                   <div>
                     <Link
-                      href="/others-pages/login"
+                      href="/auth/login"
                       className="d-flex items-center icon-user text-inherit text-22"
                     />
                   </div>
