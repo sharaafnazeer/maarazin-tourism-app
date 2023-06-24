@@ -28,8 +28,19 @@ class InvalidCredential extends Error {
     }
 }
 
+class InvalidOperation extends Error {
+    constructor(title, message) {
+        super(message);
+        this.name = this.constructor.name;
+        this.title = title;
+        this.statusCode = 403;
+        Error.captureStackTrace(this, this.constructor);
+    }
+}
+
 module.exports = {
     RecordNotFound,
     RecordFound,
-    InvalidCredential
+    InvalidCredential,
+    InvalidOperation
 }

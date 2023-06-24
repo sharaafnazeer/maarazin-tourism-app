@@ -23,10 +23,11 @@ const hotelsRouter = require('./routes/hotel.route');
 const hotelGroupsRouter = require('./routes/hotel-group.route');
 const roomsRouter = require('./routes/room.route');
 const rolesRouter = require('./routes/role.route');
+const reservationsRouter = require('./routes/reservation.route');
 const authRouter = require('./routes/auth.route');
 const seedersRouter = require('./routes/seeder.route');
 const {COMMON} = require("./constants/common");
-const {RecordNotFound, InvalidCredential, RecordFound} = require("./exceptions/errors");
+const {RecordNotFound, InvalidCredential, RecordFound, InvalidOperation} = require("./exceptions/errors");
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -66,13 +67,15 @@ app.use(COMMON.API_PREFIX + '/admin/hotel-groups', hotelGroupsRouter);
 app.use(COMMON.API_PREFIX + '/admin/rooms', roomsRouter);
 app.use(COMMON.API_PREFIX + '/admin/users', usersRouter);
 app.use(COMMON.API_PREFIX + '/admin/roles', rolesRouter);
+app.use(COMMON.API_PREFIX + '/reservations', reservationsRouter);
+app.use(COMMON.API_PREFIX + '/admin/reservations', reservationsRouter);
 app.use(COMMON.API_PREFIX + '/admin/seeders', seedersRouter);
 
 app.use(COMMON.API_PREFIX + '/auth', authRouter);
 
 app.use('/uploads', express.static('uploads'));
 app.use((err, req, res, next) => {
-    if (err instanceof RecordNotFound || err instanceof InvalidCredential || err instanceof RecordFound) {
+    if (err instanceof RecordNotFound || err instanceof InvalidCredential || err instanceof RecordFound || err instanceof InvalidOperation) {
         return res.status(err.statusCode).json({
             error: {
                 title: err.title,

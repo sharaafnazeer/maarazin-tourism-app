@@ -16,6 +16,14 @@ function getAllCombinations(arr) {
     return result;
 }
 
+function generateReferenceNumber() {
+    const timestamp = Date.now().toString(); // Get the current timestamp
+    const randomString = Math.random().toString(36).substring(2, 8); // Generate a random alphanumeric string
+
+    return `${randomString}-${timestamp}`;
+}
+
 module.exports = {
     getAllCombinations,
+    generateReferenceNumber,
 }
