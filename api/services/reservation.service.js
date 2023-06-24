@@ -3,6 +3,7 @@ const {Room} = require("../models/room.model");
 const {Hotel} = require("../models/hotel.model");
 const {Reservation} = require("../models/reservation.model");
 const {generateReferenceNumber} = require("../helpers/helpers");
+const moment = require("moment");
 const addReservation = async (reservationInfo) => {
     try {
 
@@ -26,6 +27,7 @@ const addReservation = async (reservationInfo) => {
             query: reservationInfo.query,
             arrivalDate: reservationInfo.query?.from || "",
             departureDate: reservationInfo.query?.to || "",
+            reservationDateTime: moment().format('YYYY-MM-DD HH:mm:ss')
         });
 
         reservation.save();

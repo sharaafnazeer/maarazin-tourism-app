@@ -2,11 +2,15 @@ import React, {useState} from "react";
 import CustomerInfo from "../CustomerInfo";
 import PaymentInfo from "../PaymentInfo";
 import OrderSubmittedInfo from "../OrderSubmittedInfo";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {saveReservation} from "../../../slices/reservationSlice";
+import {successNofication} from "../../../data/notification";
 
 const Index = () => {
     const [currentStep, setCurrentStep] = useState(0);
     const reservationData = useSelector(state => state.reservation);
+    const dispatch = useDispatch();
+
     const steps = [
         {
             title: "Personal Details",
@@ -45,8 +49,13 @@ const Index = () => {
                 totalAmount: reservationData.reservationRoomDetails.finalPrice,
                 query: reservationData.reservationQueryDetails,
             }
-            console.log(data);
-            setCurrentStep(currentStep + 1);
+
+            dispatch(saveReservation(data))
+                .unwrap()
+                .then((res) => {
+                    successNofication(res.message);
+                    setCurrentStep(currentStep + 1);
+                }).catch((err) => console.log(err));
         }
     };
 
