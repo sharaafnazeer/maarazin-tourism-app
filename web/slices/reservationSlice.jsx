@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {postReservationApi} from "../services/reservationApi";
+import {getAllReservationsApi, getOneReservationApi, postReservationApi} from "../services/reservationApi";
 import {updateSelectedHotel} from "./hotelSlice";
 
 const initialState = {
@@ -9,6 +9,8 @@ const initialState = {
     reservationQueryDetails: null,
     reservationCustomerDetails: null,
     reservationConfirmationDetails: null,
+    reserversions:[],
+    selectedReservation:null,
 };
 
 export const saveReservation = createAsyncThunk(
@@ -20,6 +22,31 @@ export const saveReservation = createAsyncThunk(
         return response.data;
     }
 );
+
+
+export const getAllReservations = createAsyncThunk(
+    "reservation/getAllReservations",
+    async(_,thunkAPI)=>{
+        thunkAPI.dispatch(setLoading(true));
+        const response = await getAllReservationsApi();
+        thunkAPI.dispatch(updateGetAllReservationDetails(response.data));
+        return response.data;
+    }
+);
+
+
+export const getOneReservation = createAsyncThunk(
+    "reservation/getOneReservation",
+    async(reserveId, thunkAPI)=>{
+        thunkAPI.dispatch(setLoading(true));
+        const response = await getOneReservationApi(reserveId);
+        thunkAPI.dispatch(updateSelectedReservation(response.data));
+        return response.data;
+    }
+)
+
+
+
 
 export const reservationSlice = createSlice({
     name: "reservation",
@@ -36,13 +63,21 @@ export const reservationSlice = createSlice({
             state.reservationConfirmationDetails = action.payload;
             state.isLoading = false;
         },
+        updateGetAllReservationDetails:(state,action)=>{
+            state.reserversions = action.payload;
+            state.isLoading = false;
+        },
+        updateSelectedReservation:(state,action)=>{
+            state.selectedReservation = action.payload;
+            state.isLoading= false;
+        },
         setLoading: (state) => {
             state.isLoading = !state.isLoading;
         },
     },
 });
 
-export const {updateReservationDetails, updateReservationConfirmationDetails, setLoading} =
+export const {updateReservationDetails, updateReservationConfirmationDetails,updateSelectedReservation,updateGetAllReservationDetails, setLoading} =
     reservationSlice.actions;
 
 export default reservationSlice.reducer;

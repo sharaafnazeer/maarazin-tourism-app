@@ -8,3 +8,11 @@ export const postReservationApi = async (data) => {
 export const getUserApi = async (token) => {
     return await API.get(`/auth/user`, buildAuthHeader(token));
 }
+
+export const getAllReservationsApi = async()=>{
+    return await API.get(`/admin/reservations`);
+}
+
+export const  getOneReservationApi = async (reserveId)=>{
+    return await API.get(`/admin/reservations/${reserveId}`);
+}
