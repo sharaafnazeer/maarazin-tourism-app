@@ -16,3 +16,7 @@ export const getAllReservationsApi = async()=>{
 export const  getOneReservationApi = async (reserveId)=>{
     return await API.get(`/admin/reservations/${reserveId}`);
 }
+
+export const updateReservationActionApi = async (data)=>{
+    return await API.put(`/admin/reservations/${data.reservationId}/status`,data);
+}

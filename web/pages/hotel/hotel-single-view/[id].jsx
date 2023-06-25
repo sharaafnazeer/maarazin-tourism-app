@@ -48,9 +48,11 @@ const HotelSingleV1Dynamic = (props) => {
 
         reservationActual.room = hotel.rooms.find((room) => room._id === roomId);
         const data = {
-            reservationHotelDetails: hotel,
-            reservationRoomDetails: reservationActual,
-            reservationQueryDetails: queryData,
+            reservationDetails: {
+                reservationHotelDetails: hotel,
+                reservationRoomDetails: reservationActual,
+                reservationQueryDetails: queryData,
+            }
         }
 
         dispatch(updateReservationDetails(data));

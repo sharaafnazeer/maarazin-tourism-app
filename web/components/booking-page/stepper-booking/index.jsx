@@ -41,13 +41,13 @@ const Index = () => {
         if (currentStep < steps.length - 1) {
 
             const data = {
-                customer: reservationData.reservationCustomerDetails,
-                roomId: reservationData.reservationRoomDetails.roomId,
-                hotelId: reservationData.reservationRoomDetails.room.hotel,
-                roomSelections: reservationData.reservationRoomDetails.combinations,
-                numberOfRooms: reservationData.reservationRoomDetails.finalNumRooms,
-                totalAmount: reservationData.reservationRoomDetails.finalPrice,
-                query: reservationData.reservationQueryDetails,
+                customer: reservationData.reservationDetails.reservationCustomerDetails,
+                roomId: reservationData.reservationDetails.reservationRoomDetails.roomId,
+                hotelId: reservationData.reservationDetails.reservationRoomDetails.room.hotel,
+                roomSelections: reservationData.reservationDetails.reservationRoomDetails.combinations,
+                numberOfRooms: reservationData.reservationDetails.reservationRoomDetails.finalNumRooms,
+                totalAmount: reservationData.reservationDetails.reservationRoomDetails.finalPrice,
+                query: reservationData.reservationDetails.reservationQueryDetails,
             }
 
             dispatch(saveReservation(data))
@@ -73,7 +73,6 @@ const Index = () => {
                         <div className="col-auto">
                             <div
                                 className="d-flex items-center cursor-pointer transition"
-                                onClick={() => setCurrentStep(index)}
                             >
                                 <div
                                     className={

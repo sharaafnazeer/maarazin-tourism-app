@@ -169,7 +169,6 @@ const ContentTabContent = () => {
                         Save Changes <div className="icon-arrow-top-right ml-15"/>
                     </button>                   
                 </div>
-                <ToastContainer/>
             </div>
         </>
     );

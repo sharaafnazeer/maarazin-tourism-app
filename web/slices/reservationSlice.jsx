@@ -1,13 +1,15 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {getAllReservationsApi, getOneReservationApi, postReservationApi} from "../services/reservationApi";
+import {getAllReservationsApi, getOneReservationApi, postReservationApi, updateReservationActionApi} from "../services/reservationApi";
 import {updateSelectedHotel} from "./hotelSlice";
 
 const initialState = {
     isLoading: false,
-    reservationRoomDetails: null,
-    reservationHotelDetails: null,
-    reservationQueryDetails: null,
-    reservationCustomerDetails: null,
+    reservationDetails: {
+        reservationRoomDetails: null,
+        reservationHotelDetails: null,
+        reservationQueryDetails: null,
+        reservationCustomerDetails: null,
+    },
     reservationConfirmationDetails: null,
     reserversions:[],
     selectedReservation:null,
@@ -45,18 +47,22 @@ export const getOneReservation = createAsyncThunk(
     }
 )
 
-
-
+export const updateReservationAction = createAsyncThunk(
+    "reservation/updateReservationAction",
+    async(reserveId, thunkAPI)=>{
+        thunkAPI.dispatch(setLoading(true));
+        const response = await updateReservationActionApi(reserveId);
+        thunkAPI.dispatch(updateSelectedReservation(response.data));
+        return response.data;
+    }
+)
 
 export const reservationSlice = createSlice({
     name: "reservation",
     initialState,
     reducers: {
         updateReservationDetails: (state, action) => {
-            state.reservationHotelDetails = action.payload.reservationHotelDetails;
-            state.reservationRoomDetails = action.payload.reservationRoomDetails;
-            state.reservationQueryDetails = action.payload.reservationQueryDetails;
-            state.reservationCustomerDetails = action.payload.reservationCustomerDetails;
+            state.reservationDetails = action.payload.reservationDetails;
             state.isLoading = false;
         },
         updateReservationConfirmationDetails: (state, action) => {

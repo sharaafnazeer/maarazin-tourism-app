@@ -2,25 +2,10 @@ import dynamic from "next/dynamic";
 import { getOneReservation } from "../../../../slices/reservationSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-const DetailsPopup = ({ reservationId }) => {
-  const dispatch = useDispatch();
+const DetailsPopup = () => {
   const selectReservation = useSelector((state) => state.reservation.selectedReservation);
-
-  const onDetailClick = () => {
-     dispatch(getOneReservation(reservationId))
-  };
-
   return (
     <>
-      <button
-        className="flex-center bg-light-2 rounded-4 size-35"
-        data-bs-toggle="modal"
-        data-bs-target="#staticBackdrop"
-        onClick={()=>onDetailClick()}
-      >
-       <i class="bi bi-three-dots-vertical"></i>
-      </button>
-
       <div
         className="modal fade"
         id="staticBackdrop"
@@ -33,7 +18,7 @@ const DetailsPopup = ({ reservationId }) => {
             <div className="modal-content">  
               <div className="modal-header">
                 <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                  {`${selectReservation?.customer?.fullName} Personal Details`}
+                  {`${selectReservation?.customer?.firstName || ""} ${selectReservation?.customer?.lastName || ""} Personal Details`}
                 </h1>
                 <button
                   type="button"
@@ -89,9 +74,9 @@ const DetailsPopup = ({ reservationId }) => {
                       <div className="row y-gap-10">
                         <div className="col-12">
                           <div className="d-flex justify-between ">
-                            <div className="text-15 lh-16">First name</div>
+                            <div className="text-15 lh-16">Full name</div>
                             <div className="text-15 lh-16 fw-500 text-blue-1">
-                              {selectReservation?.customer?.fullName}
+                              {selectReservation?.customer?.firstName}
                             </div>
                           </div>
                         </div>
@@ -100,7 +85,7 @@ const DetailsPopup = ({ reservationId }) => {
                           <div className="d-flex justify-between border-top-light pt-10">
                             <div className="text-15 lh-16">Last name</div>
                             <div className="text-15 lh-16 fw-500 text-blue-1">
-                            {selectReservation?.customer?.fullName}
+                            {selectReservation?.customer?.lastName}
                             </div>
                           </div>
                         </div>

@@ -7,7 +7,8 @@ const CustomerInfo = () => {
   const reservationData = useSelector((state) => state.reservation);
   const dispatch = useDispatch();
   const [customerInfo, setCustomerInfo] = useState({
-    fullName: "",
+    firstName: "",
+    lastName: "",
     email: "",
     phoneNumber: "",
     addressLine1: "",
@@ -25,7 +26,10 @@ const CustomerInfo = () => {
 
     const data = {
       ...reservationData,
-      reservationCustomerDetails: newCustomerInfo,
+      reservationDetails: {
+        ...reservationData.reservationDetails,
+        reservationCustomerDetails: newCustomerInfo
+      },
     };
     dispatch(updateReservationDetails(data));
   };
@@ -51,8 +55,8 @@ const CustomerInfo = () => {
               <input
                 type="text"
                 required
-                id="fullName"
-                value={customerInfo.fullName}
+                id="firstName"
+                value={customerInfo.firstName}
                 onChange={(event) =>
                   onChange(event.target.id, event.target.value)
                 }
@@ -67,7 +71,7 @@ const CustomerInfo = () => {
                 type="text"
                 required
                 id="lastName"
-                value={customerInfo.fullName}
+                value={customerInfo.lastName}
                 onChange={(event) =>
                   onChange(event.target.id, event.target.value)
                 }
@@ -184,24 +188,6 @@ const CustomerInfo = () => {
               <input
                 type="text"
                 required
-                id="country"
-                value={customerInfo.country}
-                onChange={(event) =>
-                  onChange(event.target.id, event.target.value)
-                }
-              />
-              <label className="lh-1 text-16 text-light-1">
-                Country
-              </label>
-            </div>
-          </div>
-          {/* End col-12 */}
-
-          <div className="col-md-6">
-            <div className="form-input ">
-              <input
-                type="text"
-                required
                 id="zipCode"
                 value={customerInfo.zipCode}
                 onChange={(event) =>
@@ -210,6 +196,22 @@ const CustomerInfo = () => {
               />
               <label className="lh-1 text-16 text-light-1">
                 ZIP code/Postal code
+              </label>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="form-input ">
+              <input
+                type="text"
+                required
+                id="country"
+                value={customerInfo.country}
+                onChange={(event) =>
+                  onChange(event.target.id, event.target.value)
+                }
+              />
+              <label className="lh-1 text-16 text-light-1">
+                Country
               </label>
             </div>
           </div>

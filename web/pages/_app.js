@@ -13,6 +13,7 @@ import {Provider} from "react-redux";
 import {wrapper} from "../store/store";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import {SessionProvider} from "next-auth/react";
+import { ToastContainer } from "react-toastify";
 
 
 if (typeof window !== "undefined") {
@@ -34,6 +35,7 @@ function App({Component, pageProps: {session, ...pageProps}}) {
                 <Provider store={store}>
                     <Component {...pageProps} />
                     <SrollTop/>
+                    <ToastContainer />
                 </Provider>
             </SessionProvider>
         </main>

@@ -13,7 +13,7 @@ const Index = () => {
 
     const dispatch = useDispatch();   
     const allReservations = useSelector(state => state.reservation.reserversions);
-    
+  const selectReservation = useSelector((state) => state.reservation.selectedReservation);
     useEffect(() => {
       dispatch(getAllReservations());
     }, [])
@@ -58,7 +58,7 @@ const Index = () => {
                         {/* End .row */}
 
                         <div className="py-30 px-30 rounded-4 bg-white shadow-3">
-                           <ReservationTable allReservations={allReservations}/>
+                           <ReservationTable allReservations={allReservations} selectReservation={selectReservation}/>
                             {/* End tabs */}
                         </div>
                         <Footer/>
