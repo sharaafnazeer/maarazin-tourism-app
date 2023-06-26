@@ -5,10 +5,10 @@ import ActionsButton from "./ActionsButton";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getAllReservations, getOneReservation, updateReservationAction } from "../../../../slices/reservationSlice";
+import { confirmNotification, rejectedNotification, } from "../../../../data/notification";
 
-const ReservationTable = ({ allReservations, selectReservation }) => {
+const ReservationTable = ({ allReservations}) => {
   const dispatch = useDispatch();
-  const [confirmAction, setConfirmAction] = useState(1);
 
   const onDetailClick = (reservationId) => {
 
@@ -22,6 +22,7 @@ const ReservationTable = ({ allReservations, selectReservation }) => {
         reservationId,
         status: 1
       }
+      confirmNotification()
       dispatch(updateReservationAction(data))
       .unwrap()
       .then((res) => {
@@ -38,6 +39,7 @@ const ReservationTable = ({ allReservations, selectReservation }) => {
         reservationId,
         status: 2
       }
+      rejectedNotification()
       dispatch(updateReservationAction(data))
       .unwrap()
       .then((res) => {
@@ -78,14 +80,14 @@ const ReservationTable = ({ allReservations, selectReservation }) => {
                     <td>
                       {
                         reservation.status === 0 && (
-                          <span className="rounded-100 py-4 px-10 text-center text-14 fw-500 bg-blue-1-05 text-blue-1">
+                          <span className="rounded-100 py-4 px-10 text-center text-14 fw-500 bg-yellow-4 text-yellow-3">
                               Pending
                           </span>
                         )
                       }
                       {
                         reservation.status === 1 && (
-                          <span className="rounded-100 py-4 px-10 text-center text-14 fw-500 bg-blue-1-05 text-blue-1">
+                          <span className="rounded-100 py-4 px-10 text-center text-14 fw-500 bg-success-1 text-success">
                               Confirmed
                           </span>
                         )

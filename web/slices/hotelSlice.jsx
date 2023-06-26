@@ -12,7 +12,7 @@ import {
     getAllAddonsApi,
     getAllHotelRoomsApi,
     getAllSiteHotelsApi,
-    deleteOneHotelApi, getOneSiteHotelApi, getSimilarSiteHotelApi, getPopularSiteHotelApi,
+    deleteOneHotelApi, getOneSiteHotelApi, getSimilarSiteHotelApi, getPopularSiteHotelApi, getAllHotelLocationApi,
 } from "../services/hotelsApi";
 
 const initialState = {
@@ -31,6 +31,7 @@ const initialState = {
         page: 1,
         size: 12,
     },
+    getAllLocation:[],
 };
 
 export const saveHotel = createAsyncThunk(
@@ -192,13 +193,24 @@ export const updateHotelLocation = createAsyncThunk(
 )
 
 export const deleteSelectedHotel = createAsyncThunk(
-    "room/deleteSelectedHotel",
+    "hotel/deleteSelectedHotel",
     async (hotelId, thunkAPI) => {
         thunkAPI.dispatch(setLoading(true));
         const response = await deleteOneHotelApi(hotelId);
         return response.data;
     }
 );
+
+
+export const getAllHotelLocation = createAsyncThunk(
+    "hotel/getAllHotelLocation",
+    async(_,thunkAPI)=>{
+        thunkAPI.dispatch(setLoading(true));
+        const response = await getAllHotelLocationApi();
+        thunkAPI.dispatch(getHotelLocation(response.data))
+        return response.data;
+    }
+)
 
 export const hotelSlice = createSlice({
     name: "hotel",
@@ -245,6 +257,10 @@ export const hotelSlice = createSlice({
             state.allAddons = action.payload;
             state.isLoading = false;
         },
+        getHotelLocation:(state, action)=>{
+            state.getAllLocation = action.payload;
+            state.isLoading = false;
+        },
         setLoading: (state) => {
             state.isLoading = !state.isLoading;
         },
@@ -265,6 +281,7 @@ export const {
     updateSelectedHotelRoom,
     updateSiteSimilarHotels,
     updateSitePopularHotels,
+    getHotelLocation,
 } = hotelSlice.actions;
 
 export default hotelSlice.reducer;

@@ -13,9 +13,9 @@ const CustomerInfo = () => {
     phoneNumber: "",
     addressLine1: "",
     addressLine2: "",
-    city:"",
+    city: "",
     state: "",
-    country:"",
+    country: "",
     zipCode: "",
     specialRequests: "",
   });
@@ -28,7 +28,7 @@ const CustomerInfo = () => {
       ...reservationData,
       reservationDetails: {
         ...reservationData.reservationDetails,
-        reservationCustomerDetails: newCustomerInfo
+        reservationCustomerDetails: newCustomerInfo,
       },
     };
     dispatch(updateReservationDetails(data));
@@ -160,9 +160,7 @@ const CustomerInfo = () => {
                   onChange(event.target.id, event.target.value)
                 }
               />
-              <label className="lh-1 text-16 text-light-1">
-                City
-              </label>
+              <label className="lh-1 text-16 text-light-1">City</label>
             </div>
           </div>
           {/* End col-12 */}
@@ -177,9 +175,7 @@ const CustomerInfo = () => {
                   onChange(event.target.id, event.target.value)
                 }
               />
-              <label className="lh-1 text-16 text-light-1">
-                State
-              </label>
+              <label className="lh-1 text-16 text-light-1">State</label>
             </div>
           </div>
           {/* End col-12 */}
@@ -210,9 +206,7 @@ const CustomerInfo = () => {
                   onChange(event.target.id, event.target.value)
                 }
               />
-              <label className="lh-1 text-16 text-light-1">
-                Country
-              </label>
+              <label className="lh-1 text-16 text-light-1">Country</label>
             </div>
           </div>
           {/* End col-12 */}

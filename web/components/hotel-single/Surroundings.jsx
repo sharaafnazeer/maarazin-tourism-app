@@ -41,7 +41,7 @@ const Surroundings = ({hotelData}) => {
                                         </div>
                                         <div className="col-auto ">
                                             <div className="text-15 text-right">
-                                                {data.distance} km
+                                                {data.distance}
                                             </div>
                                         </div>
                                     </div>

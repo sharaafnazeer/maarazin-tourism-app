@@ -1,40 +1,15 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllHotelLocation } from "../../../slices/hotelSlice";
 
 const SearchBar = ({location, setLocation}) => {
     const [selectedItem, setSelectedItem] = useState(null);
-
-    const locationSearchContent = [
-        {
-            id: 1,
-            name: "London",
-            address: "Greater London, United Kingdom",
-        },
-        {
-            id: 2,
-            name: "New York",
-            address: "New York State, United States",
-        },
-        {
-            id: 3,
-            name: "Paris",
-            address: "France",
-        },
-        {
-            id: 4,
-            name: "Madrid",
-            address: "Spain",
-        },
-        {
-            id: 5,
-            name: "Santorini",
-            address: "Greece",
-        },
-        {
-            id: 6,
-            name: "Colombo",
-            address: "Western, Sri Lanka",
-        },
-    ];
+    const dispatch = useDispatch();
+    const allHotelLocation = useSelector(state => state.hotel.getAllLocation);
+   
+    useEffect(()=>{
+        dispatch(getAllHotelLocation());
+    },[])
 
     const handleOptionClick = (item) => {
         setLocation(item.name);
@@ -66,12 +41,12 @@ const SearchBar = ({location, setLocation}) => {
                 <div className="shadow-2 dropdown-menu min-width-400">
                     <div className="bg-white px-20 py-20 sm:px-0 sm:py-15 rounded-4">
                         <ul className="y-gap-5 js-results">
-                            {locationSearchContent.map((item) => (
+                            {allHotelLocation.map((item) => (
                                 <li
                                     className={`-link d-block col-12 text-left rounded-4 px-20 py-15 js-search-option mb-1 ${
-                                        selectedItem && selectedItem.id === item.id ? "active" : ""
+                                        selectedItem && selectedItem.id === item._id ? "active" : ""
                                     }`}
-                                    key={item.id}
+                                    key={item._id}
                                     role="button"
                                     onClick={() => handleOptionClick(item)}
                                 >
@@ -82,7 +57,7 @@ const SearchBar = ({location, setLocation}) => {
                                                 {item.name}
                                             </div>
                                             <div className="text-14 lh-12 text-light-1 mt-5">
-                                                {item.address}
+                                                {item?.state?.name}, {item?.state?.country?.name}
                                             </div>
                                         </div>
                                     </div>

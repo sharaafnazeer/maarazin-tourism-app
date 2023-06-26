@@ -60,10 +60,11 @@ const Header1 = () => {
                                         </div>
                                     )
                                 }
-                                {/* End btn-group */}
+                                {/* End btn-group */}   
 
                                 {/* Start mobile menu icon */}
-                                <div className="d-none xl:d-flex x-gap-20 items-center pl-30 text-white">
+                                {/* <div className="d-none xl:d-flex x-gap-20 items-center pl-30 text-white"> */}
+                                <div className="d-flex x-gap-20 items-center pl-30 text-white">
                                     <div>
                                         {
                                             (session && session.status === "authenticated") ? (

@@ -1,6 +1,17 @@
+import { useDispatch, useSelector } from "react-redux";
 import MainFilterSearchBox from "./MainFilterSearchBox";
+import { useEffect } from "react";
+import { getAllHotelLocation } from "../../../slices/hotelSlice";
 
 const index = () => {
+  // const dispatch = useDispatch();
+  //   const getAllHotelLoc = useSelector(state => state.hotel.getAllLocation);
+  //   console.log(getAllHotelLoc);
+
+  //   useEffect(()=>{
+  //       dispatch(getAllHotelLocation());
+  //   },[])
+
   return (
     <section className="masthead -type-1 z-5">
       <div className="masthead__bg">

@@ -107,3 +107,8 @@ export const postRoomApi = async (data) => {
 export const deleteOneHotelApi = async (hotelId) => {
     return await API.delete(`/admin/hotels/${hotelId}`);
 }
+
+
+export const getAllHotelLocationApi =async()=>{
+    return await API.get(`/locations/cities`);
+}

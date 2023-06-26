@@ -14,6 +14,14 @@ const DateSearch = ({dates, setDates}) => {
         }
     }
 
+    const disablePastDate = () => {
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, "0");
+        const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+        const yyyy = today.getFullYear();
+        return yyyy + "-" + mm + "-" + dd;
+      };
+
     return (
         <div className="text-15 text-light-1 ls-2 lh-16 custom_dual_datepicker">
             <DatePicker
@@ -26,6 +34,7 @@ const DateSearch = ({dates, setDates}) => {
                 range
                 rangeHover
                 format="MMMM DD"
+                minDate={disablePastDate()}
             />
         </div>
     );
