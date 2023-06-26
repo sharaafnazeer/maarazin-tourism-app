@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const roomSchema = new Schema({
     name: String,
+    slug: String,
     benefits: String,
     roomImages: [String],
     sleeps: Schema.Types.Mixed, // Object field

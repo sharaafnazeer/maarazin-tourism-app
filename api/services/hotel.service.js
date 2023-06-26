@@ -4,6 +4,7 @@ const {HotelGroup} = require("../models/hotel-group.model");
 const {PopularFacility} = require("../models/most-popular-facility.model");
 const {getRoomsByHotelIdWithDetails} = require("./room.service");
 const {PRICE_FILTER} = require("../constants/common");
+const {slugify} = require("../helpers/helpers");
 const addHotel = async (hotelInfo) => {
     try {
         if (hotelInfo.hotelGroupId) {
@@ -14,6 +15,7 @@ const addHotel = async (hotelInfo) => {
         }
         const hotel = new Hotel({
             name: hotelInfo.name,
+            slug: slugify(hotelInfo.name),
             description: hotelInfo.description,
             bannerImages: hotelInfo.bannerImages,
             featuredImages: hotelInfo.featuredImages,
@@ -60,6 +62,7 @@ const updateHotel = async (hotelId, hotelInfo) => {
             }
         }
         hotel.name = hotelInfo.name || hotel.name;
+        hotel.slug = slugify(hotelInfo.name) || hotel.slug;
         hotel.description = hotelInfo.description || hotel.description;
         hotel.hotelGroup = hotelInfo.hotelGroupId || hotel.hotelGroup;
         hotel.rating = parseInt(hotelInfo.rating) || parseInt(hotel.rating);

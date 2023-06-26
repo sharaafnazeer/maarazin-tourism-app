@@ -3,7 +3,7 @@ const {Room} = require("../models/room.model");
 const {Hotel} = require("../models/hotel.model");
 const {Facility} = require("../models/facility.model");
 const {Addon} = require("../models/addon.model");
-const {getAllCombinations} = require("../helpers/helpers");
+const {getAllCombinations, slugify} = require("../helpers/helpers");
 const addRoom = async (roomInfo) => {
     try {
 
@@ -44,6 +44,7 @@ const addRoom = async (roomInfo) => {
 
         const room = new Room({
             name: roomInfo.name,
+            slug: slugify(roomInfo.name),
             roomArea: roomInfo.roomArea,
             roomImages: roomInfo.roomImages,
             benefits: roomInfo.benefits,
@@ -76,6 +77,7 @@ const updateRoom = async (roomId, roomInfo) => {
         }
 
         room.name = roomInfo.name || room.name;
+        room.slug = slugify(roomInfo.slug) || room.slug;
         room.benefits = roomInfo.benefits || room.benefits;
         room.roomArea = roomInfo.roomArea || room.roomArea;
         room.roomPrice = parseFloat(roomInfo.roomPrice) || parseFloat(room.roomPrice);

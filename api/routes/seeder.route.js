@@ -7,5 +7,6 @@ router.get('/roles', seederController.roleSeeder);
 router.get('/addons', seederController.addonSeeder);
 router.get('/hotel-groups', seederController.hotelGroupSeeder);
 router.get('/popular-facilities', seederController.popularFacilitiesSeeder);
+router.get('/locations', seederController.locationSeeder);
 
 module.exports = router;

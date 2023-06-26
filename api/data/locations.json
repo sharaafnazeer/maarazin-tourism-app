@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Maldives",
+    "states": [
+      {
+        "name": "North",
+        "cities": [
+          {
+            "name": "Malé"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sri Lanka",
+    "states": [
+      {
+        "name": "Western",
+        "cities": [
+          {
+            "name": "Colombo"
+          }
+        ]
+      }
+    ]
+  }
+]
