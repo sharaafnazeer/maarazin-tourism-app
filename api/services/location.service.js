@@ -45,7 +45,13 @@ const getStates = async () => {
 }
 
 const getCities = async () => {
-    return City.find().populate('state').populate('state.country');
+    return City.find().populate({
+        path: 'state',
+        populate: {
+            path: 'country',
+            model: 'Country'
+        }
+    }).exec();
 }
 
 module.exports = {
