@@ -3,8 +3,9 @@ import Seo from "../../../components/common/Seo";
 import Header11 from "../../../components/header/header-11";
 import DefaultFooter from "../../../components/footer/default";
 import StepperBooking from "../../../components/booking-page/stepper-booking";
+import {wrapper} from "../../../store/store";
 
-const index = () => {
+const Booking = () => {
 
     return (
         <>
@@ -33,4 +34,22 @@ const index = () => {
     );
 };
 
-export default index;
+export const getServerSideProps = wrapper.getServerSideProps((store) =>
+    async ({req, res, params, query, ...etc}) => {
+        const state = store.getState()
+
+        console.log("State on server", state?.reservation?.reservationRoomDetails);
+
+        if (!state?.reservation?.reservationRoomDetails) {
+            res.statusCode = 302
+            res.setHeader('Location', '/')
+            return {props: {}}
+        }
+
+        // Return the data as props
+        return {
+            props: {},
+        };
+    }
+);
+export default Booking;
