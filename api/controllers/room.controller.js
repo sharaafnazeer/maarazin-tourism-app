@@ -19,7 +19,7 @@ const addRoomController = async (req, res, next) => {
             return req.protocol + '://' + req.get('host') + '/uploads/' + file.filename;
         });
     try {
-        const response = await addRoom(room);
+        const response = await addRoom(room, user);
 
         if (response instanceof RecordNotFound) {
             return next(response);
@@ -89,8 +89,9 @@ const getRoomsController = async (req, res, next) => {
 }
 const getRoomByIdController = async (req, res, next) => {
     try {
+        const user = req.decodedToken.user;
         const {roomId} = req.params
-        const response = await getRoomById(roomId);
+        const response = await getRoomById(roomId, user);
 
         if (response instanceof RecordNotFound) {
             return next(response)
