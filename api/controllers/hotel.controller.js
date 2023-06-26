@@ -7,11 +7,18 @@ const {
     getSimilarHotelsById, getHotelsWithDetails, deleteHotelById, getPopularHotels
 } = require('../services/hotel.service')
 const sendJson = require("../helpers/json");
-const {RecordNotFound} = require("../exceptions/errors");
+const {RecordNotFound, InvalidOperation} = require("../exceptions/errors");
 const {getRoomsByHotelId, getRoomsByHotelIdWithDetails} = require("../services/room.service");
-const {PRICE_FILTER} = require("../constants/common");
+const {PRICE_FILTER, ROLES} = require("../constants/common");
 
 const addHotelController = async (req, res, next) => {
+
+    const user = req.decodedToken.user;
+
+    if (user.role.slug !== ROLES.SUPER_ADMIN) {
+        return next(new InvalidOperation("Not Allowed", "You are not allowed to add a hotel"))
+    }
+
     const bannerImages = req.files['bannerImages']; // Access uploaded banner images
     const featuredImages = req.files['featuredImages']; // Access uploaded featured images
     const hotel = req.body;
@@ -46,6 +53,13 @@ const addHotelController = async (req, res, next) => {
 
 const updateHotelController = async (req, res, next) => {
     try {
+
+        const user = req.decodedToken.user;
+
+        if (user.role.slug !== ROLES.SUPER_ADMIN) {
+            return next(new InvalidOperation("Not Allowed", "You are not allowed to update the hotel"))
+        }
+
         const {hotelId} = req.params;
         const hotel = req.body;
 
@@ -91,6 +105,7 @@ const updateHotelController = async (req, res, next) => {
 
 const getHotelsController = async (req, res) => {
     try {
+        const user = req.decodedToken.user;
         const {page, size, rating, minPrice, maxPrice, ...rest} = req.query;
         const filters = {
             ...rest,
@@ -107,7 +122,7 @@ const getHotelsController = async (req, res) => {
             filters.maxPrice = Number(maxPrice)
         }
         const response =
-            req.baseUrl.includes('admin') ? await getHotels() : await getHotelsWithDetails(filters);
+            req.baseUrl.includes('admin') ? await getHotels(user) : await getHotelsWithDetails(filters);
         return sendJson(res, 200, response);
     } catch (e) {
         return sendJson(res, 500, {
@@ -122,9 +137,10 @@ const getHotelsController = async (req, res) => {
 
 const getHotelByIdController = async (req, res, next) => {
     try {
+        const user = req.decodedToken.user;
         const {hotelId} = req.params;
         const response =
-            req.baseUrl.includes('admin') ? await getHotelById(hotelId) : await getHotelByIdWithDetails(hotelId);
+            req.baseUrl.includes('admin') ? await getHotelById(hotelId, user) : await getHotelByIdWithDetails(hotelId);
 
         if (response instanceof RecordNotFound) {
             return next(response)
@@ -145,6 +161,11 @@ const getHotelByIdController = async (req, res, next) => {
 const deleteHotelByIdController = async (req, res, next) => {
     try {
         const {hotelId} = req.params
+        const user = req.decodedToken.user;
+
+        if (user.role.slug !== ROLES.SUPER_ADMIN) {
+            return next(new InvalidOperation("Not Allowed", "You are not allowed to delete the hotel"))
+        }
         const response = await deleteHotelById(hotelId);
 
         if (response instanceof RecordNotFound) {

@@ -39,7 +39,7 @@ const getUsers = async () => {
 
 const getUserById = async (userId) => {
     try {
-        const room = await User.findById(userId)
+        const room = await User.findById(userId).populate('role');
         if (!room) {
             return new RecordNotFound("User not found", "User with given ID not found");
         }

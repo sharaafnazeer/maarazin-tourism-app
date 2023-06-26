@@ -4,10 +4,16 @@ const {Hotel} = require("../models/hotel.model");
 const {Facility} = require("../models/facility.model");
 const {Addon} = require("../models/addon.model");
 const {getAllCombinations, slugify} = require("../helpers/helpers");
-const addRoom = async (roomInfo) => {
+const {ROLES} = require("../constants/common");
+const addRoom = async (roomInfo, user) => {
     try {
 
-        const hotel = await Hotel.findById(roomInfo.hotelId);
+        let hotel = null;
+        if (user?.role?.slug === ROLES.REXE_ADMIN || user?.role?.slug === ROLES.SUPER_ADMIN) {
+            hotel = await Hotel.findById(roomInfo.hotelId).populate();
+        } else if (user?.role?.slug === ROLES.HOTEL_ADMIN) {
+            hotel = await Hotel.findOne({_id: roomInfo.hotelId, users: {$in: [user._id]}});
+        }
         if (!hotel) {
             return new RecordNotFound("Hotel not found", "Hotel with given ID not found");
         }
@@ -149,10 +155,22 @@ const getRooms = async () => {
     }
 }
 
-const getRoomById = async (roomId) => {
+const getRoomById = async (roomId, user) => {
     try {
-        const room = await Room.findById(roomId)
-        if (!room) {
+        let room = null;
+        if (user?.role?.slug === ROLES.REXE_ADMIN || user?.role?.slug === ROLES.SUPER_ADMIN) {
+            room = await Room.findById(roomId).populate('facilities');
+        } else if (user?.role?.slug === ROLES.HOTEL_ADMIN) {
+            room = await Room.findOne({
+                _id: roomId,
+            }).populate({
+                path: 'hotel',
+                match: {
+                    'users': {$in: [user._id]},
+                }
+            }).populate('facilities');
+        }
+        if (!room || !room.hotel) {
             return new RecordNotFound("Room not found", "Room with given ID not found");
         }
         return room;

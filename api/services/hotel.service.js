@@ -3,7 +3,7 @@ const {RecordNotFound} = require("../exceptions/errors");
 const {HotelGroup} = require("../models/hotel-group.model");
 const {PopularFacility} = require("../models/most-popular-facility.model");
 const {getRoomsByHotelIdWithDetails} = require("./room.service");
-const {PRICE_FILTER} = require("../constants/common");
+const {PRICE_FILTER, ROLES} = require("../constants/common");
 const {slugify} = require("../helpers/helpers");
 const addHotel = async (hotelInfo) => {
     try {
@@ -126,9 +126,14 @@ const updateHotel = async (hotelId, hotelInfo) => {
     }
 }
 
-const getHotels = async () => {
+const getHotels = async (user) => {
+
     try {
-        return await Hotel.find();
+        if (user?.role?.slug === ROLES.REXE_ADMIN || user?.role?.slug === ROLES.SUPER_ADMIN) {
+            return await Hotel.find();
+        } else if (user?.role?.slug === ROLES.HOTEL_ADMIN) {
+            return await Hotel.find({users: {$in: [user._id]}});
+        }
     } catch (e) {
         throw e;
     }
@@ -222,9 +227,14 @@ const getHotelsWithDetails = async (filters) => {
     }
 }
 
-const getHotelById = async (hotelId) => {
+const getHotelById = async (hotelId, user) => {
     try {
-        const hotel = await Hotel.findById(hotelId).populate();
+        let hotel = null;
+        if (user?.role?.slug === ROLES.REXE_ADMIN || user?.role?.slug === ROLES.SUPER_ADMIN) {
+            hotel = await Hotel.findById(hotelId).populate();
+        } else if (user?.role?.slug === ROLES.HOTEL_ADMIN) {
+            hotel = await Hotel.findOne({_id: hotelId, users: {$in: [user._id]}});
+        }
         if (!hotel) {
             return new RecordNotFound("Hotel not found", "Hotel with given ID not found");
         }

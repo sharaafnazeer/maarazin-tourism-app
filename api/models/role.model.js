@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const roleSchema = new Schema({
     name: String,
+    slug: String,
     users: [{
         type: Schema.Types.ObjectId,
         ref: "User"
