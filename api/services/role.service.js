@@ -3,13 +3,14 @@ const {promises} = require("fs");
 const {Role} = require("../models/role.model");
 const {User} = require("../models/user.model");
 const {hash} = require("bcrypt");
+const {slugify} = require("../helpers/helpers");
 const seedRoles = async () => {
     try {
-        const filePath = resolve(__dirname, '..', 'data', 'roleUsers.json');
+        const filePath = resolve(__dirname, '..', 'data', 'role-users.json');
         const data = await promises.readFile(filePath, 'utf8');
         const jsonData = JSON.parse(data);
         for (const role of jsonData) {
-            const newRole = new Role({name: role.name});
+            const newRole = new Role({name: role.name, slug: slugify(role.name)});
             const savedRole = await newRole.save();
 
             for (const user of role.users) {

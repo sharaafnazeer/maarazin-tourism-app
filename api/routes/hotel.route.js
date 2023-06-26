@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const hotelController = require('../controllers/hotel.controller');
 const {mkdirSync} = require("fs");
+const authMiddleware = require("../middlewares/authMiddleware");
 
 // Set storage destination and file names
 const storage = multer.diskStorage({
@@ -38,18 +39,18 @@ const upload = multer({
 router.post('', upload.fields([
     {name: 'bannerImages', maxCount: 10},
     {name: 'featuredImages', maxCount: 10}
-]), hotelController.addHotelController);
+]), authMiddleware, hotelController.addHotelController);
 
 router.put('/:hotelId', upload.fields([
     {name: 'bannerImages', maxCount: 10},
     {name: 'featuredImages', maxCount: 10}
-]), hotelController.updateHotelController);
+]), authMiddleware, hotelController.updateHotelController);
 
 router.get('/popular/all', hotelController.getPopularHotelsController);
-router.get('/:hotelId', hotelController.getHotelByIdController);
-router.delete('/:hotelId', hotelController.deleteHotelByIdController);
-router.get('/:hotelId/rooms', hotelController.getRoomsByHotelController);
+router.get('/:hotelId', authMiddleware, hotelController.getHotelByIdController);
+router.delete('/:hotelId', authMiddleware, hotelController.deleteHotelByIdController);
+router.get('/:hotelId/rooms', authMiddleware, hotelController.getRoomsByHotelController);
 router.get('/:hotelId/similar', hotelController.getSimilarHotelsByHotelController);
-router.get('', hotelController.getHotelsController);
+router.get('', authMiddleware, hotelController.getHotelsController);
 
 module.exports = router;

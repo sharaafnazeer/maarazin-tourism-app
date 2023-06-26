@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const roomController = require('../controllers/room.controller');
 const {mkdirSync} = require("fs");
+const authMiddleware = require("../middlewares/authMiddleware");
 
 // Set storage destination and file names
 const storage = multer.diskStorage({
@@ -37,14 +38,14 @@ const upload = multer({
 
 router.post('', upload.fields([
     {name: 'roomImages', maxCount: 10}
-]), roomController.addRoomController);
+]), authMiddleware, roomController.addRoomController);
 
 router.put('/:roomId', upload.fields([
     {name: 'roomImages', maxCount: 10}
-]), roomController.updateRoomController);
+]), authMiddleware, roomController.updateRoomController);
 
-router.get('/:roomId', roomController.getRoomByIdController);
-router.delete('/:roomId', roomController.deleteRoomByIdController);
-router.get('', roomController.getRoomsController);
+router.get('/:roomId', authMiddleware, roomController.getRoomByIdController);
+router.delete('/:roomId', authMiddleware, roomController.deleteRoomByIdController);
+router.get('', authMiddleware, roomController.getRoomsController);
 
 module.exports = router;

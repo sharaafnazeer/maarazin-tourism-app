@@ -1,8 +1,16 @@
 const sendJson = require("../helpers/json");
-const {RecordNotFound} = require("../exceptions/errors");
+const {RecordNotFound, InvalidOperation} = require("../exceptions/errors");
 const {addRoom, updateRoom, getRooms, getRoomById, deleteRoomById} = require("../services/room.service");
+const {ROLES} = require("../constants/common");
 
 const addRoomController = async (req, res, next) => {
+
+    const user = req.decodedToken.user;
+
+    if (!(user.role.slug === ROLES.SUPER_ADMIN || user.role.slug === ROLES.REXE_ADMIN)) {
+        return next(new InvalidOperation("Not Allowed", "You are not allowed to add a room"))
+    }
+
     const roomImages = req.files['roomImages']; // Access uploaded room images
     const room = req.body;
 
@@ -31,6 +39,13 @@ const addRoomController = async (req, res, next) => {
 
 const updateRoomController = async (req, res, next) => {
     try {
+
+        const user = req.decodedToken.user;
+
+        if (!(user.role.slug === ROLES.SUPER_ADMIN || user.role.slug === ROLES.REXE_ADMIN)) {
+            return next(new InvalidOperation("Not Allowed", "You are not allowed to update the room"))
+        }
+
         const {roomId} = req.params
         const room = req.body;
         const roomImages = req.files['roomImages']; // Access uploaded banner images
@@ -94,6 +109,13 @@ const getRoomByIdController = async (req, res, next) => {
 
 const deleteRoomByIdController = async (req, res, next) => {
     try {
+
+        const user = req.decodedToken.user;
+
+        if (!(user.role.slug === ROLES.SUPER_ADMIN || user.role.slug === ROLES.REXE_ADMIN)) {
+            return next(new InvalidOperation("Not Allowed", "You are not allowed to delete the room"))
+        }
+
         const {roomId} = req.params
         const response = await deleteRoomById(roomId);
 
