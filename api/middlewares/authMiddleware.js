@@ -6,7 +6,7 @@ async function authMiddleware(req, res, next) {
     // Get the Authorization header from the request
     const authHeader = req.headers.authorization;
 
-    if (req.baseUrl.includes('admin')) {
+    if (req.baseUrl.includes('admin') || req.originalUrl.includes('user')) {
         if (authHeader) {
             // Extract the token from the Authorization header
             const token = authHeader.split(' ')[1];
