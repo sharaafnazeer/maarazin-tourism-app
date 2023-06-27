@@ -13,6 +13,7 @@ import {useRouter} from "next/router";
 import RoomMostP_Facilities from "./rooms/RoomMostP_Facilities";
 import { ToastContainer, toast } from 'react-toastify';
 import { failureNofication, successNofication } from "../../../../data/notification";
+import { Validation } from "../../../../utils/hotel/Validation";
 
 const ContentTabContent = () => {
 
@@ -40,7 +41,15 @@ const ContentTabContent = () => {
         existingBannerImages: [],
         existingFeatureImages: [],
     });
+
+    // const [errors, setErrors] = useState({})
+    // const handleValidation =(event)=>{
+    //     event.preventDefault();
+    //     setErrors(Validation(hotelData));
+    // }
     const onSave = () => {
+
+        // handleValidation();
         let formData = new FormData();
 
         formData.append("name", hotelData.name);

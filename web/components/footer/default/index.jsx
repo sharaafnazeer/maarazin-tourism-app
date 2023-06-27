@@ -14,8 +14,8 @@ const index = () => {
                             <Link href="/" className="header-logo mr-20">
                                 <Image
                                     alt={"image"}
-                                    width={300}
-                                    height={300}
+                                    width={200}
+                                    height={200}
                                     src="/img/general/rexe-dark.svg"
                                 />
                             </Link>
