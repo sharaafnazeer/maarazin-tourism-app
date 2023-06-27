@@ -11,6 +11,7 @@ import {
 } from "../../../../slices/hotelSlice";
 import {useRouter} from "next/router";
 import RoomMostP_Facilities from "./rooms/RoomMostP_Facilities";
+import { Validation } from "../../../../utils/hotel/Validation";
 import {failureNofication, successNofication} from "../../../../data/notification";
 import {useSession} from "next-auth/react";
 
@@ -41,7 +42,15 @@ const ContentTabContent = () => {
         existingBannerImages: [],
         existingFeatureImages: [],
     });
+
+    // const [errors, setErrors] = useState({})
+    // const handleValidation =(event)=>{
+    //     event.preventDefault();
+    //     setErrors(Validation(hotelData));
+    // }
     const onSave = () => {
+
+        // handleValidation();
         let formData = new FormData();
 
         formData.append("name", hotelData.name);
