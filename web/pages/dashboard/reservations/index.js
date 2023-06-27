@@ -3,23 +3,21 @@ import Sidebar from "../common/Sidebar";
 import Header from "../../../components/header/dashboard-header";
 import Footer from "../common/Footer";
 import FilterBox from "./components/filter-box";
-import {getSession} from "next-auth/react";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getAllReservations } from "../../../slices/reservationSlice";
+import {getSession, useSession} from "next-auth/react";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {getAllReservations} from "../../../slices/reservationSlice";
 import ReservationTable from "./components/ReservationTable";
 
 const Index = () => {
 
-    const dispatch = useDispatch();   
+    const dispatch = useDispatch();
     const allReservations = useSelector(state => state.reservation.reserversions);
-  
+    const session = useSession();
+
     useEffect(() => {
-      dispatch(getAllReservations());
-    }, [])
-    
-
-
+        dispatch(getAllReservations({token: session?.data?.user?.accessToken}));
+    }, []);
 
     return (
         <>
@@ -58,7 +56,7 @@ const Index = () => {
                         {/* End .row */}
 
                         <div className="py-30 px-30 rounded-4 bg-white shadow-3">
-                           <ReservationTable allReservations={allReservations}/>
+                            <ReservationTable allReservations={allReservations}/>
                             {/* End tabs */}
                         </div>
                         <Footer/>

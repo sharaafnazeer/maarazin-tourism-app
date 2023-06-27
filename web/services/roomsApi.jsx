@@ -1,25 +1,22 @@
 import {API} from "./index"
+import {buildAuthHeader, buildAuthMultipartHeader} from "../utils/buildAuthHeader";
 
-const config = {
-    headers: {'content-type': 'multipart/form-data'}
+export const postRoomApi = async ({formData, token}) => {
+    return await API.post(`/admin/rooms`, formData, buildAuthMultipartHeader(token));
 }
 
-export const postRoomApi = async (formData) => {
-    return await API.post(`/admin/rooms`, formData, config);
+export const updateRoomApi = async ({roomId, formData, token}) => {
+    return await API.put(`/admin/rooms/${roomId}`, formData, buildAuthMultipartHeader(token));
 }
 
-export const updateRoomApi = async (data) => {
-    return await API.put(`/admin/rooms/${data.roomId}`, data.formData, config);
+export const getAllRoomsApi = async ({token}) => {
+    return await API.get(`/admin/rooms`, buildAuthHeader(token));
 }
 
-export const getAllRoomsApi = async () => {
-    return await API.get(`/admin/rooms`);
+export const getOneRoomApi = async ({roomId, token}) => {
+    return await API.get(`/admin/rooms/${roomId}`, buildAuthHeader(token));
 }
 
-export const getOneRoomApi = async (roomId) => {
-    return await API.get(`/admin/rooms/${roomId}`);
-}
-
-export const deleteOneRoomApi = async (roomId) => {
-    return await API.delete(`/admin/rooms/${roomId}`);
+export const deleteOneRoomApi = async ({roomId, token}) => {
+    return await API.delete(`/admin/rooms/${roomId}`, buildAuthHeader(token));
 }

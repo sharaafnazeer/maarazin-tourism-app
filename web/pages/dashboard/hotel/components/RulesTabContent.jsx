@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { updateHotelRule } from "../../../../slices/hotelSlice";
 import { failureNofication, successNofication } from "../../../../data/notification";
+import {useSession} from "next-auth/react";
 
 const RulesTabContent = () => {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ const RulesTabContent = () => {
   const hotelId = router.query.id;
 
   const selectedHotel = useSelector((state) => state.hotel.selectedHotel);
+  const session = useSession();
 
   const [rules, setRules] = useState({
     minAdvance: '',
@@ -36,7 +38,8 @@ const RulesTabContent = () => {
 
     const data = {
       formData,
-      hotelId
+      hotelId,
+      token: session?.data?.user?.accessToken
     }
     
 

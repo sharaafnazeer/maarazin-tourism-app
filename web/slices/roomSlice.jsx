@@ -9,9 +9,9 @@ const initialState = {
 
 export const saveRoom = createAsyncThunk(
     "hotel/saveRoom",
-    async (room, thunkAPI) => {
+    async (data, thunkAPI) => {
         thunkAPI.dispatch(setLoading(true));
-        const response = await postRoomApi(room);
+        const response = await postRoomApi(data);
         return response.data;
     }
 );
@@ -27,9 +27,9 @@ export const updateRoom = createAsyncThunk(
 
 export const getAllRooms = createAsyncThunk(
     "room/getAllRooms",
-    async (_, thunkAPI) => {
+    async (data, thunkAPI) => {
         thunkAPI.dispatch(setLoading(true));
-        const response = await getAllRoomsApi();
+        const response = await getAllRoomsApi(data);
         thunkAPI.dispatch(updateRooms(response.data));
         // console.log(response.data);
         return response.data;
@@ -38,9 +38,9 @@ export const getAllRooms = createAsyncThunk(
 
 export const getSelectedRoom = createAsyncThunk(
     "room/getSelectedRoom",
-    async (roomId, thunkAPI) => {
+    async (data, thunkAPI) => {
         thunkAPI.dispatch(setLoading(true));
-        const response = await getOneRoomApi(roomId);
+        const response = await getOneRoomApi(data);
         thunkAPI.dispatch(updateSelectedRoom(response.data));
         return response.data;
     }
@@ -48,9 +48,9 @@ export const getSelectedRoom = createAsyncThunk(
 
 export const deleteSelectedRoom = createAsyncThunk(
     "room/deleteSelectedRoom",
-    async (roomId, thunkAPI) => {
+    async (data, thunkAPI) => {
         thunkAPI.dispatch(setLoading(true));
-        const response = await deleteOneRoomApi(roomId);
+        const response = await deleteOneRoomApi(data);
         return response.data;
     }
 );

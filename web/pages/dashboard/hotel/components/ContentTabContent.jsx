@@ -11,8 +11,8 @@ import {
 } from "../../../../slices/hotelSlice";
 import {useRouter} from "next/router";
 import RoomMostP_Facilities from "./rooms/RoomMostP_Facilities";
-import { ToastContainer, toast } from 'react-toastify';
-import { failureNofication, successNofication } from "../../../../data/notification";
+import {failureNofication, successNofication} from "../../../../data/notification";
+import {useSession} from "next-auth/react";
 
 const ContentTabContent = () => {
 
@@ -21,6 +21,7 @@ const ContentTabContent = () => {
     const hotelId = router.query.id;
 
     const selectedHotel = useSelector(state => state.hotel.selectedHotel);
+    const session = useSession();
 
 
     useEffect(() => {
@@ -47,10 +48,10 @@ const ContentTabContent = () => {
         formData.append("description", hotelData.description);
         formData.append("hotelGroupId", hotelData.hotelGroupId);
         formData.append("rating", activeRating);
-        hotelImages.forEach((image, index) => {
+        hotelImages.forEach((image) => {
             formData.append("bannerImages", image);
         })
-        featuredImages.forEach((image, index) => {
+        featuredImages.forEach((image) => {
             formData.append("featuredImages", image);
         })
         formData.append(
@@ -65,7 +66,8 @@ const ContentTabContent = () => {
 
             const data = {
                 formData,
-                hotelId
+                hotelId,
+                token: session?.data?.user?.accessToken
             }
 
             dispatch(updateOneHotel(data))
@@ -74,14 +76,18 @@ const ContentTabContent = () => {
                     setFeaturedImages([]);
                     setHotelImages([]);
                     successNofication(res.message);
-                    router.push(`/dashboard/hotel/update-hotel/${res.record._id}`);                    
+                    router.push(`/dashboard/hotel/update-hotel/${res.record._id}`);
                 })
                 .catch((err) => {
-                   failureNofication(err.message) ;
+                    failureNofication(err.message);
                 });
 
         } else {
-            dispatch(saveHotel(formData))
+            const data = {
+                formData,
+                token: session?.data?.user?.accessToken
+            }
+            dispatch(saveHotel(data))
                 .unwrap()
                 .then((res) => {
                     setFeaturedImages([]);
@@ -167,7 +173,7 @@ const ContentTabContent = () => {
                         onClick={() => onSave()}
                     >
                         Save Changes <div className="icon-arrow-top-right ml-15"/>
-                    </button>                   
+                    </button>
                 </div>
             </div>
         </>
