@@ -43,7 +43,16 @@ const getRoles = async () => {
     }
 }
 
+const getRoleBySlug = async (slug) => {
+    try {
+        return await Role.findOne({slug: slug}).populate('users');
+    } catch (e) {
+        throw e;
+    }
+}
+
 module.exports = {
     seedRoles,
-    getRoles
+    getRoles,
+    getRoleBySlug
 }

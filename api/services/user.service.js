@@ -56,10 +56,18 @@ const getUserByEmail = async (email) => {
         throw e;
     }
 }
+const getUsersByRole = async (role) => {
+    try {
+        return await User.find({role: role}).populate('role');
+    } catch (e) {
+        throw e;
+    }
+}
 
 module.exports = {
     addUser,
     getUsers,
     getUserByEmail,
-    getUserById
+    getUserById,
+    getUsersByRole
 }

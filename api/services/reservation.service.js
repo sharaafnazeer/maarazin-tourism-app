@@ -4,10 +4,11 @@ const {Hotel} = require("../models/hotel.model");
 const {Reservation} = require("../models/reservation.model");
 const {generateReferenceNumber} = require("../helpers/helpers");
 const moment = require("moment");
+const {sendCustomerBookingMail, sendAdminBookingMail} = require("../mail");
+const {getRoleBySlug} = require("./role.service");
 const addReservation = async (reservationInfo) => {
     try {
-
-        const hotel = await Hotel.findById(reservationInfo.hotelId);
+        const hotel = await Hotel.findById(reservationInfo.hotelId).populate('users');
         if (!hotel) {
             return new RecordNotFound("Hotel not found", "Hotel with given ID not found");
         }
@@ -31,7 +32,25 @@ const addReservation = async (reservationInfo) => {
         });
 
         reservation.save();
-        return reservation;
+
+        const admins = [];
+        const rexeAdmin = await getRoleBySlug('rexe-admin');
+        if (rexeAdmin) {
+            rexeAdmin.users.forEach((user) => {
+                admins.push(user);
+            });
+        }
+        hotel.users.forEach((user) => {
+            admins.push(user);
+        });
+
+        // Send customer email
+        sendCustomerBookingMail(reservation);
+        // Send admin email
+        const recipients = admins.map((admin) => admin.email);
+        sendAdminBookingMail(recipients, reservation)
+
+        return new RecordNotFound("test");
     } catch (e) {
         throw e;
     }
