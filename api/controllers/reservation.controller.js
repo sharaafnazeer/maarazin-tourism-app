@@ -33,7 +33,8 @@ const addReservationController = async (req, res, next) => {
 
 const getReservationsController = async (req, res) => {
     try {
-        const response = await getReservations();
+        const user = req?.decodedToken?.user;
+        const response = await getReservations(user);
         return sendJson(res, 200, response);
     } catch (e) {
         return sendJson(res, 500, {
@@ -48,8 +49,9 @@ const getReservationsController = async (req, res) => {
 
 const getReservationByIdController = async (req, res, next) => {
     try {
+        const user = req?.decodedToken?.user;
         const {reservationId} = req.params;
-        const response = await getReservationById(reservationId);
+        const response = await getReservationById(reservationId, user);
 
         if (response instanceof RecordNotFound) {
             return next(response)
@@ -67,9 +69,10 @@ const getReservationByIdController = async (req, res, next) => {
 
 const updateReservationStatusByIdController = async (req, res, next) => {
     try {
+        const user = req?.decodedToken?.user;
         const {reservationId} = req.params;
         const {status} = req.body;
-        const response = await updateReservationStatusById(reservationId, status);
+        const response = await updateReservationStatusById(reservationId, status, user);
 
         if (response instanceof RecordNotFound || response instanceof InvalidOperation) {
             return next(response)

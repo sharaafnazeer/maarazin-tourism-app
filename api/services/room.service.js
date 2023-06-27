@@ -170,7 +170,7 @@ const getRoomById = async (roomId, user) => {
                 }
             }).populate('facilities');
         }
-        if (!room || !room.hotel) {
+        if (!room || !room?.hotel) {
             return new RecordNotFound("Room not found", "Room with given ID not found");
         }
         return room;
