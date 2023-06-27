@@ -50,7 +50,7 @@ const addReservation = async (reservationInfo) => {
         const recipients = admins.map((admin) => admin.email);
         sendAdminBookingMail(recipients, reservation)
 
-        return new RecordNotFound("test");
+        return reservation;
     } catch (e) {
         throw e;
     }
