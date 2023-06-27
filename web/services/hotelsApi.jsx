@@ -1,15 +1,11 @@
 import {API} from "./index"
+import {buildAuthHeader, buildAuthMultipartHeader} from "../utils/buildAuthHeader";
 
-const config = {
-    headers: {'content-type': 'multipart/form-data'}
+export const postHotelApi = async ({formData, token}) => {
+    return await API.post('/admin/hotels', formData, buildAuthMultipartHeader(token));
 }
-
-
-export const postHotelApi = async (formdata) => {
-    return await API.post('/admin/hotels', formdata, config);
-}
-export const getAllHotelsApi = async () => {
-    return await API.get('/admin/hotels');
+export const getAllHotelsApi = async ({token}) => {
+    return await API.get('/admin/hotels', buildAuthHeader(token));
 }
 export const getAllSiteHotelsApi = async (payload) => {
 
@@ -54,8 +50,8 @@ export const getAllSiteHotelsApi = async (payload) => {
     return await API.get('/hotels', {params});
 }
 
-export const getOneHotelApi = async (hotelId) => {
-    return await API.get(`/admin/hotels/${hotelId}`);
+export const getOneHotelApi = async ({hotelId, token}) => {
+    return await API.get(`/admin/hotels/${hotelId}`, buildAuthHeader(token));
 }
 
 export const getOneSiteHotelApi = async (hotelId) => {
@@ -85,30 +81,26 @@ export const getAllAddonsApi = async () => {
     return await API.get(`/admin/features/addons`);
 }
 
-export const getAllHotelRoomsApi = async (hotelId) => {
-    return await API.get(`/admin/hotels/${hotelId}/rooms`);
+export const getAllHotelRoomsApi = async ({hotelId, token}) => {
+    return await API.get(`/admin/hotels/${hotelId}/rooms`, buildAuthHeader(token));
 }
 
-export const updateOneHotelApi = async (data) => {
-    return await API.put(`/admin/hotels/${data.hotelId}`, data.formData, config)
+export const updateOneHotelApi = async ({hotelId, formData, token}) => {
+    return await API.put(`/admin/hotels/${hotelId}`, formData, buildAuthMultipartHeader(token));
 }
 
-export const updateHotelRulesApi = async (data) => {
-    return await API.put(`/admin/hotels/${data.hotelId}`, data.formData)
+export const updateHotelRulesApi = async ({hotelId, formData, token}) => {
+    return await API.put(`/admin/hotels/${hotelId}`, formData, buildAuthHeader(token))
 }
 
-export const updateHotelLocationApi = async (data) => {
-    return await API.put(`/admin/hotels/${data.hotelId}`, data.formData)
+export const updateHotelLocationApi = async ({hotelId, formData, token}) => {
+    return await API.put(`/admin/hotels/${hotelId}`, formData, buildAuthHeader(token))
 }
 
-export const postRoomApi = async (data) => {
-    return await API.post(`/admin/rooms/${data.hotelId}`, data.formData, config);
-}
-export const deleteOneHotelApi = async (hotelId) => {
-    return await API.delete(`/admin/hotels/${hotelId}`);
+export const deleteOneHotelApi = async ({hotelId, token}) => {
+    return await API.delete(`/admin/hotels/${hotelId}`, buildAuthHeader(token));
 }
 
-
-export const getAllHotelLocationApi =async()=>{
+export const getAllHotelLocationApi = async () => {
     return await API.get(`/locations/cities`);
 }

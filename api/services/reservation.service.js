@@ -6,6 +6,7 @@ const {generateReferenceNumber} = require("../helpers/helpers");
 const moment = require("moment");
 const {sendCustomerBookingMail, sendAdminBookingMail} = require("../mail");
 const {getRoleBySlug} = require("./role.service");
+const {ROLES} = require("../constants/common");
 const addReservation = async (reservationInfo) => {
     try {
         const hotel = await Hotel.findById(reservationInfo.hotelId).populate('users');
@@ -56,25 +57,61 @@ const addReservation = async (reservationInfo) => {
     }
 }
 
-const getReservations = async () => {
+const getReservations = async (user) => {
     try {
-        return await Reservation.find().populate('room')
+        let reservations = [];
+        if (user?.role?.slug === ROLES.REXE_ADMIN || user?.role?.slug === ROLES.SUPER_ADMIN) {
+            reservations = await Reservation.find().populate('room');
+        } else if (user?.role?.slug === ROLES.HOTEL_ADMIN) {
+            const tempReservations = await Reservation.find().populate({
+                path: 'room',
+                populate: {
+                    path: 'hotel',
+                    model: 'Hotel',
+                    match: {
+                        'users': {$in: [user._id]},
+                    }
+                }
+            }).exec();
+
+            for (let tempReservation of tempReservations) {
+                if (tempReservation?.room?.hotel) {
+                    reservations.push(tempReservation);
+                }
+            }
+        }
+        return reservations;
     } catch (e) {
         throw e;
     }
 }
 
-const getReservationById = async (reservationId) => {
+const getReservationById = async (reservationId, user) => {
     try {
-        const reservation = await Reservation.findById(reservationId)
-            .populate({
-                path: 'room',
-                populate: {
-                    path: 'hotel',
-                    model: 'Hotel'
-                }
-            }).exec();
-        if (!reservation) {
+        let reservation = null;
+        if (user?.role?.slug === ROLES.REXE_ADMIN || user?.role?.slug === ROLES.SUPER_ADMIN) {
+            reservation = await Reservation.findById(reservationId)
+                .populate({
+                    path: 'room',
+                    populate: {
+                        path: 'hotel',
+                        model: 'Hotel',
+                    }
+                }).exec();
+        } else if (user?.role?.slug === ROLES.HOTEL_ADMIN) {
+            reservation = await Reservation.findById(reservationId)
+                .populate({
+                    path: 'room',
+                    populate: {
+                        path: 'hotel',
+                        model: 'Hotel',
+                        match: {
+                            'users': {$in: [user._id]},
+                        }
+                    }
+                }).exec();
+        }
+        if (!reservation || !reservation?.room.hotel) {
             return new RecordNotFound("Reservation not found", "Reservation with given ID not found");
         }
         return reservation;
@@ -83,7 +120,7 @@ const getReservationById = async (reservationId) => {
     }
 }
 
-const updateReservationStatusById = async (reservationId, status) => {
+const updateReservationStatusById = async (reservationId, status, user) => {
     try {
         const reservation = await Reservation.findById(reservationId)
         if (!reservation) {

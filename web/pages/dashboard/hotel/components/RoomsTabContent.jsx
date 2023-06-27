@@ -10,27 +10,28 @@ import {useRouter} from "next/router";
 import {useState} from "react";
 import {
     deleteSelectedRoom,
-    getAllRooms,
     getSelectedRoom,
     saveRoom,
     updateRoom,
-    updateRooms, updateSelectedRoom
+    updateSelectedRoom
 } from "../../../../slices/roomSlice";
 import {getOneHotelRooms} from "../../../../slices/hotelSlice";
-import { failureNofication, successNofication } from "../../../../data/notification";
+import {failureNofication, successNofication} from "../../../../data/notification";
+import {useSession} from "next-auth/react";
 
 const RoomsTabcontent = () => {
 
     const dispatch = useDispatch();
     const router = useRouter();
     const hotelId = router.query.id;
+    const session = useSession();
 
     const selectedRoom = useSelector((state) => state.room.selectedRoom);
     const selectedHotelRooms = useSelector(state => state.hotel.selectedHotelRooms);
- 
+
 
     useEffect(() => {
-        dispatch(getOneHotelRooms(hotelId));
+        dispatch(getOneHotelRooms({hotelId, token: session?.data?.user?.accessToken}));
     }, [hotelId])
 
     const [images, setImages] = useState([]);
@@ -106,7 +107,7 @@ const RoomsTabcontent = () => {
             setAddons([]);
         }
     }, [selectedRoom, selectedRoom?._id]);
-    
+
     const onChange = (id, value) => {
         const newHotelRoom = {...hotelRoom, [id]: value};
         setHotelRoom(newHotelRoom);
@@ -137,23 +138,28 @@ const RoomsTabcontent = () => {
 
             const data = {
                 formData,
-                roomId: selectedRoom._id
+                roomId: selectedRoom._id,
+                token: session?.data?.user?.accessToken
             }
             dispatch(updateRoom(data))
                 .unwrap()
                 .then((res) => {
                     successNofication(res.message);
-                    dispatch(getOneHotelRooms(hotelId));
+                    dispatch(getOneHotelRooms({hotelId, token: session?.data?.user?.accessToken}));
                 })
                 .catch((err) => {
                     failureNofication(err.message)
                 });
         } else {
-            dispatch(saveRoom(formData))
+            const data = {
+                formData,
+                token: session?.data?.user?.accessToken
+            }
+            dispatch(saveRoom(data))
                 .unwrap()
                 .then((res) => {
                     successNofication(res.message);
-                    dispatch(getOneHotelRooms(hotelId));
+                    dispatch(getOneHotelRooms({hotelId, token: session?.data?.user?.accessToken}));
                 })
                 .catch((err) => {
                     failureNofication(err.message);
@@ -162,16 +168,16 @@ const RoomsTabcontent = () => {
     };
 
     const onDelete = (id) => {
-        dispatch(deleteSelectedRoom(id))
+        dispatch(deleteSelectedRoom({roomId: id, token: session?.data?.user?.accessToken}))
             .unwrap()
             .then(res => {
                 successNofication(res.message);
-                dispatch(getOneHotelRooms(hotelId));
+                dispatch(getOneHotelRooms({hotelId, token: session?.data?.user?.accessToken}));
             });
     }
 
     const onEdit = (id) => {
-        dispatch(getSelectedRoom(id));
+        dispatch(getSelectedRoom({roomId: id, token: session?.data?.user?.accessToken}));
     }
 
     const onRoomClear = () => {

@@ -36,18 +36,18 @@ const initialState = {
 
 export const saveHotel = createAsyncThunk(
     "hotel/saveHotel",
-    async (hotel, thunkAPI) => {
+    async (data, thunkAPI) => {
         thunkAPI.dispatch(setLoading(true));
-        const response = await postHotelApi(hotel);
+        const response = await postHotelApi(data);
         return response.data;
     }
 );
 
 export const getAllHotels = createAsyncThunk(
     "hotel/getAllHotels",
-    async (_, thunkAPI) => {
+    async (data, thunkAPI) => {
         thunkAPI.dispatch(setLoading(true));
-        const response = await getAllHotelsApi(); //returrn get response from the API
+        const response = await getAllHotelsApi(data); //returrn get response from the API
         thunkAPI.dispatch(updateHotels(response.data)); //passing the response to the reducer function including the response
         // console.log(response.data);
         return response.data;
@@ -68,9 +68,9 @@ export const getAllSiteHotels = createAsyncThunk(
 
 export const getOneHotel = createAsyncThunk(
     "hotel/getOneHotel",
-    async (hotelId, thunkAPI) => {
+    async (data, thunkAPI) => {
         thunkAPI.dispatch(setLoading(true));
-        const response = await getOneHotelApi(hotelId); //returrn get response from the API
+        const response = await getOneHotelApi(data); //returrn get response from the API
         thunkAPI.dispatch(updateSelectedHotel(response.data)); //passing the response to the reducer function including the response
         // console.log(response.data);
         return response.data;
@@ -111,9 +111,9 @@ export const getAllPopularSiteHotels = createAsyncThunk(
 
 export const getOneHotelRooms = createAsyncThunk(
     "hotel/getOneHotelRooms",
-    async (hotelId, thunkAPI) => {
+    async (data, thunkAPI) => {
         thunkAPI.dispatch(setLoading(true));
-        const response = await getAllHotelRoomsApi(hotelId);
+        const response = await getAllHotelRoomsApi(data);
         thunkAPI.dispatch(updateSelectedHotelRoom(response.data));
         return response.data;
     }
@@ -194,9 +194,9 @@ export const updateHotelLocation = createAsyncThunk(
 
 export const deleteSelectedHotel = createAsyncThunk(
     "hotel/deleteSelectedHotel",
-    async (hotelId, thunkAPI) => {
+    async (data, thunkAPI) => {
         thunkAPI.dispatch(setLoading(true));
-        const response = await deleteOneHotelApi(hotelId);
+        const response = await deleteOneHotelApi(data);
         return response.data;
     }
 );

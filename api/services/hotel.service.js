@@ -62,7 +62,7 @@ const updateHotel = async (hotelId, hotelInfo) => {
             }
         }
         hotel.name = hotelInfo.name || hotel.name;
-        hotel.slug = slugify(hotelInfo.name) || hotel.slug;
+        hotel.slug = slugify(hotel.name) || hotel.slug;
         hotel.description = hotelInfo.description || hotel.description;
         hotel.hotelGroup = hotelInfo.hotelGroupId || hotel.hotelGroup;
         hotel.rating = parseInt(hotelInfo.rating) || parseInt(hotel.rating);

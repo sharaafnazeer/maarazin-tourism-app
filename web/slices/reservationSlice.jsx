@@ -1,6 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {getAllReservationsApi, getOneReservationApi, postReservationApi, updateReservationActionApi} from "../services/reservationApi";
-import {updateSelectedHotel} from "./hotelSlice";
 
 const initialState = {
     isLoading: false,
@@ -28,9 +27,9 @@ export const saveReservation = createAsyncThunk(
 
 export const getAllReservations = createAsyncThunk(
     "reservation/getAllReservations",
-    async(_,thunkAPI)=>{
+    async(data,thunkAPI)=>{
         thunkAPI.dispatch(setLoading(true));
-        const response = await getAllReservationsApi();
+        const response = await getAllReservationsApi(data);
         thunkAPI.dispatch(updateGetAllReservationDetails(response.data));
         return response.data;
     }
@@ -39,9 +38,9 @@ export const getAllReservations = createAsyncThunk(
 
 export const getOneReservation = createAsyncThunk(
     "reservation/getOneReservation",
-    async(reserveId, thunkAPI)=>{
+    async(data, thunkAPI)=>{
         thunkAPI.dispatch(setLoading(true));
-        const response = await getOneReservationApi(reserveId);
+        const response = await getOneReservationApi(data);
         thunkAPI.dispatch(updateSelectedReservation(response.data));
         return response.data;
     }
@@ -49,9 +48,9 @@ export const getOneReservation = createAsyncThunk(
 
 export const updateReservationAction = createAsyncThunk(
     "reservation/updateReservationAction",
-    async(reserveId, thunkAPI)=>{
+    async(data, thunkAPI)=>{
         thunkAPI.dispatch(setLoading(true));
-        const response = await updateReservationActionApi(reserveId);
+        const response = await updateReservationActionApi(data);
         thunkAPI.dispatch(updateSelectedReservation(response.data));
         return response.data;
     }

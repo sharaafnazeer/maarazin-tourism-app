@@ -57,7 +57,7 @@ const addRoom = async (roomInfo, user) => {
             sleeps: {
                 adults: parseInt(roomInfo.numOfAdults), children: parseInt(roomInfo.numOfChild),
             },
-            roomPrice: parseFloat(roomInfo.roomPrice),
+            roomPrice: parseFloat(roomInfo.roomPrice || 0),
             hotel: hotel.id,
             facilities: newFacilities,
             addons: newAddons,
@@ -83,7 +83,7 @@ const updateRoom = async (roomId, roomInfo) => {
         }
 
         room.name = roomInfo.name || room.name;
-        room.slug = slugify(roomInfo.slug) || room.slug;
+        room.slug = slugify(room.name) || room.slug;
         room.benefits = roomInfo.benefits || room.benefits;
         room.roomArea = roomInfo.roomArea || room.roomArea;
         room.roomPrice = parseFloat(roomInfo.roomPrice) || parseFloat(room.roomPrice);
@@ -170,7 +170,7 @@ const getRoomById = async (roomId, user) => {
                 }
             }).populate('facilities');
         }
-        if (!room || !room.hotel) {
+        if (!room || !room?.hotel) {
             return new RecordNotFound("Room not found", "Room with given ID not found");
         }
         return room;

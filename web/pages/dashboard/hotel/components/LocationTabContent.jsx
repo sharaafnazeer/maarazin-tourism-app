@@ -7,6 +7,7 @@ import { useState } from "react";
 import { updateHotelLocation } from "../../../../slices/hotelSlice";
 import { useEffect } from "react";
 import { failureNofication, successNofication } from "../../../../data/notification";
+import {useSession} from "next-auth/react";
 
 const LocationTabContent = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const LocationTabContent = () => {
   const hotelId = router.query.id;
 
   const selectedHotel = useSelector((state) => state.hotel.selectedHotel);
+  const session = useSession();
 
   const [hotelLocation, setHotelLocation] = useState({
     city: "",
@@ -35,6 +37,7 @@ const LocationTabContent = () => {
     const data = {
       formData,
       hotelId,
+      token: session?.data?.user?.accessToken
     };
 
     dispatch(updateHotelLocation(data))
