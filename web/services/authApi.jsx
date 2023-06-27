@@ -1,5 +1,5 @@
 import {API} from "./index"
-import buildAuthHeader from "../utils/buildAuthHeader";
+import {buildAuthHeader} from "../utils/buildAuthHeader";
 
 export const loginApi = async (data) => {
     return await API.post(`/auth/login`, data);
