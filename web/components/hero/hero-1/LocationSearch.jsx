@@ -16,6 +16,11 @@ const SearchBar = ({location, setLocation}) => {
         setSelectedItem(item);
     };
 
+  const onChange = ( value) => {
+        const selectedLocation = {...location,value};
+        setSelectedItem(selectedLocation);
+    };
+
     return (
         <>
             <div className="searchMenu-loc px-30 lg:py-20 lg:px-0 js-form-dd js-liverSearch">
@@ -31,8 +36,8 @@ const SearchBar = ({location, setLocation}) => {
                             type="search"
                             placeholder="Where are you going?"
                             className="js-search js-dd-focus"
-                            value={location}
-                            onChange={(e) => setSearchValue(e.target.value)}
+                            defaultValue={location}
+                            onChange={(e) => onChange(e.target.value)}
                         />
                     </div>
                 </div>
