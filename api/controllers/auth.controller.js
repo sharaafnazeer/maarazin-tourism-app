@@ -52,7 +52,7 @@ const signUpController = async (req, res, next) => {
 }
 
 const getUserController = (req, res) => {
-    const {password, ...user} = req.decodedToken.user;
+    const {password, ...user} = req?.decodedToken?.user;
     return sendJson(res, 200, user);
 }
 

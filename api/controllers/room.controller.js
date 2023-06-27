@@ -5,7 +5,7 @@ const {ROLES} = require("../constants/common");
 
 const addRoomController = async (req, res, next) => {
 
-    const user = req.decodedToken.user;
+    const user = req?.decodedToken?.user;
 
     if (!(user.role.slug === ROLES.SUPER_ADMIN || user.role.slug === ROLES.REXE_ADMIN)) {
         return next(new InvalidOperation("Not Allowed", "You are not allowed to add a room"))
@@ -40,7 +40,7 @@ const addRoomController = async (req, res, next) => {
 const updateRoomController = async (req, res, next) => {
     try {
 
-        const user = req.decodedToken.user;
+        const user = req?.decodedToken?.user;
 
         if (!(user.role.slug === ROLES.SUPER_ADMIN || user.role.slug === ROLES.REXE_ADMIN)) {
             return next(new InvalidOperation("Not Allowed", "You are not allowed to update the room"))
@@ -89,7 +89,7 @@ const getRoomsController = async (req, res, next) => {
 }
 const getRoomByIdController = async (req, res, next) => {
     try {
-        const user = req.decodedToken.user;
+        const user = req?.decodedToken?.user;
         const {roomId} = req.params
         const response = await getRoomById(roomId, user);
 
@@ -111,7 +111,7 @@ const getRoomByIdController = async (req, res, next) => {
 const deleteRoomByIdController = async (req, res, next) => {
     try {
 
-        const user = req.decodedToken.user;
+        const user = req?.decodedToken?.user;
 
         if (!(user.role.slug === ROLES.SUPER_ADMIN || user.role.slug === ROLES.REXE_ADMIN)) {
             return next(new InvalidOperation("Not Allowed", "You are not allowed to delete the room"))

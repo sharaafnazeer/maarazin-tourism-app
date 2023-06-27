@@ -13,7 +13,7 @@ const {PRICE_FILTER, ROLES} = require("../constants/common");
 
 const addHotelController = async (req, res, next) => {
 
-    const user = req.decodedToken.user;
+    const user = req?.decodedToken?.user;
 
     if (user.role.slug !== ROLES.SUPER_ADMIN) {
         return next(new InvalidOperation("Not Allowed", "You are not allowed to add a hotel"))
@@ -54,7 +54,7 @@ const addHotelController = async (req, res, next) => {
 const updateHotelController = async (req, res, next) => {
     try {
 
-        const user = req.decodedToken.user;
+        const user = req?.decodedToken?.user;
 
         if (user.role.slug !== ROLES.SUPER_ADMIN) {
             return next(new InvalidOperation("Not Allowed", "You are not allowed to update the hotel"))
@@ -105,7 +105,7 @@ const updateHotelController = async (req, res, next) => {
 
 const getHotelsController = async (req, res) => {
     try {
-        const user = req.decodedToken.user;
+        const user = req?.decodedToken?.user;
         const {page, size, rating, minPrice, maxPrice, ...rest} = req.query;
         const filters = {
             ...rest,
@@ -137,7 +137,7 @@ const getHotelsController = async (req, res) => {
 
 const getHotelByIdController = async (req, res, next) => {
     try {
-        const user = req.decodedToken.user;
+        const user = req?.decodedToken?.user;
         const {hotelId} = req.params;
         const response =
             req.baseUrl.includes('admin') ? await getHotelById(hotelId, user) : await getHotelByIdWithDetails(hotelId);
@@ -161,7 +161,7 @@ const getHotelByIdController = async (req, res, next) => {
 const deleteHotelByIdController = async (req, res, next) => {
     try {
         const {hotelId} = req.params
-        const user = req.decodedToken.user;
+        const user = req?.decodedToken?.user;
 
         if (user.role.slug !== ROLES.SUPER_ADMIN) {
             return next(new InvalidOperation("Not Allowed", "You are not allowed to delete the hotel"))
