@@ -1,26 +1,43 @@
 import {useEffect, useState} from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllHotelLocation } from "../../../slices/hotelSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {getAllHotelLocation} from "../../../slices/hotelSlice";
 
 const SearchBar = ({location, setLocation}) => {
     const [selectedItem, setSelectedItem] = useState(null);
     const dispatch = useDispatch();
     const allHotelLocation = useSelector(state => state.hotel.getAllLocation);
-   
-    useEffect(()=>{
+    const [tempLocations, setTempLocations] = useState([]);
+
+    useEffect(() => {
         dispatch(getAllHotelLocation());
-    },[])
+    }, [])
+
+    useEffect(() => {
+        if (!tempLocations.length)
+            setTempLocations(allHotelLocation);
+    }, [allHotelLocation]);
 
     const handleOptionClick = (item) => {
-        setLocation(item.name);
         setSelectedItem(item);
+        setLocation(item.name);
     };
 
-  const onChange = ( value) => {
-        const selectedLocation = {...location,value};
-        setSelectedItem(selectedLocation);
-    };
+    const onChange = (value) => {
+        setLocation(value);
+        let tempLocations;
+        if (value) {
+            tempLocations = allHotelLocation.filter((location) => location.slug.includes(value.toLowerCase()));
+            const temp = tempLocations.find((location) => location.slug === value.toLowerCase() || location.name === value.toLowerCase());
+            if (temp) {
+                setSelectedItem(temp);
+            }
+        } else {
+            tempLocations = allHotelLocation;
+            setSelectedItem(null);
+        }
 
+        setTempLocations(tempLocations);
+    };
     return (
         <>
             <div className="searchMenu-loc px-30 lg:py-20 lg:px-0 js-form-dd js-liverSearch">
@@ -36,7 +53,7 @@ const SearchBar = ({location, setLocation}) => {
                             type="search"
                             placeholder="Where are you going?"
                             className="js-search js-dd-focus"
-                            defaultValue={location}
+                            value={location}
                             onChange={(e) => onChange(e.target.value)}
                         />
                     </div>
@@ -46,10 +63,10 @@ const SearchBar = ({location, setLocation}) => {
                 <div className="shadow-2 dropdown-menu min-width-400">
                     <div className="bg-white px-20 py-20 sm:px-0 sm:py-15 rounded-4">
                         <ul className="y-gap-5 js-results">
-                            {allHotelLocation.map((item) => (
+                            {tempLocations.map((item) => (
                                 <li
                                     className={`-link d-block col-12 text-left rounded-4 px-20 py-15 js-search-option mb-1 ${
-                                        selectedItem && selectedItem.id === item._id ? "active" : ""
+                                        selectedItem && selectedItem._id === item._id ? "active" : ""
                                     }`}
                                     key={item._id}
                                     role="button"
