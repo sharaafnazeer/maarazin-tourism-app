@@ -73,7 +73,7 @@ const RoomsTabcontent = () => {
 
             setAmenities(selectedRoom.amenities)
 
-            setFacilities(selectedRoom.facilities);
+            setFacilities(selectedRoom.facilities?.map((facility) => facility._id));
 
             const newAddons = selectedRoom.addons.map((addon) => {
                 return {
