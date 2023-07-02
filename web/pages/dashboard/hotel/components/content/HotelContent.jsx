@@ -6,7 +6,8 @@ const HotelContent = ({
                           hotelData,
                           setHotelData,
                           activeRating,
-                          setActiveRating
+                          setActiveRating,
+                          errors
                       }) => {
 
     const categories = useSelector(state => state.hotel.categories);
@@ -29,6 +30,7 @@ const HotelContent = ({
                     />
                     <label className="lh-1 text-16 text-light-1">Hotel Name</label>
                 </div>
+                    {errors.name && <p style={{color:"red"}}>{errors.name}</p>}
             </div>
             {/* End Name */}
 

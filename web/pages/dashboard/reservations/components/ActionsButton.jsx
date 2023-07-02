@@ -25,27 +25,27 @@ const ActionsButton = ({
           </a>
         </li>
         {(record && record.status) === 0 && (
-              <>
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="#"
-                    onClick={() => onConfirmClick(record._id)}
-                  >
-                    Confirm
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="#"
-                    onClick={() => onRejectClick(record._id)}
-                  >
-                    Reject
-                  </a>
-                </li>
-              </>
-            )}
+          <>
+            <li>
+              <a
+                className="dropdown-item"
+                href="#"
+                onClick={() => onConfirmClick(record._id)}
+              >
+                Confirm
+              </a>
+            </li>
+            <li>
+              <a
+                className="dropdown-item"
+                href="#"
+                onClick={() => onRejectClick(record._id)}
+              >
+                Reject
+              </a>
+            </li>
+          </>
+        )}
       </ul>
     </div>
   );

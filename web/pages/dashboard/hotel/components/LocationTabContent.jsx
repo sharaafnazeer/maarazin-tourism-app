@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { updateHotelLocation } from "../../../../slices/hotelSlice";
 import { useEffect } from "react";
-import { failureNofication, successNofication } from "../../../../data/notification";
+import { DeletedNofication, failureNofication, successNofication } from "../../../../data/notification";
 import {useSession} from "next-auth/react";
 
 const LocationTabContent = () => {
@@ -62,6 +62,7 @@ const LocationTabContent = () => {
   };
 
   const onDeleteNearBy = (i) => {
+    DeletedNofication()
     setNearBy(nearBy.filter((item, index) => index !== i));
   };
 

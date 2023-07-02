@@ -43,14 +43,13 @@ const ContentTabContent = () => {
         existingFeatureImages: [],
     });
 
-    // const [errors, setErrors] = useState({})
-    // const handleValidation =(event)=>{
-    //     event.preventDefault();
-    //     setErrors(Validation(hotelData));
-    // }
+    const [errors, setErrors] = useState({})
+    const handleValidation =()=>{
+        setErrors(Validation(hotelData));
+    }
     const onSave = () => {
 
-        // handleValidation();
+        handleValidation();
         let formData = new FormData();
 
         formData.append("name", hotelData.name);
@@ -140,6 +139,7 @@ const ContentTabContent = () => {
                     setActiveRating={setActiveRating}
                     hotelId={hotelId}
                     selectedHotel={selectedHotel}
+                    errors={errors}
                 />
                 {/* End HotelContent */}
 

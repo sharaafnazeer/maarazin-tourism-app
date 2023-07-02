@@ -26,6 +26,19 @@ export const failureNofication =(message)=>{
         });
 }
 
+export const DeletedNofication =()=>{
+    toast.success("Successfuly Deleted", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+}
+
 export const confirmNotification =()=>{
     toast.success('Reservation Confirmed', {
         position: "top-center",

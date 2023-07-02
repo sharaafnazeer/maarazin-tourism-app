@@ -94,7 +94,7 @@ const HotelSingleV1Dynamic = (props) => {
                                     <h1 className="text-30 sm:text-25 fw-600">{hotel?.name}</h1>
                                 </div>
                                 {/* End .col */}
-                                <div className="col-auto">
+                                <div className="col-auto d-flex x-gap-5">
                                     {
                                         buildRating(hotel?.rating || 0)
                                     }

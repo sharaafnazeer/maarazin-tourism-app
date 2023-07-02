@@ -9,6 +9,7 @@ import {getAllHotels, deleteSelectedHotel} from "../../../slices/hotelSlice";
 import {useEffect} from "react";
 import {useRouter} from "next/router";
 import {getSession, useSession} from "next-auth/react";
+import { DeletedNofication } from "../../../data/notification";
 
 const Hotels = () => {
 
@@ -23,6 +24,7 @@ const Hotels = () => {
     }, []);
 
     const onDelete = (hotelId) => {
+        DeletedNofication()
         dispath(deleteSelectedHotel({hotelId, token: session?.data?.user?.accessToken}))
             .unwrap()
             .then(() => {
@@ -68,7 +70,7 @@ const Hotels = () => {
                                     href="/dashboard/hotel/add-hotel"
                                     className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
                                 >
-                                    Add Hotels <div className="icon-arrow-top-right ml-15"></div>
+                                    Add Hotel<div className="icon-arrow-top-right ml-15"></div>
                                 </Link>
                             </div>
                         </div>

@@ -70,7 +70,7 @@ const Location = ({
       <div className="col-lg-4 col-md-6">
         <div className="form-input ">
           <input
-            type="text"
+            type="number"
             id="mapLatitude"
             required
             defaultValue={(selectedHotel && hotelId) ? selectedHotel?.location?.mapLatitude :" "}
@@ -83,7 +83,7 @@ const Location = ({
       <div className="col-lg-4 col-md-6">
         <div className="form-input ">
           <input
-            type="text"
+            type="number"
             id="mapLongitude"
             required
             defaultValue={(selectedHotel && hotelId) ? selectedHotel?.location?.mapLongitude :" "}
@@ -96,7 +96,7 @@ const Location = ({
       <div className="col-lg-4 col-md-6">
         <div className="form-input ">
           <input
-            type="text"
+            type="number"
             id="mapZoom"
             required
             defaultValue={(selectedHotel && hotelId) ? selectedHotel?.location?.mapZoom :" "}

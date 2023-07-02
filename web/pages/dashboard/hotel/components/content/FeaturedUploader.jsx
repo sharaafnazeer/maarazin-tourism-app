@@ -5,6 +5,7 @@ const FeaturedUploader = ({featuredImages = [], setFeaturedImages, hotelData, se
     const [error, setError] = useState("");
 
     const handleFileUpload = (event) => {
+        
         const fileList = event.target.files;
         const newImages = [];
         const maxSize = 800; // in pixels
