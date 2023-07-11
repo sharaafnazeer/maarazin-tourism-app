@@ -30,7 +30,7 @@ const HotelContent = ({
                     />
                     <label className="lh-1 text-16 text-light-1">Hotel Name</label>
                 </div>
-                    {errors.name && <p style={{color:"red"}}>{errors.name}</p>}
+                    {errors?.name && <p style={{color:"red"}}>{errors?.name}</p>}
             </div>
             {/* End Name */}
 
@@ -74,7 +74,7 @@ const HotelContent = ({
             <div className="mt-10">
                 <div className="row">
                     <div className="col-auto">
-                        <div className="fw-500">Hotal Rating</div>
+                        <div className="fw-500">Hotel Rating</div>
                     </div>
                     <div className="col-auto">
                         <HotelRating
