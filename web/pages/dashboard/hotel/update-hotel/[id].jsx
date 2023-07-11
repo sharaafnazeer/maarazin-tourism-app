@@ -4,6 +4,7 @@ import Footer from "../../common/Footer";
 import Header from "../../../../components/header/dashboard-header";
 import SettingsTabs from "../components/index";
 import {getSession} from "next-auth/react";
+import Link from "next/link";
 
 const UpdateHotel = () => {
 

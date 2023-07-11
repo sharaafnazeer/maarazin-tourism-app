@@ -94,7 +94,7 @@ const updateRoom = async (roomId, roomInfo) => {
 
         if (roomInfo.roomImages) roomImages = roomInfo.roomImages;
 
-        if (roomImages.length || existingRoomImages.length) room.roomImages = [...roomImages, ...existingRoomImages];
+        room.roomImages = [...roomImages, ...existingRoomImages];
 
         room.sleeps = {
             ...room.sleeps,

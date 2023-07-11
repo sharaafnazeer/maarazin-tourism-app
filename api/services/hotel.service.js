@@ -82,11 +82,9 @@ const updateHotel = async (hotelId, hotelInfo) => {
         if (hotelInfo.featuredImages)
             featuredImages = hotelInfo.featuredImages;
 
-        if (bannerImages.length || existingBannerImages.length)
-            hotel.bannerImages = [...bannerImages, ...existingBannerImages];
+        hotel.bannerImages = [...bannerImages, ...existingBannerImages];
 
-        if (featuredImages.length || existingFeatureImages.length)
-            hotel.featuredImages = [...featuredImages, ...existingFeatureImages];
+        hotel.featuredImages = [...featuredImages, ...existingFeatureImages];
 
         if (hotelInfo.popularFacilities) {
             const facilities = JSON.parse(hotelInfo.popularFacilities)
