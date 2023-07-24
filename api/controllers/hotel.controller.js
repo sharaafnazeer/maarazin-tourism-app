@@ -15,7 +15,7 @@ const addHotelController = async (req, res, next) => {
 
     const user = req?.decodedToken?.user;
 
-    if (user.role.slug !== ROLES.SUPER_ADMIN) {
+    if (!(user.role.slug === ROLES.SUPER_ADMIN || user.role.slug === ROLES.HOTEL_ADMIN || user.role.slug === ROLES.REXE_ADMIN)) {
         return next(new InvalidOperation("Not Allowed", "You are not allowed to add a hotel"))
     }
 
@@ -56,7 +56,7 @@ const updateHotelController = async (req, res, next) => {
 
         const user = req?.decodedToken?.user;
 
-        if (user.role.slug !== ROLES.SUPER_ADMIN) {
+        if (!(user.role.slug === ROLES.SUPER_ADMIN || user.role.slug === ROLES.HOTEL_ADMIN || user.role.slug === ROLES.REXE_ADMIN)) {
             return next(new InvalidOperation("Not Allowed", "You are not allowed to update the hotel"))
         }
 
@@ -163,7 +163,7 @@ const deleteHotelByIdController = async (req, res, next) => {
         const {hotelId} = req.params
         const user = req?.decodedToken?.user;
 
-        if (user.role.slug !== ROLES.SUPER_ADMIN) {
+        if (!(user.role.slug === ROLES.SUPER_ADMIN || user.role.slug === ROLES.HOTEL_ADMIN || user.role.slug === ROLES.REXE_ADMIN)) {
             return next(new InvalidOperation("Not Allowed", "You are not allowed to delete the hotel"))
         }
         const response = await deleteHotelById(hotelId);

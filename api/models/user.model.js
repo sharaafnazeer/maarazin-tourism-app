@@ -7,7 +7,8 @@ const userSchema = new Schema({
     email: String,
     phoneNumber: String,
     password: String,
-    role: {type: Schema.Types.ObjectId, ref: 'Role'}, // Reference to Role model
+    role: {type: Schema.Types.ObjectId, ref: 'Role'}, // Reference to Role model,
+    status: Number,
 }, {timestamps: true});
 
 module.exports = {

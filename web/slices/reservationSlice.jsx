@@ -17,10 +17,14 @@ const initialState = {
 export const saveReservation = createAsyncThunk(
     "reservation/saveReservation",
     async (room, thunkAPI) => {
-        thunkAPI.dispatch(setLoading(true));
-        const response = await postReservationApi(room);
-        thunkAPI.dispatch(updateReservationConfirmationDetails(response.data.record));
-        return response.data;
+        try {
+            thunkAPI.dispatch(setLoading(true));
+            const response = await postReservationApi(room);
+            thunkAPI.dispatch(updateReservationConfirmationDetails(response.data.record));
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.response.data.error);
+        }
     }
 );
 
@@ -28,10 +32,14 @@ export const saveReservation = createAsyncThunk(
 export const getAllReservations = createAsyncThunk(
     "reservation/getAllReservations",
     async(data,thunkAPI)=>{
-        thunkAPI.dispatch(setLoading(true));
-        const response = await getAllReservationsApi(data);
-        thunkAPI.dispatch(updateGetAllReservationDetails(response.data));
-        return response.data;
+        try {
+            thunkAPI.dispatch(setLoading(true));
+            const response = await getAllReservationsApi(data);
+            thunkAPI.dispatch(updateGetAllReservationDetails(response.data));
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.response.data.error);
+        }
     }
 );
 
@@ -39,20 +47,28 @@ export const getAllReservations = createAsyncThunk(
 export const getOneReservation = createAsyncThunk(
     "reservation/getOneReservation",
     async(data, thunkAPI)=>{
-        thunkAPI.dispatch(setLoading(true));
-        const response = await getOneReservationApi(data);
-        thunkAPI.dispatch(updateSelectedReservation(response.data));
-        return response.data;
+        try {
+            thunkAPI.dispatch(setLoading(true));
+            const response = await getOneReservationApi(data);
+            thunkAPI.dispatch(updateSelectedReservation(response.data));
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.response.data.error);
+        }
     }
 )
 
 export const updateReservationAction = createAsyncThunk(
     "reservation/updateReservationAction",
     async(data, thunkAPI)=>{
-        thunkAPI.dispatch(setLoading(true));
-        const response = await updateReservationActionApi(data);
-        thunkAPI.dispatch(updateSelectedReservation(response.data));
-        return response.data;
+        try {
+            thunkAPI.dispatch(setLoading(true));
+            const response = await updateReservationActionApi(data);
+            thunkAPI.dispatch(updateSelectedReservation(response.data));
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.response.data.error);
+        }
     }
 )
 

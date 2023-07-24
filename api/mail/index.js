@@ -32,6 +32,35 @@ const sendCustomerBookingMail = (reservationInfo) => {
     }).then(() => console.log("Success"));
 }
 
+const sendRegistrationConfirmationMail = (userData, token) => {
+    // Construct the absolute file path to the template file
+    const templatePath = join(__dirname, 'templates', 'register-confirmation.hbs');
+    const templateSource = readFileSync(templatePath, 'utf-8');
+
+    // Compile the Handlebars template
+    const template = compile(templateSource);
+
+    // Render the template with the provided data
+    const htmlContent = template({
+        name: userData?.firstName,
+        email: userData?.email,
+        url: `${process.env.REGISTER_CONFIRM_URL}${token}`
+    });
+
+    const mailOptions = {
+        from: "", // sender address
+        to: userData?.email, // receiver email
+        subject: "Greetings from Rexe Holidays!", // Subject line
+        html: htmlContent,
+    }
+
+    sendMail(mailOptions, (info) => {
+        console.log("Registration email sent successfully");
+        console.log("MESSAGE ID: ", info.messageId);
+        console.log("DETAILS: ", info.mailDetails);
+    }).then(() => console.log("Success"));
+}
+
 const sendAdminBookingMail = (recipients = [], reservationInfo) => {
 
     // Construct the absolute file path to the template file
@@ -66,5 +95,6 @@ const sendAdminBookingMail = (recipients = [], reservationInfo) => {
 
 module.exports = {
     sendAdminBookingMail,
-    sendCustomerBookingMail
+    sendCustomerBookingMail,
+    sendRegistrationConfirmationMail
 }

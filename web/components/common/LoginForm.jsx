@@ -1,6 +1,7 @@
 import {signIn, useSession} from "next-auth/react";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
+import Link from "next/link";
 
 const LoginForm = () => {
 
@@ -11,7 +12,6 @@ const LoginForm = () => {
 
     useEffect(() => {
         if (session && status === "authenticated") {
-            console.log("came")
             router.push('/dashboard'); // Replace '/dashboard' with the desired page URL
         }
     });
@@ -37,12 +37,12 @@ const LoginForm = () => {
         <form className="row y-gap-20">
             <div className="col-12">
                 <h1 className="text-22 fw-500">Welcome back</h1>
-                {/* <p className="mt-10">
-          Don&apos;t have an account yet?{" "}
-          <Link href="/others-pages/signup" className="text-blue-1">
-            Sign up for free
-          </Link>
-        </p> */}
+                <p className="mt-10">
+                    Don&apos;t have an account yet?{" "}
+                    <Link href="/auth/signup" className="text-blue-1">
+                        Sign up for free
+                    </Link>
+                </p>
             </div>
             {/* End .col */}
 

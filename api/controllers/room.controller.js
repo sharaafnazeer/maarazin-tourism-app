@@ -7,7 +7,7 @@ const addRoomController = async (req, res, next) => {
 
     const user = req?.decodedToken?.user;
 
-    if (!(user.role.slug === ROLES.SUPER_ADMIN || user.role.slug === ROLES.REXE_ADMIN)) {
+    if (!(user.role.slug === ROLES.SUPER_ADMIN || user.role.slug === ROLES.HOTEL_ADMIN || user.role.slug === ROLES.REXE_ADMIN)) {
         return next(new InvalidOperation("Not Allowed", "You are not allowed to add a room"))
     }
 
@@ -42,7 +42,7 @@ const updateRoomController = async (req, res, next) => {
 
         const user = req?.decodedToken?.user;
 
-        if (!(user.role.slug === ROLES.SUPER_ADMIN || user.role.slug === ROLES.REXE_ADMIN)) {
+        if (!(user.role.slug === ROLES.SUPER_ADMIN || user.role.slug === ROLES.HOTEL_ADMIN || user.role.slug === ROLES.REXE_ADMIN)) {
             return next(new InvalidOperation("Not Allowed", "You are not allowed to update the room"))
         }
 
@@ -113,7 +113,7 @@ const deleteRoomByIdController = async (req, res, next) => {
 
         const user = req?.decodedToken?.user;
 
-        if (!(user.role.slug === ROLES.SUPER_ADMIN || user.role.slug === ROLES.REXE_ADMIN)) {
+        if (!(user.role.slug === ROLES.SUPER_ADMIN || user.role.slug === ROLES.HOTEL_ADMIN || user.role.slug === ROLES.REXE_ADMIN)) {
             return next(new InvalidOperation("Not Allowed", "You are not allowed to delete the room"))
         }
 

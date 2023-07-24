@@ -10,48 +10,67 @@ const initialState = {
 export const saveRoom = createAsyncThunk(
     "hotel/saveRoom",
     async (data, thunkAPI) => {
-        thunkAPI.dispatch(setLoading(true));
-        const response = await postRoomApi(data);
-        return response.data;
+        try {
+            thunkAPI.dispatch(setLoading(true));
+            const response = await postRoomApi(data);
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.response.data.error);
+        }
     }
 );
 
 export const updateRoom = createAsyncThunk(
     "hotel/updateRoom",
     async (data, thunkAPI) => {
-        thunkAPI.dispatch(setLoading(true));
-        const response = await updateRoomApi(data);
-        return response.data;
+        try {
+            thunkAPI.dispatch(setLoading(true));
+            const response = await updateRoomApi(data);
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.response.data.error);
+        }
     }
 );
 
 export const getAllRooms = createAsyncThunk(
     "room/getAllRooms",
     async (data, thunkAPI) => {
-        thunkAPI.dispatch(setLoading(true));
-        const response = await getAllRoomsApi(data);
-        thunkAPI.dispatch(updateRooms(response.data));
-        // console.log(response.data);
-        return response.data;
+        try {
+            thunkAPI.dispatch(setLoading(true));
+            const response = await getAllRoomsApi(data);
+            thunkAPI.dispatch(updateRooms(response.data));
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.response.data.error);
+        }
     }
 );
 
 export const getSelectedRoom = createAsyncThunk(
     "room/getSelectedRoom",
     async (data, thunkAPI) => {
-        thunkAPI.dispatch(setLoading(true));
-        const response = await getOneRoomApi(data);
-        thunkAPI.dispatch(updateSelectedRoom(response.data));
-        return response.data;
+        try {
+            thunkAPI.dispatch(setLoading(true));
+            const response = await getOneRoomApi(data);
+            thunkAPI.dispatch(updateSelectedRoom(response.data));
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.response.data.error);
+        }
     }
 );
 
 export const deleteSelectedRoom = createAsyncThunk(
     "room/deleteSelectedRoom",
     async (data, thunkAPI) => {
-        thunkAPI.dispatch(setLoading(true));
-        const response = await deleteOneRoomApi(data);
-        return response.data;
+        try {
+            thunkAPI.dispatch(setLoading(true));
+            const response = await deleteOneRoomApi(data);
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.response.data.error);
+        }
     }
 );
 
