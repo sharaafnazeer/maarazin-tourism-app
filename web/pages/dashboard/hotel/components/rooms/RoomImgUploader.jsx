@@ -15,11 +15,12 @@ const RoomImgUploader = ({images = [], setImages, hotelRoom, setHotelRoom}) => {
             reader.onloadend = () => {
                 const img = new Image();
                 img.onload = () => {
-                    if (img.width > maxSize || img.height > maxSize) {
-                        setError(
-                            `Image ${file.name} exceeds the maximum size of ${maxSize}px.`
-                        );
-                    } else if (
+                    // if (img.width > maxSize || img.height > maxSize) {
+                    //     setError(
+                    //         `Image ${file.name} exceeds the maximum size of ${maxSize}px.`
+                    //     );
+                    // } else
+                    if (
                         !["image/png", "image/jpeg"].includes(file.type.toLowerCase())
                     ) {
                         setError(
@@ -86,7 +87,7 @@ const RoomImgUploader = ({images = [], setImages, hotelRoom, setHotelRoom}) => {
                         onChange={handleFileUpload}
                     />
                     <div className="text-start mt-10 text-14 text-light-1">
-                        PNG or JPG no bigger than 800px wide and tall.
+                        PNG or JPG image only.
                     </div>
                 </div>
             </div>

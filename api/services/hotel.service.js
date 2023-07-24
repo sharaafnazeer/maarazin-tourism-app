@@ -44,7 +44,7 @@ const addHotel = async (hotelInfo) => {
             }
         }
 
-        return await hotel.save()
+        return await hotel.save();
     } catch (e) {
         throw e;
     }
@@ -83,9 +83,12 @@ const updateHotel = async (hotelId, hotelInfo) => {
         if (hotelInfo.featuredImages)
             featuredImages = hotelInfo.featuredImages;
 
-        hotel.bannerImages = [...bannerImages, ...existingBannerImages];
-
-        hotel.featuredImages = [...featuredImages, ...existingFeatureImages];
+        if (existingBannerImages.length || bannerImages.length) {
+            hotel.bannerImages = [...bannerImages, ...existingBannerImages];
+        }
+        if (existingFeatureImages.length || featuredImages.length) {
+            hotel.featuredImages = [...featuredImages, ...existingFeatureImages];
+        }
 
         if (hotelInfo.popularFacilities) {
             const facilities = JSON.parse(hotelInfo.popularFacilities)
@@ -118,8 +121,7 @@ const updateHotel = async (hotelId, hotelInfo) => {
             hotel.nearBy = JSON.parse(hotelInfo.nearBy);
         }
 
-        hotel.save();
-        return hotel
+        return await hotel.save();
     } catch (e) {
         throw e;
     }

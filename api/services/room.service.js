@@ -94,7 +94,8 @@ const updateRoom = async (roomId, roomInfo) => {
 
         if (roomInfo.roomImages) roomImages = roomInfo.roomImages;
 
-        room.roomImages = [...roomImages, ...existingRoomImages];
+        if (existingRoomImages.length || roomImages.length)
+            room.roomImages = [...roomImages, ...existingRoomImages];
 
         room.sleeps = {
             ...room.sleeps,
@@ -140,8 +141,7 @@ const updateRoom = async (roomId, roomInfo) => {
             room.amenities = JSON.parse(roomInfo.amenities);
         }
 
-        room.save();
-        return room;
+        return await room.save();
     } catch (e) {
         throw e;
     }
