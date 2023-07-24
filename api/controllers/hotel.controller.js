@@ -33,6 +33,7 @@ const addHotelController = async (req, res, next) => {
             return req.protocol + '://' + req.get('host') + '/uploads/' + file.filename;
         });
     try {
+        hotel.users = [user];
         const response = await addHotel(hotel);
 
         if (response instanceof RecordNotFound) {

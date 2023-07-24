@@ -26,8 +26,9 @@ const addHotel = async (hotelInfo) => {
                 minStay: 1,
                 checkIn: '',
                 checkOut: ''
-            }
-        })
+            },
+            users: hotelInfo.users
+        });
 
         if (hotelInfo.popularFacilities) {
             const facilities = JSON.parse(hotelInfo.popularFacilities)
