@@ -19,6 +19,10 @@ passport.use(new LocalStrategy(
                 return done(new RecordNotFound('User not found', 'It seems like you are not registered with our application!'), false)
             }
 
+            if (!availableUser.status) {
+                return done(new RecordNotFound('User not verified', 'It seems like you have not verified your account yet. Please verify your account from your mail box!'), false)
+            }
+
             const result = await Bcrypt.compare(password, availableUser.password);
             if (!result) {
                 return done(new RecordNotFound('Invalid credential', 'You have entered a wrong email or password'), false);
