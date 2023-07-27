@@ -3,6 +3,7 @@ import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {registerUser} from "../../slices/authSlice";
 import {failureNofication, successNofication} from "../../data/notification";
+import {useRouter} from "next/router";
 
 const SignUpForm = () => {
 
@@ -15,6 +16,7 @@ const SignUpForm = () => {
         roleName: "customer",
     });
     const dispatch = useDispatch();
+    const router = useRouter();
 
     const onChange = (id, value) => {
         const newUserData = {...userData, [id]: value};
@@ -26,6 +28,7 @@ const SignUpForm = () => {
             .unwrap()
             .then((res) => {
                 successNofication(res.message);
+                router.push('/');
             }).catch((err) => {
             failureNofication(err.message);
         });
