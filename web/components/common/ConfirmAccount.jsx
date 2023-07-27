@@ -21,10 +21,10 @@ const ConfirmAccount = () => {
                 .unwrap()
                 .then((res) => {
                     successNofication(res.message);
-                    router.push('/auth/login');
+                    router.replace('/auth/login');
                 }).catch((err) => {
                 failureNofication(err.message);
-                router.push('/auth/login');
+                router.replace('/auth/login');
             })
         }
     }, [token])

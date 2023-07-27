@@ -28,7 +28,7 @@ const SignUpForm = () => {
             .unwrap()
             .then((res) => {
                 successNofication(res.message);
-                router.push('/');
+                router.replace('/');
             }).catch((err) => {
             failureNofication(err.message);
         });

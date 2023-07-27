@@ -12,7 +12,7 @@ const LoginForm = () => {
 
     useEffect(() => {
         if (session && status === "authenticated") {
-            router.push('/dashboard'); // Replace '/dashboard' with the desired page URL
+            router.replace('/dashboard'); // Replace '/dashboard' with the desired page URL
         }
     });
 
@@ -28,7 +28,7 @@ const LoginForm = () => {
         if (result.error) {
             console.log(result.error)
         } else {
-            router.push(router.basePath + "/dashboard");
+            router.replace(router.basePath + "/dashboard");
         }
 
     };
