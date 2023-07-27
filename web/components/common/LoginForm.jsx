@@ -2,6 +2,7 @@ import {signIn, useSession} from "next-auth/react";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import Link from "next/link";
+import {failureNofication} from "../../data/notification";
 
 const LoginForm = () => {
 
@@ -25,10 +26,10 @@ const LoginForm = () => {
             email: email,
             password: password
         });
-        if (result.error) {
-            console.log(result.error)
-        } else {
+        if (result.ok) {
             router.replace(router.basePath + "/dashboard");
+        } else {
+            failureNofication(result.error);
         }
 
     };

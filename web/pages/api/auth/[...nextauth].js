@@ -10,6 +10,7 @@ export const authOptions = {
             async authorize(credentials, req) {
                 try {
                     const token = await loginApi(credentials)
+                    console.log("Token:", token); // Check if the token is received
                     if (token) {
                         const user = await getUserApi(token.data.accessToken);
                         if (user) {
@@ -19,7 +20,8 @@ export const authOptions = {
                         return null
                     }
                 } catch (error) {
-                    throw new Error(error.response.data.message)
+                    console.error("Error:", error);
+                    throw new Error(error.response.data.error?.message)
                 }
             }
         })
