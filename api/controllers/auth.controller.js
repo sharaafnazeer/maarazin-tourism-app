@@ -3,7 +3,7 @@
 const passport = require("passport");
 const jwt = require('jsonwebtoken');
 const sendJson = require("../helpers/json");
-const {addUser, getUserByEmail, updateUserStatus} = require("../services/user.service");
+const {addUser, updateUserStatus} = require("../services/user.service");
 const {RecordFound, RecordNotFound, InvalidOperation} = require("../exceptions/errors");
 const {TOKEN_TYPE} = require("../constants/common");
 
@@ -41,7 +41,7 @@ const signUpController = async (req, res, next) => {
         if (response instanceof RecordFound || response instanceof RecordNotFound) {
             return next(response)
         }
-        return sendJson(res, 200, {title: 'Account registered', message: 'Account registered successfully'});
+        return sendJson(res, 200, {title: 'Account registered', message: 'Account registered successfully. Please check your mail box to verify your account'});
     } catch (e) {
         return sendJson(res, 500, {
             error: {
